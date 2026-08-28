@@ -230,6 +230,8 @@ export function QuoteOfTheDay() {
         <p className="kicker text-base text-accent">quote of the day</p>
         <blockquote
           key={idx}
+          aria-live="polite"
+          aria-atomic="true"
           className="mt-6 animate-[fadeUp_0.7s_cubic-bezier(0.16,1,0.3,1)_both] font-serif text-[clamp(1.5rem,3.5vw,2.25rem)] font-300 italic leading-snug text-balance text-foreground"
           style={{ fontWeight: 300 }}
         >
@@ -326,6 +328,8 @@ export function MomentInVerse() {
           <p className="kicker relative text-base text-primary">a moment in verse</p>
           <blockquote
             key={idx}
+            aria-live="polite"
+            aria-atomic="true"
             className="relative mt-8 animate-[fadeUp_0.7s_cubic-bezier(0.16,1,0.3,1)_both] space-y-2 font-serif text-[clamp(1.5rem,4vw,2.25rem)] font-300 italic leading-snug text-foreground"
             style={{ fontWeight: 300 }}
           >

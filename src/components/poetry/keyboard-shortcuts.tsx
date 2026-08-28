@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { CommandPalette } from "./command-palette";
+import { ShortcutsHelp } from "./shortcuts-help";
 import { useTheme } from "./theme-provider";
 import { useShortcuts } from "@/hooks/use-shortcuts";
 
@@ -11,6 +12,7 @@ import { useShortcuts } from "@/hooks/use-shortcuts";
  */
 export function KeyboardShortcuts() {
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const { toggle: toggleTheme } = useTheme();
 
   const toggleMusic = useCallback(() => {
@@ -48,6 +50,9 @@ export function KeyboardShortcuts() {
       ?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  const openHelp = useCallback(() => setHelpOpen(true), []);
+  const closeHelp = useCallback(() => setHelpOpen(false), []);
+
   const shortcuts = [
     // Cmd/Ctrl + K → open command palette
     { key: "k", ctrl: true, handler: openPalette },
@@ -64,6 +69,8 @@ export function KeyboardShortcuts() {
     { key: "p", handler: jumpToPoem },
     // R → jump to resources
     { key: "r", handler: jumpToResources },
+    // ? → show shortcuts help
+    { key: "?", shift: true, handler: openHelp },
     // Slash → open palette (vim-style)
     { key: "/", handler: openPalette },
   ];
@@ -88,6 +95,7 @@ export function KeyboardShortcuts() {
         onToggleTheme={toggleTheme}
         onToggleMusic={toggleMusic}
       />
+      <ShortcutsHelp open={helpOpen} onClose={closeHelp} />
       {/* Floating hint badge — appears once then fades */}
       <ShortcutHint />
     </>
@@ -138,6 +146,11 @@ function ShortcutHint() {
         P
       </kbd>
       <span>poem</span>
+      <span className="opacity-40">·</span>
+      <kbd className="rounded border border-border/60 bg-background/60 px-1.5 py-0.5 font-mono text-[0.65rem] text-primary">
+        ?
+      </kbd>
+      <span>help</span>
       <button
         onClick={() => setShow(false)}
         className="ml-1 text-muted-foreground/60 hover:text-foreground"

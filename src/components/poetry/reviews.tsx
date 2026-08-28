@@ -5,6 +5,8 @@ import { Star, Copy, Check, Mail, ArrowRight, Instagram, Facebook, Twitter, Shop
 import { reviews } from "@/lib/poetry-data";
 import { ButterflyMark } from "./particles";
 import { ConfettiBurst } from "./confetti";
+import { VisitorCounter } from "./visitor-counter";
+import { LoadChime } from "./load-chime";
 import { useToast } from "@/hooks/use-toast";
 
 function ReviewCard({ r, i }: { r: (typeof reviews)[number]; i: number }) {
@@ -238,6 +240,10 @@ export function Footer() {
           <p className="text-xs tracking-wide text-muted-foreground">
             © 2026 R. Ray Barnes Productions · The Art of Poetry
           </p>
+          <div className="mt-3 flex items-center justify-center gap-3">
+            <VisitorCounter />
+            <LoadChime />
+          </div>
         </div>
       </div>
     </footer>

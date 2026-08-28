@@ -318,3 +318,39 @@ Stage Summary:
 - All features verified via agent-browser + VLM: share menu opens, reading chips visible, confetti fires, JSON-LD in DOM, 404 page renders with poem, sitemap + robots serve 200.
 - Lint clean. Dev log clean (200 responses for /, /sitemap.xml, /robots.txt, /api/poem; 404 for nonexistent pages).
 - **Recommended next phase**: add a "poem of the day" email signup that actually sends (needs SMTP or service), add a visitor counter with privacy-friendly analytics, add a subtle page-load sound option, consider a "dark mode only" toggle for the hero gradient, add a reading-progress milestone toasts, add keyboard shortcut '?' to show all shortcuts, consider ARIA live regions for the rotating quotes/poems for screen readers.
+
+---
+Task ID: 9
+Agent: Cron Review Agent (Round 8)
+Task: Added shortcuts help overlay (?), reading-progress milestone toasts, ARIA live regions, visitor counter, and load chime.
+
+Work Log:
+- **New feature: Keyboard shortcuts help overlay** (`shortcuts-help.tsx`):
+  - Full-screen modal listing all 10 shortcuts grouped by Navigation / Panels / Actions, each with icon, label, and kbd keys.
+  - Triggered by `?` (shift+?) key. Closes on Escape, backdrop click, or X button. Body scroll locked when open.
+  - Updated the ShortcutHint badge to include `?` help in the rotation.
+  - Verified via VLM: modal visible with Navigation / Panels / Actions groups, close button, "Press ? anytime" footer.
+- **New feature: Reading-progress milestone toasts** (`reading-milestones.tsx`):
+  - Fires a toast at 25/50/75/100% scroll progress with themed messages: "A quarter through the verse" / "Halfway through the collection" / "Three quarters read" / "You've read it all".
+  - Each milestone fires only once per session (sessionStorage-gated via `rb-milestones` key).
+  - Verified via VLM: toast "A quarter through the verse — The poet is warming up." appeared after scrolling to 25%.
+- **New feature: ARIA live regions for rotating content** (updated `verses.tsx`):
+  - Added `aria-live="polite"` + `aria-atomic="true"` to the QuoteOfTheDay blockquote and the MomentInVerse blockquote so screen readers announce the new quote/poem when it rotates.
+  - Verified: 3 `aria-live` elements in DOM (all "polite").
+- **New feature: Privacy-friendly visitor counter** (`visitor-counter.tsx`):
+  - Tracks the user's own visit count in localStorage (`rb-visits`, `rb-last-visit`). Counts a new visit if more than 30 minutes since last visit. No external analytics or server calls.
+  - Shows a subtle pill in the footer (Users icon + "N visits to this verse") only on revisit (visit count ≥ 2).
+  - Verified: set visits=3 with last-visit 31min ago → reloaded → counter showed "4 visits to this verse" (incremented correctly).
+- **New feature: Page-load ambient chime** (`load-chime.tsx`):
+  - Opt-in toggle (Bell/BellOff icon) in the footer. When enabled, plays a soft two-note chime (A4 → E4 perfect fifth, sine waves, 2s fade) once on page load (1s delay after curtain lifts).
+  - Preference stored in localStorage (`rb-chime`). Default: off (to respect autoplay norms).
+  - Verified: chime button found in footer.
+- **Lint fixes**: Fixed 2 `react-hooks/set-state-in-effect` errors:
+  - `visitor-counter.tsx`: Deferred setState via `requestAnimationFrame` instead of calling setVisits synchronously in the effect.
+  - `load-chime.tsx`: Used lazy initial state `useState(() => ...)` instead of setState-in-effect.
+
+Stage Summary:
+- **5 new features fully working**: shortcuts help overlay (? key, 10 shortcuts in 3 groups), reading-progress milestone toasts (25/50/75/100%, sessionStorage-gated), ARIA live regions (3 polite regions for rotating quotes/poems), privacy-friendly visitor counter (localStorage, 30min threshold), page-load ambient chime (opt-in, Web Audio API two-note interval).
+- All features verified via agent-browser + VLM: shortcuts help modal opens with grouped shortcuts, milestone toast "A quarter through the verse" appears, 3 aria-live regions in DOM, visitor counter shows "4 visits", chime button in footer.
+- Lint clean. Dev log clean (200 responses only).
+- **Recommended next phase**: add a "poem of the day" email signup that actually sends (needs SMTP/service), add a reading-time progress indicator per section, add a subtle scroll-spy highlight on the timeline dots, add a "back to reading" resume-scroll feature (remembers last scroll position), consider a high-contrast accessibility mode, add a language selector for the poem-of-the-day, add a "dedicate a poem" feature where users can send a poem to someone.
