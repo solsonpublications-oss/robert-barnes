@@ -40,12 +40,12 @@ function Typewriter() {
 
   return (
     <p
-      className="mt-7 max-w-md text-base italic md:text-lg"
+      className="max-w-md text-base italic md:text-lg"
       style={{
         fontFamily: "var(--font-literata), serif",
         color: "var(--mist)",
         lineHeight: 1.6,
-        minHeight: "3.2em",
+        minHeight: "1.6em",
       }}
     >
       <span aria-live="polite" aria-label={rotatingSubtitles[idx]}>
@@ -140,49 +140,43 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen flex-col items-center justify-center px-5 pt-28 pb-20 text-center"
+      className="relative flex min-h-screen flex-col items-center justify-center px-5 py-8 text-center"
     >
-      {/* top kicker */}
-      <div className="reveal flex flex-col items-center gap-3" data-delay="0">
-        <p className="kicker text-base text-primary sm:text-lg">
+      {/* hero content column — matches original max-w-2xl + gap-5 */}
+      <div className="reveal relative z-10 flex max-w-2xl flex-col items-center gap-5 text-center" data-delay="0">
+        <span className="kicker text-base text-primary sm:text-lg">
           FOUR VOLUMES · ONE VOICE
-        </p>
-        <p className="font-serif text-base italic text-muted-foreground md:text-xl">
+        </span>
+        <p className="font-serif text-lg italic text-muted-foreground md:text-xl">
           a life, written in verse
         </p>
-      </div>
 
-      {/* main title */}
-      <h1
-        className="reveal hero-title mt-8 max-w-[14ch] font-serif text-[clamp(3.25rem,12vw,9rem)] italic leading-[0.92] tracking-tight sm:mt-10"
-        data-delay="120"
-        style={{ fontWeight: 300 }}
-      >
-        The Art of Poetry
-      </h1>
+        {/* main title — 500 weight, natural 2-line break at max-w-2xl */}
+        <h1
+          className="hero-title w-full font-serif text-[clamp(3.25rem,12vw,6.2rem)] italic leading-[1.1] tracking-tight"
+          style={{ fontWeight: 500 }}
+        >
+          The Art of Poetry
+        </h1>
 
-      {/* rotating typewriter subtitle */}
-      <div className="reveal flex flex-col items-center" data-delay="240">
+        {/* rotating typewriter subtitle */}
         <Typewriter />
+
         {/* thin divider line */}
         <span
           aria-hidden="true"
-          className="mt-6 block h-px w-10 bg-primary/60"
+          className="block h-px w-10 bg-primary/60"
         />
-        <p
-          className="mt-5 text-xs tracking-[0.2em] uppercase text-primary md:text-sm"
-        >
+        <p className="text-xs uppercase tracking-[0.2em] text-primary md:text-sm">
           By R. Ray Barnes
         </p>
+
         {/* butterfly mark */}
         <HeroButterfly />
       </div>
 
       {/* scroll cue */}
-      <div
-        className="reveal absolute bottom-8 left-1/2 -translate-x-1/2"
-        data-delay="500"
-      >
+      <div className="reveal absolute bottom-8 left-1/2 -translate-x-1/2" data-delay="500">
         <div className="flex h-10 w-6 items-start justify-center rounded-full border border-border/70 p-1.5">
           <span className="h-2 w-1 animate-bounce rounded-full bg-primary" />
         </div>

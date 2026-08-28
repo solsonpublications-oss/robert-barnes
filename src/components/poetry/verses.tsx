@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import {
   Copy,
   Check,
   RefreshCw,
   Volume2,
+  VolumeX,
+  Loader2,
   Maximize2,
   X,
   Share2,
@@ -20,6 +22,7 @@ import {
   Bird,
 } from "lucide-react";
 import { poems, pillars, quotes, verseMoments } from "@/lib/poetry-data";
+import { useToast } from "@/hooks/use-toast";
 
 function CopyButton({ text, label }: { text: string; label?: string }) {
   const [done, setDone] = useState(false);
@@ -40,6 +43,69 @@ function CopyButton({ text, label }: { text: string; label?: string }) {
     >
       {done ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
       {done ? "copied" : "copy"}
+    </button>
+  );
+}
+
+function ListenButton({ text }: { text: string }) {
+  const [state, setState] = useState<"idle" | "loading" | "playing">("idle");
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { toast } = useToast();
+
+  const toggle = async () => {
+    if (state === "playing") {
+      audioRef.current?.pause();
+      audioRef.current = null;
+      setState("idle");
+      return;
+    }
+    setState("loading");
+    try {
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, voice: "jam", speed: 0.85 }),
+      });
+      if (!res.ok) throw new Error("TTS failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+      const el = new Audio(url);
+      el.onended = () => {
+        setState("idle");
+        audioRef.current = null;
+      };
+      audioRef.current = el;
+      await el.play();
+      setState("playing");
+    } catch {
+      toast({
+        title: "Could not generate audio",
+        description: "Please try again in a moment.",
+        variant: "destructive",
+      });
+      setState("idle");
+    }
+  };
+
+  return (
+    <button
+      onClick={toggle}
+      disabled={state === "loading"}
+      aria-label="Listen to this poem"
+      className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary disabled:opacity-50"
+    >
+      {state === "loading" ? (
+        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+      ) : state === "playing" ? (
+        <VolumeX className="h-3.5 w-3.5" />
+      ) : (
+        <Volume2 className="h-3.5 w-3.5" />
+      )}
+      {state === "loading" ? "…" : state === "playing" ? "stop" : "listen"}
     </button>
   );
 }
@@ -88,7 +154,8 @@ export function Verses() {
               <p className="relative mt-4 font-serif text-sm text-muted-foreground">
                 {p.attribution}
               </p>
-              <div className="relative mt-5">
+              <div className="relative mt-5 flex items-center gap-2">
+                <ListenButton text={`${p.lines.join(" ")}`} />
                 <CopyButton
                   text={`${p.lines.join("\n")}\n${p.attribution}`}
                   label={`Share this poem: ${p.lines[0]}`}
@@ -179,6 +246,10 @@ export function MomentInVerse() {
   const [idx, setIdx] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [loadingAudio, setLoadingAudio] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { toast } = useToast();
   const m = verseMoments[idx];
 
   const shareUrl =
@@ -192,6 +263,54 @@ export function MomentInVerse() {
       /* ignore */
     }
   };
+
+  const stopAudio = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    setListening(false);
+  }, []);
+
+  const listen = useCallback(async () => {
+    if (listening) {
+      stopAudio();
+      return;
+    }
+    setLoadingAudio(true);
+    try {
+      const poemText = m.lines.join(" ");
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: poemText, voice: "jam", speed: 0.85 }),
+      });
+      if (!res.ok) throw new Error("TTS failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      stopAudio();
+      const el = new Audio(url);
+      el.onended = () => {
+        setListening(false);
+        audioRef.current = null;
+      };
+      audioRef.current = el;
+      await el.play();
+      setListening(true);
+      toast({
+        title: "Now reading",
+        description: "The poem is being read aloud.",
+      });
+    } catch {
+      toast({
+        title: "Could not generate audio",
+        description: "Please try again in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoadingAudio(false);
+    }
+  }, [m, listening, stopAudio, toast]);
 
   return (
     <section className="relative px-5 py-24 sm:py-32">
@@ -219,10 +338,22 @@ export function MomentInVerse() {
               next verse
             </button>
             <button
-              className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+              onClick={listen}
+              disabled={loadingAudio}
+              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm transition-all duration-300 disabled:opacity-50 ${
+                listening
+                  ? "border-accent/50 bg-accent/10 text-accent"
+                  : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-primary"
+              }`}
             >
-              <Volume2 className="h-3.5 w-3.5" />
-              listen
+              {loadingAudio ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : listening ? (
+                <VolumeX className="h-3.5 w-3.5" />
+              ) : (
+                <Volume2 className="h-3.5 w-3.5" />
+              )}
+              {listening ? "stop" : loadingAudio ? "loading" : "listen"}
             </button>
             <button
               onClick={copyPoem}

@@ -4,11 +4,13 @@ import { useEffect } from "react";
 import { ThemeProvider } from "@/components/poetry/theme-provider";
 import { Particles } from "@/components/poetry/particles";
 import { Navbar, BackToTop } from "@/components/poetry/nav";
+import { ReadingProgress } from "@/components/poetry/reading-progress";
 import { Hero, About } from "@/components/poetry/hero";
 import { Collection, Stats } from "@/components/poetry/collection";
 import { Journey, Process } from "@/components/poetry/journey";
 import { Verses, Pillars, QuoteOfTheDay, MomentInVerse } from "@/components/poetry/verses";
 import { Reviews, Newsletter, CallToAction, Footer } from "@/components/poetry/reviews";
+import { AmbientPlayer } from "@/components/poetry/ambient-player";
 import { useReveal } from "@/hooks/use-reveal";
 
 function AnimatedCounters() {
@@ -49,6 +51,7 @@ export default function Home() {
 
   return (
     <ThemeProvider>
+      <ReadingProgress />
       <Particles />
       <Navbar />
       <main className="relative z-10 flex min-h-screen flex-col">
@@ -69,6 +72,7 @@ export default function Home() {
         <Footer />
       </main>
       <BackToTop />
+      <AmbientPlayer />
     </ThemeProvider>
   );
 }

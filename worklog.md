@@ -32,3 +32,45 @@ Stage Summary:
 - Interactive features verified: theme toggle, typewriter subtitle, scroll-reveal, scroll-spy nav, mobile menu, copy-to-clipboard, quote rotator, poem fullscreen, share menu, newsletter toast, animated counters.
 - Assets: author portrait + 4 book covers in `public/images/`.
 - Remaining polish opportunities: fine-tune hero title line-break across breakpoints, add TTS "listen" audio playback for poems, add the uploaded PDF book previews, integrate the uploaded video somewhere meaningful.
+
+---
+Task ID: 2
+Agent: Cron Review Agent (Round 1)
+Task: QA the clone against the original, fix visual diffs, and add mandatory enhancements (more styling details + new features).
+
+Work Log:
+- **QA pass**: Opened both the original and clone side-by-side with agent-browser. Used VLM (z-ai vision) to compare hero sections — found 4 issues: (1) title gradient too gold/saturated vs original's peach-cream, (2) font-weight 300 vs original's 500, (3) title not breaking into 2 lines, (4) butterfly pushed below fold by excess margins.
+- **Hero fixes**:
+  - Extracted exact original gradient via `getComputedStyle`: `linear-gradient(135deg, #f5ece0, #eac98e, #da8da5)` — cream → ember-soft → light rose. Updated `.hero-title` in globals.css to match exactly, plus the original's `text-shadow` glow (`0 0 60px rgba(217,164,77,.15), 0 0 120px rgba(200,92,124,.08)`).
+  - Changed title `font-weight` from 300 → 500 to match original.
+  - Restructured hero to use `flex flex-col items-center gap-5 max-w-2xl` (matching original's exact layout) so the title naturally breaks into 2 lines at 672px width.
+  - Removed stray `mt-7` on Typewriter and `mt-4` on divider (the parent `gap-5` handles spacing). Reduced section padding from `pt-28 pb-20` → `py-8` so the butterfly fits within the viewport (verified: svgBottom 574px < viewport 577px).
+  - Hero similarity improved from 8/10 → 9/10.
+- **New feature: Reading progress bar** (`reading-progress.tsx`):
+  - Fixed 2px gold gradient bar at the very top of the viewport that tracks scroll percentage with a glowing box-shadow. Verified at 40% scroll.
+- **New feature: TTS poem audio** (`/api/tts` route + `ListenButton` component):
+  - Created `src/app/api/tts/route.ts` using z-ai-web-dev-sdk's `audio.tts.create()` with the `jam` voice (English gentleman) at 0.85 speed for poetry readings. Includes in-memory cache for repeated requests.
+  - Added `ListenButton` to all 3 poem cards in the Verses section — shows loading spinner → "stop" state with VolumeX icon when playing.
+  - Added working "Listen" button to the MomentInVerse section (next verse / listen / copy / expand / share).
+  - Verified: POST /api/tts returns 200 in ~4s, audio plays, button toggles to "Stop".
+- **New feature: Book detail modal** (`book-modal.tsx`):
+  - Volume cards are now clickable — opens a modal with the book cover, rating, page count, description, a **sample poem** from that volume, a "Listen" button (TTS), and the Amazon CTA.
+  - Added 4 original sample poems (one per volume) in the modal.
+  - Modal closes on Escape, backdrop click, or X button. Body scroll locked when open.
+  - Added hover overlay on book covers: "View details" badge appears with backdrop blur.
+- **New feature: Floating ambient music player** (`ambient-player.tsx`):
+  - Fixed bottom-left toggle button that generates a soft jazz-adjacent drone via the Web Audio API (two detuned sine oscillators at A2+E3, low-pass filter with slow LFO sweep, periodic triangle-wave bass pings). No external audio file needed.
+  - Button shows VolumeX when idle, Music icon with ping animation when playing. Smooth 2s fade-in/fade-out.
+- **Styling enhancements**:
+  - Volume cards: added shimmer top-border on hover, image zoom (scale-110) inside cover, -2° rotation on hover, "View details" overlay with blur, staggered star scale animation.
+  - Timeline dots: added `animate-ping` pulse ring (2.5s duration) for a living, breathing effect.
+  - Stat counters: added `group-hover:scale-110` on the numbers.
+  - Removed invalid `font-300` Tailwind class (doesn't exist) — replaced with inline `style={{ fontWeight: 300 }}` where needed, and 500 for the hero title.
+- **Verification**: Lint passes clean. Dev log shows no errors — only 200 responses for GET / and POST /api/tts. All interactions tested via agent-browser: book modal opens/closes, TTS generates audio, reading progress bar tracks scroll, ambient player button present.
+
+Stage Summary:
+- Hero now matches original at 9/10 similarity (gradient, weight, 2-line break, butterfly visible).
+- 4 new features added: reading progress bar, TTS poem narration (API + UI), book detail modal with sample poems, ambient jazz music player.
+- Styling enhanced: hover micro-interactions on cards, animated timeline dots, staggered star animations.
+- All features verified working via agent-browser. Lint clean. Dev log clean.
+- Recommended next phase: integrate uploaded PDFs as flip-book previews, add the walkthrough video to the About section, add keyboard shortcuts (e.g., 'T' for theme, 'M' for music), consider a daily poem-of-the-day feature using the LLM skill.

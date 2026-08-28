@@ -36,12 +36,13 @@ export function Journey() {
                   className="reveal relative pl-12 md:grid md:grid-cols-2 md:gap-12 md:pl-0"
                   data-delay={(i % 4) * 80}
                 >
-                  {/* dot */}
+                  {/* dot with pulse ring */}
                   <span
                     className="absolute left-4 top-2 z-10 grid h-4 w-4 -translate-x-1/2 place-items-center rounded-full border-2 border-primary bg-background md:left-1/2"
                     aria-hidden
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span className="absolute h-full w-full animate-ping rounded-full bg-primary/30" style={{ animationDuration: "2.5s" }} />
+                    <span className="relative h-1.5 w-1.5 rounded-full bg-primary" />
                   </span>
 
                   {/* card */}

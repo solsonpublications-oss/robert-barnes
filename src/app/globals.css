@@ -321,17 +321,18 @@
   /* Hero title gradient + glow (matches original .hero-gradient-text) */
   .hero-title {
     background: linear-gradient(
-      180deg,
-      var(--foreground) 0%,
-      var(--ember-soft) 45%,
-      var(--primary) 80%,
-      color-mix(in oklab, var(--primary) 75%, var(--accent)) 100%
+      135deg,
+      #f5ece0 0%,
+      #eac98e 50%,
+      #da8da5 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    filter: drop-shadow(0 4px 30px color-mix(in oklab, var(--primary) 35%, transparent));
+    text-shadow:
+      0 0 60px rgba(217, 164, 77, 0.15),
+      0 0 120px rgba(200, 92, 124, 0.08);
   }
 
   /* Butterfly flutter animation */
