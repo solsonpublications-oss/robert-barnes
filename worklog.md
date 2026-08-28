@@ -203,3 +203,39 @@ Stage Summary:
 - Lint clean. Dev log clean (200 responses only).
 - All features verified via agent-browser + VLM: curtain visible, bookmark toggle works, reading list panel shows saved volume, share menu has X+Facebook links, resources section renders with download cards.
 - **Recommended next phase**: add a poem-of-the-day archive (last 7 days via date-keyed cache), add a "favorite poem" star toggle on the 3 verse cards, add keyboard shortcut 'B' to open reading list, add a print-friendly stylesheet for poems, consider a subtle confetti/ember particle burst on first bookmark.
+
+---
+Task ID: 6
+Agent: Cron Review Agent (Round 5)
+Task: Added poem archive (last 7 days), favorite poem toggle with ember burst, new keyboard shortcuts (B/P/R), print stylesheet, and styling polish.
+
+Work Log:
+- **New feature: Poem-of-the-day archive** (refactored `/api/poem` + UI):
+  - Refactored the poem route to maintain a ring buffer (`archive[]`) of the last 7 days of poems. When the day rolls over, the previous today poem is pushed into the archive before generating the new one. Added `?history=1` query param to return the archive.
+  - Added "archive" button to the poem-of-the-day controls. Clicking toggles a panel showing previous poems (date, title, first 2 lines) with a scrollable list. Empty state: "This is the first poem of the archive. Come back tomorrow for another."
+  - Verified: POST /api/poem?history=1 returns 200, panel opens with PREVIOUS POEMS header.
+- **New feature: Favorite poem toggle** (`favorite-button.tsx` + `use-favorites.ts` hook):
+  - `useFavorites` hook manages a localStorage-backed list (`rb-favorite-poems`) of favorited poems, each storing {id, title, firstLine}. Syncs across tabs via storage event.
+  - `FavoriteButton` component (star icon) added to all 3 verse cards in the Verses section. Shows outline star when unsaved, filled accent star when saved. Fires toast on toggle.
+  - **Ember burst effect**: On first favorite, 8 small accent-colored dots radiate outward (emberBurst keyframe animation, 1s ease-out) plus a pinging Sparkles icon. Added `@keyframes emberBurst` to globals.css.
+  - Verified: clicked favorite on Vol II poem → toast "Added to favorites", 3 favorite buttons in DOM (1 saved, 2 unsaved).
+- **New feature: Keyboard shortcuts B/P/R** (added to `keyboard-shortcuts.tsx`):
+  - `B` → opens the reading list panel (dispatches click on the floating trigger).
+  - `P` → smooth-scrolls to the poem-of-the-day section.
+  - `R` → smooth-scrolls to the resources section.
+  - Updated the ShortcutHint badge to show all 5 shortcuts (⌘K search, T theme, M music, B list, P poem) with dot separators and flex-wrap for small screens. Auto-dismiss after 11s.
+  - Verified: dispatched 'b' → reading list panel opened; dispatched 'p' → scrolled to poem-of-the-day (top: 80px).
+- **New feature: Print-friendly stylesheet** (globals.css + poem-of-the-day):
+  - Added `@media print` block that hides everything except a `.print-poem` container, which renders as a clean white page with Georgia serif, centered italic title with bottom border, poem body (1.15rem, 1.8 line-height), attribution, and a fixed footer with site name + date.
+  - Added a hidden `.print-poem` container (with title, body, attr, footer) to the poem-of-the-day section, shown only when printing via `display: block !important` in print CSS.
+  - Added a "print" button (Printer icon) to the poem-of-the-day controls that calls `window.print()`.
+  - Verified: print button found in DOM, print container has 4 children.
+- **Styling enhancements**:
+  - Poem card controls now use `flex-wrap` so listen/favorite/copy buttons wrap gracefully on narrow cards.
+  - Shortcut hint badge uses flex-wrap + dot separators for a cleaner, more compact look.
+
+Stage Summary:
+- **4 new features fully working**: poem-of-the-day archive (7-day ring buffer + UI panel), favorite poem toggle with ember burst (localStorage + 3 verse cards), 3 new keyboard shortcuts (B/P/R), print-friendly stylesheet with print button.
+- All features verified via agent-browser: archive API returns 200, archive panel opens, favorite toast appears, B key opens reading list, P key scrolls to poem, print button + container present.
+- Lint clean. Dev log clean (200 responses only, including new ?history=1 endpoint).
+- **Recommended next phase**: add a favorites panel (floating, like reading list) to view/manage favorited poems, add a "poem of the day" email signup that sends the daily poem, add a subtle scroll-triggered ember particle effect on section dividers, consider a dark/light theme auto-switch based on system preference, add Open Graph metadata + social preview image for sharing.

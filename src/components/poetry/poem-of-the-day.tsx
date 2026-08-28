@@ -12,6 +12,9 @@ import {
   Twitter,
   Facebook,
   Link2,
+  History,
+  X,
+  Printer,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -30,6 +33,8 @@ export function PoemOfTheDay() {
   const [listening, setListening] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const [archive, setArchive] = useState<Poem[]>([]);
+  const [showArchive, setShowArchive] = useState(false);
   const { toast } = useToast();
 
   const fetchPoem = useCallback(async () => {
@@ -49,6 +54,21 @@ export function PoemOfTheDay() {
   useEffect(() => {
     fetchPoem();
   }, [fetchPoem]);
+
+  const fetchArchive = useCallback(async () => {
+    try {
+      const res = await fetch("/api/poem?history=1", { method: "POST" });
+      const data = await res.json();
+      if (Array.isArray(data.poems)) setArchive(data.poems);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const toggleArchive = () => {
+    if (!showArchive && archive.length === 0) fetchArchive();
+    setShowArchive((s) => !s);
+  };
 
   const copy = async () => {
     if (!poem?.text) return;
@@ -103,8 +123,25 @@ export function PoemOfTheDay() {
 
   const lines = poem?.text?.split("\n") ?? [];
 
+  const printPoem = () => {
+    window.print();
+  };
+
   return (
     <section id="poem-of-the-day" className="relative px-5 py-24 sm:py-28">
+      {/* hidden print container — shown only in print */}
+      {poem && !poem.error && (
+        <div className="print-poem hidden">
+          <h1 className="print-title">{poem.title}</h1>
+          <div className="print-body">{poem.text}</div>
+          <p className="print-attr">
+            {poem.theme ? `on ${poem.theme} — ` : ""}R. Ray Barnes, The Art of Poetry
+          </p>
+          <p className="print-footer">
+            The Art of Poetry — R. Ray Barnes · {poem.date}
+          </p>
+        </div>
+      )}
       <div className="reveal mx-auto max-w-2xl">
         <div className="relative overflow-hidden rounded-[2rem] border border-accent/25 bg-gradient-to-br from-card/70 via-secondary/40 to-card/50 p-8 text-center backdrop-blur glow-soft sm:p-12">
           {/* sparkle background */}
@@ -230,6 +267,68 @@ export function PoemOfTheDay() {
                   </div>
                 )}
               </div>
+
+              {/* archive */}
+              <button
+                onClick={toggleArchive}
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm transition-all duration-300 ${
+                  showArchive
+                    ? "border-primary/50 bg-primary/10 text-primary"
+                    : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-primary"
+                }`}
+              >
+                <History className="h-3.5 w-3.5" />
+                archive
+              </button>
+
+              {/* print */}
+              <button
+                onClick={printPoem}
+                aria-label="Print this poem"
+                className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+              >
+                <Printer className="h-3.5 w-3.5" />
+                print
+              </button>
+            </div>
+          )}
+
+          {/* archive panel */}
+          {showArchive && (
+            <div className="relative mt-6 rounded-xl border border-border/50 bg-background/40 p-4 text-left">
+              <div className="mb-3 flex items-center justify-between">
+                <p className="text-[0.7rem] font-semibold tracking-luxe text-accent">
+                  PREVIOUS POEMS
+                </p>
+                <button
+                  onClick={() => setShowArchive(false)}
+                  aria-label="Close archive"
+                  className="grid h-6 w-6 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+              {archive.length === 0 ? (
+                <p className="py-4 text-center text-sm text-muted-foreground">
+                  This is the first poem of the archive. Come back tomorrow for another.
+                </p>
+              ) : (
+                <ul className="max-h-60 space-y-3 overflow-y-auto pr-1">
+                  {archive.map((p, i) => (
+                    <li key={i} className="border-l border-primary/30 pl-3">
+                      <p className="text-[0.65rem] tracking-wide text-muted-foreground/70">
+                        {p.date}
+                      </p>
+                      <p className="font-serif text-sm italic text-primary">
+                        {p.title}
+                      </p>
+                      <p className="mt-0.5 line-clamp-2 font-serif text-xs italic text-foreground/70">
+                        {p.text?.split("\n").slice(0, 2).join(" / ")}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
         </div>

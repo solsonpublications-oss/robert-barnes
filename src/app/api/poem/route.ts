@@ -3,12 +3,24 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Deterministic-by-day cache so every visitor on the same day sees the same poem.
-let cachedPoem: { date: string; text: string; title: string } | null = null;
+type CachedPoem = { date: string; title: string; text: string; theme?: string };
+
+// Ring buffer of the last 7 days of poems, newest first.
+const archive: CachedPoem[] = [];
+let todayPoem: CachedPoem | null = null;
+
+function dateKey(d: Date) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
 
 function todayKey() {
+  return dateKey(new Date());
+}
+
+function dateKeyDaysAgo(days: number) {
   const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  d.setDate(d.getDate() - days);
+  return dateKey(d);
 }
 
 const SYSTEM_PROMPT =
@@ -29,16 +41,59 @@ const THEMES = [
   "evening footsteps coming home",
 ];
 
+async function generatePoem(theme: string): Promise<{ title: string; lines: string[] }> {
+  const ZAI = (await import("z-ai-web-dev-sdk")).default;
+  const zai = await ZAI.create();
+
+  const completion = await zai.chat.completions.create({
+    messages: [
+      { role: "assistant", content: SYSTEM_PROMPT },
+      {
+        role: "user",
+        content: `Write an original short poem (4 to 8 lines) about: ${theme}.\n\nReturn your answer as STRICT JSON with this exact shape and nothing else:\n{"title":"a short 2-5 word title","lines":["line one","line two","line three","line four"]}\n\nDo not include any prose, markdown, or code fences. Only the JSON object.`,
+      },
+    ],
+    thinking: { type: "disabled" },
+  });
+
+  const raw = completion.choices[0]?.message?.content ?? "";
+  let parsed: { title?: string; lines?: string[] } = {};
+  try {
+    const match = raw.match(/\{[\s\S]*\}/);
+    parsed = JSON.parse(match ? match[0] : raw);
+  } catch {
+    parsed = {};
+  }
+
+  const lines = Array.isArray(parsed.lines)
+    ? parsed.lines.map((l) => String(l)).filter(Boolean).slice(0, 10)
+    : [];
+  const title =
+    typeof parsed.title === "string" && parsed.title.trim()
+      ? parsed.title.trim()
+      : "Untitled";
+
+  return { title, lines };
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const today = todayKey();
-    if (cachedPoem && cachedPoem.date === today) {
+    const url = new URL(req.url);
+    const wantHistory = url.searchParams.get("history") === "1";
+
+    if (wantHistory) {
+      // Return the archive (today + previous days we have).
       return NextResponse.json({
-        date: cachedPoem.date,
-        title: cachedPoem.title,
-        text: cachedPoem.text,
-        cached: true,
+        poems: archive.slice(),
+        today: todayKey(),
       });
+    }
+
+    const today = todayKey();
+
+    // Serve cached today poem if available.
+    if (todayPoem && todayPoem.date === today) {
+      return NextResponse.json({ ...todayPoem, cached: true });
     }
 
     const body = await req.json().catch(() => ({}));
@@ -50,37 +105,7 @@ export async function POST(req: NextRequest) {
       themeOverride ||
       THEMES[Math.floor(Math.random() * THEMES.length)];
 
-    const ZAI = (await import("z-ai-web-dev-sdk")).default;
-    const zai = await ZAI.create();
-
-    const completion = await zai.chat.completions.create({
-      messages: [
-        { role: "assistant", content: SYSTEM_PROMPT },
-        {
-          role: "user",
-          content: `Write an original short poem (4 to 8 lines) about: ${theme}.\n\nReturn your answer as STRICT JSON with this exact shape and nothing else:\n{"title":"a short 2-5 word title","lines":["line one","line two","line three","line four"]}\n\nDo not include any prose, markdown, or code fences. Only the JSON object.`,
-        },
-      ],
-      thinking: { type: "disabled" },
-    });
-
-    const raw = completion.choices[0]?.message?.content ?? "";
-    let parsed: { title?: string; lines?: string[] } = {};
-    try {
-      // Tolerate code fences / surrounding text
-      const match = raw.match(/\{[\s\S]*\}/);
-      parsed = JSON.parse(match ? match[0] : raw);
-    } catch {
-      parsed = {};
-    }
-
-    const lines = Array.isArray(parsed.lines)
-      ? parsed.lines.map((l) => String(l)).filter(Boolean).slice(0, 10)
-      : [];
-    const title =
-      typeof parsed.title === "string" && parsed.title.trim()
-        ? parsed.title.trim()
-        : "Untitled";
+    const { title, lines } = await generatePoem(theme);
 
     if (lines.length === 0) {
       return NextResponse.json(
@@ -89,15 +114,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    cachedPoem = { date: today, title, text: lines.join("\n") };
-
-    return NextResponse.json({
+    const poem: CachedPoem = {
       date: today,
       title,
-      text: cachedPoem.text,
+      text: lines.join("\n"),
       theme,
-      cached: false,
-    });
+    };
+
+    // Roll over: push previous today poem into archive before replacing.
+    if (todayPoem && todayPoem.date !== today) {
+      archive.unshift(todayPoem);
+      if (archive.length > 7) archive.length = 7;
+    }
+    todayPoem = poem;
+
+    return NextResponse.json({ ...poem, cached: false });
   } catch (error) {
     console.error("Poem API Error:", error);
     return NextResponse.json(
@@ -109,6 +140,11 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
-  return POST(new NextRequest("http://localhost/api/poem", { method: "POST" }));
+export async function GET(req: NextRequest) {
+  return POST(req);
+}
+
+// Helper exported for potential server-side use.
+export function _archiveDebug() {
+  return { archive, today: todayPoem, dateKeys: [0, 1, 2, 3, 4, 5, 6].map(dateKeyDaysAgo) };
 }

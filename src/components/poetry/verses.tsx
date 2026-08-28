@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { poems, pillars, quotes, verseMoments } from "@/lib/poetry-data";
 import { useToast } from "@/hooks/use-toast";
+import { FavoriteButton } from "./favorite-button";
 
 function CopyButton({ text, label }: { text: string; label?: string }) {
   const [done, setDone] = useState(false);
@@ -154,8 +155,13 @@ export function Verses() {
               <p className="relative mt-4 font-serif text-sm text-muted-foreground">
                 {p.attribution}
               </p>
-              <div className="relative mt-5 flex items-center gap-2">
+              <div className="relative mt-5 flex flex-wrap items-center gap-2">
                 <ListenButton text={`${p.lines.join(" ")}`} />
+                <FavoriteButton
+                  poemId={p.id}
+                  title={p.attribution.replace(/[—\-]\s*/g, "").trim() || p.lines[0]}
+                  firstLine={p.lines[0]}
+                />
                 <CopyButton
                   text={`${p.lines.join("\n")}\n${p.attribution}`}
                   label={`Share this poem: ${p.lines[0]}`}
