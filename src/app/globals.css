@@ -427,8 +427,40 @@
     .reveal { opacity: 1; transform: none; }
   }
 
-/* ===== Print stylesheet for poems ===== */
-@media print {
+/* ===== High-contrast accessibility mode ===== */
+[data-contrast="high"] {
+  --background: #000000;
+  --foreground: #ffffff;
+  --primary: #ffd24d;
+  --primary-foreground: #000000;
+  --muted: #1a1a1a;
+  --muted-foreground: #e0e0e0;
+  --accent: #ff7a9c;
+  --accent-foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.5);
+  --input: rgba(255, 255, 255, 0.6);
+  --ring: #ffd24d;
+  --grain-opacity: 0;
+}
+
+[data-contrast="high"] .text-muted-foreground {
+  color: #e0e0e0 !important;
+}
+[data-contrast="high"] button:focus-visible,
+[data-contrast="high"] a:focus-visible,
+[data-contrast="high"] input:focus-visible {
+  outline: 3px solid #ffd24d !important;
+  outline-offset: 2px !important;
+}
+[data-contrast="high"] .particle,
+[data-contrast="high"] .grain::before,
+[data-contrast="high"] .ambient-bg::after {
+  display: none !important;
+}
+
+/* ===== Print stylesheet for poems ===== */@media print {
   /* Hide everything by default */
   body * { visibility: hidden !important; }
   /* Show only the print-poem container and its children */

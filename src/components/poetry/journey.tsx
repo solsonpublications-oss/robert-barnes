@@ -1,8 +1,31 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { journey, processSteps } from "@/lib/poetry-data";
 
 export function Journey() {
+  const [activeIdx, setActiveIdx] = useState(-1);
+
+  useEffect(() => {
+    const cards = Array.from(
+      document.querySelectorAll<HTMLElement>("#journey ol > li")
+    );
+    if (cards.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const idx = cards.indexOf(e.target as HTMLElement);
+            if (idx >= 0) setActiveIdx(idx);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px" }
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="journey" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl">
@@ -30,26 +53,42 @@ export function Journey() {
           <ol className="space-y-10 md:space-y-2">
             {journey.map((m, i) => {
               const left = i % 2 === 0;
+              const isActive = i === activeIdx;
               return (
                 <li
                   key={m.year}
                   className="reveal relative pl-12 md:grid md:grid-cols-2 md:gap-12 md:pl-0"
                   data-delay={(i % 4) * 80}
                 >
-                  {/* dot with pulse ring */}
+                  {/* dot with pulse ring — active dot is larger + brighter */}
                   <span
-                    className="absolute left-4 top-2 z-10 grid h-4 w-4 -translate-x-1/2 place-items-center rounded-full border-2 border-primary bg-background md:left-1/2"
+                    className={`absolute left-4 top-2 z-10 grid -translate-x-1/2 place-items-center rounded-full border-2 bg-background transition-all duration-500 md:left-1/2 ${
+                      isActive
+                        ? "h-5 w-5 border-primary scale-110 shadow-[0_0_20px_var(--glow-gold)]"
+                        : "h-4 w-4 border-primary"
+                    }`}
                     aria-hidden
                   >
-                    <span className="absolute h-full w-full animate-ping rounded-full bg-primary/30" style={{ animationDuration: "2.5s" }} />
-                    <span className="relative h-1.5 w-1.5 rounded-full bg-primary" />
+                    {!isActive && (
+                      <span
+                        className="absolute h-full w-full animate-ping rounded-full bg-primary/30"
+                        style={{ animationDuration: "2.5s" }}
+                      />
+                    )}
+                    <span
+                      className={`relative rounded-full bg-primary transition-all duration-500 ${
+                        isActive ? "h-2.5 w-2.5" : "h-1.5 w-1.5"
+                      }`}
+                    />
                   </span>
 
                   {/* card */}
                   <div
-                    className={`group rounded-2xl border border-border/50 bg-card/30 p-6 backdrop-blur transition-all duration-500 hover:border-primary/40 hover:bg-card/50 hover:shadow-[0_0_40px_-12px_var(--glow-gold)] ${
-                      left ? "md:col-start-1 md:text-right" : "md:col-start-2"
-                    }`}
+                    className={`group rounded-2xl border bg-card/30 p-6 backdrop-blur transition-all duration-500 hover:border-primary/40 hover:bg-card/50 hover:shadow-[0_0_40px_-12px_var(--glow-gold)] ${
+                      isActive
+                        ? "border-primary/50 shadow-[0_0_30px_-10px_var(--glow-gold)]"
+                        : "border-border/50"
+                    } ${left ? "md:col-start-1 md:text-right" : "md:col-start-2"}`}
                   >
                     <span className="font-serif text-3xl italic text-primary">
                       {m.year}

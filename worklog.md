@@ -354,3 +354,40 @@ Stage Summary:
 - All features verified via agent-browser + VLM: shortcuts help modal opens with grouped shortcuts, milestone toast "A quarter through the verse" appears, 3 aria-live regions in DOM, visitor counter shows "4 visits", chime button in footer.
 - Lint clean. Dev log clean (200 responses only).
 - **Recommended next phase**: add a "poem of the day" email signup that actually sends (needs SMTP/service), add a reading-time progress indicator per section, add a subtle scroll-spy highlight on the timeline dots, add a "back to reading" resume-scroll feature (remembers last scroll position), consider a high-contrast accessibility mode, add a language selector for the poem-of-the-day, add a "dedicate a poem" feature where users can send a poem to someone.
+
+---
+Task ID: 10
+Agent: Cron Review Agent (Round 9)
+Task: Added resume-scroll, high-contrast mode, dedicate-a-poem modal, scroll-spy timeline dots, and styling polish.
+
+Work Log:
+- **New feature: Resume-scroll "back to reading"** (`resume-scroll.tsx`):
+  - Remembers the user's last scroll position (rAF-debounced) in sessionStorage. On next load, if the saved position is >800px and differs from current by >200px, shows a "Continue reading? ~X% down the page" pill with Resume + Dismiss buttons.
+  - Auto-hides after 60s. Resume button smooth-scrolls to the saved position.
+  - Verified: set sessionStorage scroll=3000 → reloaded → "resume pill found" in DOM.
+- **New feature: High-contrast accessibility mode** (`high-contrast.tsx`):
+  - Toggle button (Contrast icon) in the footer. When enabled, sets `data-contrast="high"` on `<html>` which overrides CSS variables: pure black bg (#000), white text (#fff), bright yellow primary (#ffd24d), bright rose accent, 50% border opacity, 3px gold focus outlines, disables particles/grain/ambient-bg.
+  - Preference stored in localStorage (`rb-high-contrast`). Persists across visits.
+  - Verified via VLM: "high-contrast mode with pure black background, white text, bright yellow accents".
+- **New feature: "Dedicate a poem" modal** (`dedicate-poem.tsx`):
+  - Modal with recipient name input + optional personal note textarea. Shows a live preview of the combined dedication message ("Dear {name}, {poem} {note} — \"{title}\", R. Ray Barnes").
+  - Actions: Copy dedication (clipboard + toast), Share on X (Twitter intent), Share on Facebook.
+  - Added "dedicate" button (Heart icon, accent color) to the poem-of-the-day controls next to print.
+  - Verified via VLM: modal visible with "Dedicate this poem" header, recipient name field, personal note field, preview showing poem "moon tide".
+- **New feature: Scroll-spy active timeline dots** (updated `journey.tsx`):
+  - IntersectionObserver tracks which timeline card is in view. The active dot scales up (h-5 w-5 vs h-4 w-4), gets a gold glow shadow, and its card border brightens to primary/50 with a glow.
+  - Inactive dots keep their ping animation; active dot's ping is removed (cleaner focus).
+  - Verified: scrolled to journey → 1 active dot detected with scale-110 class.
+- **Styling enhancements**:
+  - High-contrast CSS overrides boost readability for visually impaired users (pure black/white, 3px focus outlines).
+  - Timeline active card gets a subtle gold glow shadow.
+  - Resume-scroll pill uses the same gold-gradient styling as other toasts.
+- **Lint fixes**: Fixed 2 `react-hooks/set-state-in-effect` errors:
+  - `high-contrast.tsx`: Used lazy initial state `useState(() => ...)`.
+  - `resume-scroll.tsx`: Deferred setState via `requestAnimationFrame` instead of calling it synchronously in the effect body.
+
+Stage Summary:
+- **4 new features fully working**: resume-scroll "back to reading" (sessionStorage + pill), high-contrast accessibility mode (CSS variable overrides + toggle), "dedicate a poem" modal (name + note + preview + share), scroll-spy active timeline dots (scale + glow on active).
+- All features verified via agent-browser + VLM: resume pill appears, high-contrast shows black/white/yellow, dedicate modal opens with fields + preview, 1 active timeline dot detected.
+- Lint clean. Dev log clean (200 responses only).
+- **Recommended next phase**: add a "poem of the day" email signup that actually sends (needs SMTP/service), add a reading-time progress indicator per section (mini progress bars in nav), add a language selector for the poem-of-the-day, add a "favorite quote" star on each quote, add a subtle page transition animation between sections, consider a "poem generator" where users input a theme and get a custom poem, add a reading streak tracker (consecutive days visited).

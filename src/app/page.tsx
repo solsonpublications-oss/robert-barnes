@@ -23,6 +23,7 @@ import { FavoritesPanel } from "@/components/poetry/favorites-panel";
 import { ShareSite } from "@/components/poetry/share-site";
 import { StructuredData } from "@/components/poetry/structured-data";
 import { ReadingMilestones } from "@/components/poetry/reading-milestones";
+import { ResumeScroll } from "@/components/poetry/resume-scroll";
 import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
 
@@ -107,6 +108,7 @@ export default function Home() {
       <AmbientPlayer />
       <KeyboardShortcuts />
       <ReadingMilestones />
+      <ResumeScroll />
     </ThemeProvider>
   );
 }

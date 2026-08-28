@@ -15,8 +15,10 @@ import {
   History,
   X,
   Printer,
+  Heart,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { DedicatePoem } from "./dedicate-poem";
 
 type Poem = {
   date?: string;
@@ -35,6 +37,7 @@ export function PoemOfTheDay() {
   const [shareOpen, setShareOpen] = useState(false);
   const [archive, setArchive] = useState<Poem[]>([]);
   const [showArchive, setShowArchive] = useState(false);
+  const [dedicateOpen, setDedicateOpen] = useState(false);
   const { toast } = useToast();
 
   const fetchPoem = useCallback(async () => {
@@ -290,7 +293,27 @@ export function PoemOfTheDay() {
                 <Printer className="h-3.5 w-3.5" />
                 print
               </button>
+
+              {/* dedicate */}
+              <button
+                onClick={() => setDedicateOpen(true)}
+                aria-label="Dedicate this poem"
+                className="inline-flex items-center gap-2 rounded-full border border-accent/40 px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:border-accent/60 hover:text-accent"
+              >
+                <Heart className="h-3.5 w-3.5" />
+                dedicate
+              </button>
             </div>
+          )}
+
+          {/* dedicate modal */}
+          {poem && !poem.error && (
+            <DedicatePoem
+              open={dedicateOpen}
+              onClose={() => setDedicateOpen(false)}
+              poemTitle={poem.title || "Untitled"}
+              poemText={poem.text || ""}
+            />
           )}
 
           {/* archive panel */}
