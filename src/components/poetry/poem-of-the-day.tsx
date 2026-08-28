@@ -1,7 +1,18 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { Sparkles, Loader2, Copy, Check, RefreshCw, Volume2 } from "lucide-react";
+import {
+  Sparkles,
+  Loader2,
+  Copy,
+  Check,
+  RefreshCw,
+  Volume2,
+  Share2,
+  Twitter,
+  Facebook,
+  Link2,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type Poem = {
@@ -18,6 +29,7 @@ export function PoemOfTheDay() {
   const [copied, setCopied] = useState(false);
   const [listening, setListening] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const { toast } = useToast();
 
   const fetchPoem = useCallback(async () => {
@@ -177,6 +189,47 @@ export function PoemOfTheDay() {
                 {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                 {copied ? "copied" : "copy"}
               </button>
+
+              {/* share */}
+              <div className="relative">
+                <button
+                  onClick={() => setShareOpen((s) => !s)}
+                  className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:border-accent/40 hover:text-accent"
+                >
+                  <Share2 className="h-3.5 w-3.5" />
+                  share
+                </button>
+                {shareOpen && (
+                  <div className="absolute right-0 top-full z-20 mt-2 flex flex-col gap-1 rounded-xl border border-border/60 bg-card p-1 shadow-xl">
+                    <button
+                      onClick={copy}
+                      className="flex items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-foreground hover:bg-muted"
+                    >
+                      <Link2 className="h-4 w-4" /> Copy link
+                    </button>
+                    <a
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                        `${poem?.title}\n\n${poem?.text ?? ""}\n\n— Poem of the Day, R. Ray Barnes`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-muted"
+                    >
+                      <Twitter className="h-4 w-4" /> Share on X
+                    </a>
+                    <a
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                        typeof window !== "undefined" ? window.location.href : ""
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-muted"
+                    >
+                      <Facebook className="h-4 w-4" /> Share on Facebook
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

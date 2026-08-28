@@ -14,8 +14,11 @@ import { Journey, Process } from "@/components/poetry/journey";
 import { Verses, Pillars, QuoteOfTheDay, MomentInVerse } from "@/components/poetry/verses";
 import { PoemOfTheDay } from "@/components/poetry/poem-of-the-day";
 import { Reviews, Newsletter, CallToAction, Footer } from "@/components/poetry/reviews";
+import { Resources } from "@/components/poetry/resources";
 import { AmbientPlayer } from "@/components/poetry/ambient-player";
 import { KeyboardShortcuts } from "@/components/poetry/keyboard-shortcuts";
+import { PageCurtain } from "@/components/poetry/page-curtain";
+import { ReadingList } from "@/components/poetry/reading-list";
 import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
 
@@ -58,6 +61,7 @@ export default function Home() {
 
   return (
     <ThemeProvider>
+      <PageCurtain />
       <ReadingProgress />
       <CursorGlow />
       <Particles />
@@ -84,12 +88,15 @@ export default function Home() {
         <SectionDivider variant="diamond" />
         <PoemOfTheDay />
         <SectionDivider variant="line" />
+        <Resources />
+        <SectionDivider variant="butterfly" />
         <Reviews />
         <Newsletter />
         <CallToAction />
         <Footer />
       </main>
       <BackToTop />
+      <ReadingList />
       <AmbientPlayer />
       <KeyboardShortcuts />
     </ThemeProvider>

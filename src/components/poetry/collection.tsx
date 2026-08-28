@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Star, ExternalLink, BookOpen, Info } from "lucide-react";
 import { volumes, stats } from "@/lib/poetry-data";
 import { BookModal, useBookModal } from "./book-modal";
+import { BookmarkToggle } from "./reading-list";
 
 function VolumeCard({
   v,
@@ -19,6 +20,9 @@ function VolumeCard({
       className="reveal group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-border/60 bg-card/40 p-6 hover-lift hover:border-primary/40 hover:glow-soft"
       data-delay={i * 90}
     >
+      {/* bookmark toggle */}
+      <BookmarkToggle volume={v} />
+
       {/* shimmer top border on hover */}
       <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 

@@ -165,3 +165,41 @@ Stage Summary:
 - **Asset integration complete**: 62MB video + 12 PDF preview pages now served from `/public`.
 - All features verified via agent-browser + VLM. Lint clean. Dev log clean (only 200 responses for GET / and POST /api/poem and /api/tts).
 - **Recommended next phase**: add a "share this poem" for the AI poem-of-the-day, add a poem-of-the-day archive (last 7 days), integrate the "Easy Guide" PDF as a downloadable resource in a new "Resources" section, add a subtle page-load curtain reveal animation, consider a reading-list/bookmark feature using localStorage.
+
+---
+Task ID: 5
+Agent: Cron Review Agent (Round 4)
+Task: Added page-load curtain, reading list/bookmark feature, share for AI poem, resources section with downloadable PDFs, and styling polish.
+
+Work Log:
+- **Asset integration**:
+  - Copied "An Easy Guide to Understanding" PDF (4.0 MB) → `public/downloads/easy-guide-to-understanding.pdf`.
+  - Copied "Go Sit Book" PDF (1.8 MB) → `public/downloads/go-sit-book.pdf`.
+- **New feature: Page-load curtain reveal** (`page-curtain.tsx`):
+  - Full-screen overlay (z-100) shown on first load with butterfly mark (animated), "The Art of Poetry" gold-gradient title, and 3 pulsing loading dots.
+  - Lifts away after 850ms with a 900ms cubic-bezier translate-up transition, fully gone at 1850ms.
+  - SessionStorage-gated so it only shows once per session (no re-trigger on in-page navigation). Verified via VLM: full-screen curtain with butterfly + title visible.
+- **New feature: Reading list / bookmark** (`reading-list.tsx`):
+  - `BookmarkToggle` button on each volume card (top-right corner, bookmark icon) — toggles saved state with localStorage persistence (`rb-bookmarks` key). Shows Bookmark (outline) when unsaved, BookmarkCheck (filled gold) when saved. Fires toast on toggle.
+  - `ReadingList` floating panel: bottom-right trigger button with count badge, opens a panel listing saved volumes with title, page count, Amazon link, and remove (X) button. Empty state shows guidance text.
+  - Syncs across tabs via `storage` event + refreshes on window focus. Verified: clicked bookmark on Vol I, opened reading list, panel shows "Thoughts Dancing From Heart To Mind".
+- **New feature: Share AI poem-of-the-day** (added to `poem-of-the-day.tsx`):
+  - Added "share" button with dropdown menu containing: Copy link, Share on X (Twitter intent with poem text prefilled), Share on Facebook (sharer URL).
+  - Verified: 6 share links in DOM (X + Facebook for poem-of-the-day + moment-in-verse).
+- **New feature: Resources section** (`resources.tsx`):
+  - New `#resources` section "Resources & Companions — for the reader" with 2 downloadable PDF cards.
+  - Each card: icon (FileText/BookOpen), title, description, file size, Download button with hover fill effect, corner ¶ ornament.
+  - Card 1: "An Easy Guide to Understanding" (4.0 MB), Card 2: "Go Sit — A Companion Book" (1.8 MB).
+  - Verified via VLM: section renders with header, description, and download cards.
+- **Styling enhancements**:
+  - Added 2 new section dividers: line divider before Resources, butterfly divider before Reviews.
+  - Volume cards now have bookmark toggle in top-right corner with backdrop blur.
+  - Resources cards have hover-lift + glow-soft + scale-110 icon + gold fill on hover.
+- **Lint fixes**: Fixed 3 `react-hooks/set-state-in-effect` errors by using lazy initial state (`useState(() => ...)`) instead of setState-in-effect for `BookmarkToggle`, `ReadingList`, and `PageCurtain`.
+
+Stage Summary:
+- **4 new features fully working**: page-load curtain reveal (sessionStorage-gated), reading list/bookmark with localStorage + floating panel, share menu on AI poem-of-the-day (X/Facebook/copy), resources section with 2 downloadable PDFs.
+- **Asset integration**: 2 PDFs (5.8 MB total) now served from `/public/downloads`.
+- Lint clean. Dev log clean (200 responses only).
+- All features verified via agent-browser + VLM: curtain visible, bookmark toggle works, reading list panel shows saved volume, share menu has X+Facebook links, resources section renders with download cards.
+- **Recommended next phase**: add a poem-of-the-day archive (last 7 days via date-keyed cache), add a "favorite poem" star toggle on the 3 verse cards, add keyboard shortcut 'B' to open reading list, add a print-friendly stylesheet for poems, consider a subtle confetti/ember particle burst on first bookmark.
