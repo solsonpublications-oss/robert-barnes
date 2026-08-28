@@ -366,25 +366,6 @@
     50.01%, 100% { opacity: 0; }
   }
 
-  /* Ember burst for favorite toggle */
-  @keyframes emberBurst {
-    0% { transform: translate(0, 0) scale(1); opacity: 1; }
-    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
-  }
-
-  /* Ember float for scroll-triggered bursts */
-  @keyframes emberFloat {
-    0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
-    15% { opacity: 1; transform: translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2)) scale(1); }
-    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
-  }
-
-  /* Confetti for newsletter subscribe */
-  @keyframes confettiFall {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-    100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
-  }
-
   /* Book shadow */
   .book-shadow {
     filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.55))
@@ -427,38 +408,6 @@
     .reveal { opacity: 1; transform: none; }
   }
 
-/* ===== High-contrast accessibility mode ===== */
-[data-contrast="high"] {
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #ffd24d;
-  --primary-foreground: #000000;
-  --muted: #1a1a1a;
-  --muted-foreground: #e0e0e0;
-  --accent: #ff7a9c;
-  --accent-foreground: #ffffff;
-  --card: #0a0a0a;
-  --card-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.5);
-  --input: rgba(255, 255, 255, 0.6);
-  --ring: #ffd24d;
-  --grain-opacity: 0;
-}
-
-[data-contrast="high"] .text-muted-foreground {
-  color: #e0e0e0 !important;
-}
-[data-contrast="high"] button:focus-visible,
-[data-contrast="high"] a:focus-visible,
-[data-contrast="high"] input:focus-visible {
-  outline: 3px solid #ffd24d !important;
-  outline-offset: 2px !important;
-}
-[data-contrast="high"] .particle,
-[data-contrast="high"] .grain::before,
-[data-contrast="high"] .ambient-bg::after {
-  display: none !important;
-}
 
 /* ===== Print stylesheet for poems ===== */@media print {
   /* Hide everything by default */

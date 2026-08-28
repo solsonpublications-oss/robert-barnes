@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, Sun, Moon, Monitor, ArrowUp } from "lucide-react";
+import { Menu, X, Sun, Moon, ArrowUp } from "lucide-react";
 import { navLinks } from "@/lib/poetry-data";
 import { ButterflyMark } from "./particles";
 import { useTheme } from "./theme-provider";
@@ -30,23 +30,10 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
-  const { theme, toggle, isAuto, setAuto } = useTheme();
+  const { theme, toggle } = useTheme();
 
-  // 3-state cycle: dark → light → auto → dark …
-  const cycleTheme = () => {
-    if (!isAuto && theme === "dark") {
-      toggle(); // dark → light
-    } else if (!isAuto && theme === "light") {
-      setAuto(true); // light → auto
-    } else {
-      // auto → dark (exit auto, force dark)
-      setAuto(false);
-      if (theme !== "dark") toggle();
-    }
-  };
-
-  const themeIcon = isAuto ? <Monitor className="h-4 w-4" /> : theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />;
-  const themeLabel = isAuto ? "auto" : theme === "dark" ? "light" : "auto";
+  const themeIcon = theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />;
+  const themeLabel = theme === "dark" ? "light" : "dark";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -125,9 +112,9 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={cycleTheme}
+            onClick={toggle}
             aria-label={`Switch to ${themeLabel} mode`}
-            title={`Theme: ${isAuto ? "auto" : theme}`}
+            title={`Theme: ${theme}`}
             className="grid h-9 w-9 place-items-center rounded-full border border-border/70 text-muted-foreground transition-colors duration-300 hover:border-primary/50 hover:text-primary"
           >
             {themeIcon}

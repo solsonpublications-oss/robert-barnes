@@ -4,11 +4,6 @@ import { useState } from "react";
 import { Star, Copy, Check, Mail, ArrowRight, Instagram, Facebook, Twitter, ShoppingBag, BookOpen } from "lucide-react";
 import { reviews } from "@/lib/poetry-data";
 import { ButterflyMark } from "./particles";
-import { ConfettiBurst } from "./confetti";
-import { VisitorCounter } from "./visitor-counter";
-import { LoadChime } from "./load-chime";
-import { HighContrastToggle } from "./high-contrast";
-import { ReadingStreak } from "./reading-streak";
 import { useToast } from "@/hooks/use-toast";
 
 function ReviewCard({ r, i }: { r: (typeof reviews)[number]; i: number }) {
@@ -83,14 +78,12 @@ export function Reviews() {
 export function Newsletter() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
-  const [confettiTrigger, setConfettiTrigger] = useState(0);
   const { toast } = useToast();
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setSent(true);
-    setConfettiTrigger((t) => t + 1);
     toast({
       title: "Welcome to the inner circle",
       description: "Letters from the heart will find their way to your inbox.",
@@ -102,7 +95,6 @@ export function Newsletter() {
   return (
     <section id="connect" className="relative px-5 py-24 sm:py-28">
       <div className="reveal relative mx-auto max-w-3xl rounded-[2rem] border border-accent/25 bg-gradient-to-br from-card/60 to-secondary/30 p-10 text-center backdrop-blur sm:p-14">
-        <ConfettiBurst trigger={confettiTrigger} />
         <p className="kicker text-lg text-accent">stay connected</p>
         <h2
           className="mt-3 font-serif text-[clamp(2rem,5vw,3.25rem)] font-300 italic text-foreground"
@@ -242,12 +234,6 @@ export function Footer() {
           <p className="text-xs tracking-wide text-muted-foreground">
             © 2026 R. Ray Barnes Productions · The Art of Poetry
           </p>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
-            <VisitorCounter />
-            <ReadingStreak />
-            <LoadChime />
-            <HighContrastToggle />
-          </div>
         </div>
       </div>
     </footer>
