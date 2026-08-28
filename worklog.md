@@ -126,3 +126,42 @@ Stage Summary:
 - 4 new features: keyboard shortcuts (⌘K/T/M///Esc), command palette with fuzzy search + keyboard nav, decorative section dividers (butterfly/line/diamond), parallax scroll hook.
 - All features verified working via agent-browser.
 - Recommended next phase: integrate uploaded PDFs as flip-book previews in the book modal, add the walkthrough video to the About section, add a "poem of the day" generator using the LLM skill, add cursor-following light effect.
+
+---
+Task ID: 4
+Agent: Cron Review Agent (Round 3)
+Task: Integrate uploaded assets (PDFs + video), add AI poem-of-the-day generator, cursor-following light, and more styling polish.
+
+Work Log:
+- **Asset integration**:
+  - Copied the 62MB walkthrough video `upload/...walkthrough...mp4` → `public/videos/walkthrough.mp4`.
+  - Extracted 3 preview pages (100 DPI PNG) from each of the 4 poetry book PDFs using `pdftoppm` → `public/books/pages/vol{1-4}_page-{001,002,003}.png` (12 images total).
+- **New feature: AI Poem of the Day** (`/api/poem` route + `poem-of-the-day.tsx`):
+  - `/api/poem/route.ts` uses z-ai-web-dev-sdk `chat.completions.create()` with a system prompt casting the model as R. Ray Barnes writing short free-verse (4–8 lines) on 12 rotating themes (love, faith, jazz, butterfly, longing, grace, etc.). Returns strict JSON `{title, lines[]}`.
+  - Daily cache: every visitor on the same calendar day sees the same poem (in-memory cache keyed by date). Verified: first request 1.1s, cached requests 15–30ms.
+  - `PoemOfTheDay` component: fetches on mount, shows "the pen is moving…" spinner, displays title + italic poem lines + theme attribution, with "New poem" (regenerate), "listen" (TTS via /api/tts), and "copy" controls.
+  - Verified via VLM: generated poem titled "morning grace" with lines about coffee and sunlight — matching the poet's voice.
+- **New feature: Walkthrough video section** (`walkthrough-video.tsx`):
+  - New `#walkthrough` section after About, titled "Walk Through the Verse — a guided tour".
+  - Custom controls bar (play/pause, mute, fullscreen) overlaid on a 16:9 `<video>` with the uploaded walkthrough. Muted autoplay + loop + playsInline for browser autoplay compliance.
+  - Center play hint overlay when paused. Verified: video loads (60s duration, readyState 4).
+- **New feature: PDF flip-book preview** (`flip-book.tsx`):
+  - Added `FlipBook` component to the book detail modal showing the 3 extracted PDF preview pages per volume.
+  - Prev/next arrow navigation with page counter (1/3), 220ms flip transition (scale + opacity), book shadow on the page.
+  - Verified via VLM: "PREVIEW · PAGES" section with page image, prev/next arrows, "1/3" counter, and "A glimpse inside — 3 sample pages" caption.
+- **New feature: Cursor-following warm glow** (`cursor-glow.tsx`):
+  - 420px fixed radial gradient (gold → rose → transparent) that follows the cursor with smoothed lerp (0.12 factor) via requestAnimationFrame.
+  - Hidden on touch devices and when prefers-reduced-motion is set. Desktop-only (md+).
+  - Verified: element is present, 420px, gold radial gradient, transform updates with mouse position.
+- **Styling enhancements**:
+  - Added `#poem-of-the-day` and `#walkthrough` to scroll-spy reveal hook dependencies.
+  - Added 2 new section dividers: butterfly divider after About, diamond divider before PoemOfTheDay.
+  - Walkthrough section has gold/rose border with glow-soft shadow matching the book modal aesthetic.
+  - Poem-of-the-day card uses gradient bg (card → secondary → card) with sparkle icon background watermark.
+
+Stage Summary:
+- **3 new features fully working**: AI poem-of-the-day generator (LLM skill, daily-cached, with TTS listen + copy), PDF flip-book preview in book modal (3 pages per volume with nav), walkthrough video section with custom controls.
+- **2 new polish features**: cursor-following warm glow (desktop only), additional section dividers.
+- **Asset integration complete**: 62MB video + 12 PDF preview pages now served from `/public`.
+- All features verified via agent-browser + VLM. Lint clean. Dev log clean (only 200 responses for GET / and POST /api/poem and /api/tts).
+- **Recommended next phase**: add a "share this poem" for the AI poem-of-the-day, add a poem-of-the-day archive (last 7 days), integrate the "Easy Guide" PDF as a downloadable resource in a new "Resources" section, add a subtle page-load curtain reveal animation, consider a reading-list/bookmark feature using localStorage.

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, Star, ExternalLink, BookOpen, Volume2, Loader2 } from "lucide-react";
 import { volumes, type Volume } from "@/lib/poetry-data";
 import { useToast } from "@/hooks/use-toast";
+import { FlipBook } from "./flip-book";
 
 // Extra sample poems for each volume (shown in the detail modal)
 export const samplePoems: Record<string, { title: string; lines: string[] }> = {
@@ -212,6 +213,9 @@ export function BookModal({
                 </div>
               </div>
             )}
+
+            {/* flip-book preview */}
+            <FlipBook volumeId={volume.id} volumeTitle={volume.title} />
 
             {/* cta */}
             <a
