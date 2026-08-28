@@ -8,6 +8,7 @@ import { ConfettiBurst } from "./confetti";
 import { VisitorCounter } from "./visitor-counter";
 import { LoadChime } from "./load-chime";
 import { HighContrastToggle } from "./high-contrast";
+import { ReadingStreak } from "./reading-streak";
 import { useToast } from "@/hooks/use-toast";
 
 function ReviewCard({ r, i }: { r: (typeof reviews)[number]; i: number }) {
@@ -241,8 +242,9 @@ export function Footer() {
           <p className="text-xs tracking-wide text-muted-foreground">
             © 2026 R. Ray Barnes Productions · The Art of Poetry
           </p>
-          <div className="mt-3 flex items-center justify-center gap-3">
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
             <VisitorCounter />
+            <ReadingStreak />
             <LoadChime />
             <HighContrastToggle />
           </div>

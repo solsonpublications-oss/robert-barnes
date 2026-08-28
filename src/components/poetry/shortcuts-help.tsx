@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, Search, Sun, Music, Bookmark, Star, FileText, ArrowUp } from "lucide-react";
+import { X, Search, Sun, Music, Bookmark, Star, FileText, Sparkles } from "lucide-react";
 
 type ShortcutDef = {
   keys: string[];
@@ -17,6 +17,7 @@ const SHORTCUTS: ShortcutDef[] = [
   { keys: ["R"], label: "Jump to resources", icon: FileText, group: "Navigation" },
   { keys: ["B"], label: "Open reading list", icon: Bookmark, group: "Panels" },
   { keys: ["F"], label: "Open favorites", icon: Star, group: "Panels" },
+  { keys: ["C"], label: "Compose a custom poem", icon: Sparkles, group: "Actions" },
   { keys: ["T"], label: "Toggle theme (dark / light / auto)", icon: Sun, group: "Actions" },
   { keys: ["M"], label: "Toggle ambient music", icon: Music, group: "Actions" },
   { keys: ["?"], label: "Show this help", icon: Search, group: "Actions" },

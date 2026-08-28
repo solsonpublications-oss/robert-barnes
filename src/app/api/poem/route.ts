@@ -80,12 +80,37 @@ export async function POST(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const wantHistory = url.searchParams.get("history") === "1";
+    const wantCustom = url.searchParams.get("custom") === "1";
 
     if (wantHistory) {
       // Return the archive (today + previous days we have).
       return NextResponse.json({
         poems: archive.slice(),
         today: todayKey(),
+      });
+    }
+
+    // Custom poem — generate on demand without touching the daily cache.
+    if (wantCustom) {
+      const body = await req.json().catch(() => ({}));
+      const theme =
+        typeof body?.theme === "string" && body.theme.trim().length > 0
+          ? body.theme.trim().slice(0, 120)
+          : THEMES[Math.floor(Math.random() * THEMES.length)];
+      const { title, lines } = await generatePoem(theme);
+      if (lines.length === 0) {
+        return NextResponse.json(
+          { error: "Could not compose a poem, please try again." },
+          { status: 500 }
+        );
+      }
+      return NextResponse.json({
+        date: todayKey(),
+        title,
+        text: lines.join("\n"),
+        theme,
+        cached: false,
+        custom: true,
       });
     }
 

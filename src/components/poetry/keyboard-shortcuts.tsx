@@ -50,6 +50,14 @@ export function KeyboardShortcuts() {
       ?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  // 'C' → open the custom poem generator (click the "Compose your own poem" button)
+  const openComposer = useCallback(() => {
+    const btn = Array.from(document.querySelectorAll("button")).find(
+      (b) => b.textContent.trim() === "Compose your own poem"
+    );
+    btn?.click();
+  }, []);
+
   const openHelp = useCallback(() => setHelpOpen(true), []);
   const closeHelp = useCallback(() => setHelpOpen(false), []);
 
@@ -69,6 +77,8 @@ export function KeyboardShortcuts() {
     { key: "p", handler: jumpToPoem },
     // R → jump to resources
     { key: "r", handler: jumpToResources },
+    // C → open custom poem composer
+    { key: "c", handler: openComposer },
     // ? → show shortcuts help
     { key: "?", shift: true, handler: openHelp },
     // Slash → open palette (vim-style)

@@ -391,3 +391,34 @@ Stage Summary:
 - All features verified via agent-browser + VLM: resume pill appears, high-contrast shows black/white/yellow, dedicate modal opens with fields + preview, 1 active timeline dot detected.
 - Lint clean. Dev log clean (200 responses only).
 - **Recommended next phase**: add a "poem of the day" email signup that actually sends (needs SMTP/service), add a reading-time progress indicator per section (mini progress bars in nav), add a language selector for the poem-of-the-day, add a "favorite quote" star on each quote, add a subtle page transition animation between sections, consider a "poem generator" where users input a theme and get a custom poem, add a reading streak tracker (consecutive days visited).
+
+---
+Task ID: 11
+Agent: Cron Review Agent (Round 10)
+Task: Added reading streak tracker, custom poem generator, 'C' keyboard shortcut, and styling polish.
+
+Work Log:
+- **New feature: Reading streak tracker** (`reading-streak.tsx`):
+  - Tracks consecutive days visited in localStorage (`rb-streak-dates`). Each visit: if last visit was yesterday, continue streak; if more than 1 day gap, reset to 1. Keeps last 30 days of dates.
+  - Shows a flame pill ("N day streak", Flame icon, primary color) in the footer, only when streak ≥ 2 days.
+  - Verified: set 2-day streak dates → reloaded → counter showed "3 day streak" (today incremented correctly).
+- **New feature: Custom poem generator** (`poem-generator.tsx` + `/api/poem?custom=1`):
+  - Added `?custom=1` branch to the poem API route that generates a one-off poem without touching the daily cache. Returns `{title, text, theme, custom: true}`.
+  - `PoemGenerator` modal: theme input (120 char max), 8 suggestion chips ("a quiet morning with coffee", "the courage to begin again", etc.), Compose button. Enter key triggers generation.
+  - Generated poem display: theme label, italic title, poem lines, with "Another" (regenerate), "copy", and "dedicate" actions. Loading state shows "the poet is listening…" spinner.
+  - Added "Compose your own poem" button (Sparkles icon, accent border) at the top of the poem-of-the-day section.
+  - Verified: clicked compose → typed "the courage to begin again" → generated poem titled "jazz prayer" with first line "the trumpet sighs a holy note". POST /api/poem?custom=1 returned 200 in 1.6s.
+- **New keyboard shortcut: 'C' for compose** (added to `keyboard-shortcuts.tsx`):
+  - 'C' key clicks the "Compose your own poem" button to open the generator.
+  - Added to the ShortcutsHelp overlay under Actions group (Sparkles icon, "Compose a custom poem").
+  - Verified: dispatched 'c' keydown → composer opened.
+- **Styling enhancements**:
+  - Footer status row now uses `flex-wrap` so the 4 indicators (visitor counter, reading streak, chime, high-contrast) wrap gracefully on narrow screens.
+  - Poem generator suggestion chips use hover-to-primary styling.
+  - "Compose your own poem" button uses accent border + accent-foreground hover fill matching the dedicate button aesthetic.
+
+Stage Summary:
+- **3 new features fully working**: reading streak tracker (consecutive days, flame pill, localStorage), custom poem generator (theme input + 8 suggestions + AI generation via /api/poem?custom=1, with copy/dedicate actions), 'C' keyboard shortcut for compose.
+- All features verified via agent-browser: streak shows "3 day streak", custom poem "jazz prayer" generated, C key opens composer.
+- Lint clean. Dev log clean (200 responses including new /api/poem?custom=1 endpoint).
+- **Recommended next phase**: add a "favorite quote" star on each quote of the day, add a language selector for the poem-of-the-day (e.g., English/Spanish/French), add a subtle page transition animation between sections (view transitions API), add a "share a poem to email" feature using mailto:, add a reading-time progress indicator per section in the nav, consider a "poem of the hour" mini-feature, add a font-size accessibility control.

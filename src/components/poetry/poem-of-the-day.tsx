@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { DedicatePoem } from "./dedicate-poem";
+import { PoemGenerator } from "./poem-generator";
 
 type Poem = {
   date?: string;
@@ -38,6 +39,7 @@ export function PoemOfTheDay() {
   const [archive, setArchive] = useState<Poem[]>([]);
   const [showArchive, setShowArchive] = useState(false);
   const [dedicateOpen, setDedicateOpen] = useState(false);
+  const [generatorOpen, setGeneratorOpen] = useState(false);
   const { toast } = useToast();
 
   const fetchPoem = useCallback(async () => {
@@ -163,6 +165,13 @@ export function PoemOfTheDay() {
             A fresh verse composed for this moment by an echo of the poet&apos;s
             voice — new each day.
           </p>
+          <button
+            onClick={() => setGeneratorOpen(true)}
+            className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/40 px-4 py-2 text-xs font-medium text-accent transition-all hover:bg-accent hover:text-accent-foreground"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            Compose your own poem
+          </button>
 
           <div className="relative mt-8 min-h-[12rem]">
             {loading ? (
@@ -315,6 +324,9 @@ export function PoemOfTheDay() {
               poemText={poem.text || ""}
             />
           )}
+
+          {/* custom poem generator */}
+          <PoemGenerator open={generatorOpen} onClose={() => setGeneratorOpen(false)} />
 
           {/* archive panel */}
           {showArchive && (
