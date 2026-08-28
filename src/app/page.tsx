@@ -20,6 +20,8 @@ import { KeyboardShortcuts } from "@/components/poetry/keyboard-shortcuts";
 import { PageCurtain } from "@/components/poetry/page-curtain";
 import { ReadingList } from "@/components/poetry/reading-list";
 import { FavoritesPanel } from "@/components/poetry/favorites-panel";
+import { ShareSite } from "@/components/poetry/share-site";
+import { StructuredData } from "@/components/poetry/structured-data";
 import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
 
@@ -62,10 +64,12 @@ export default function Home() {
 
   return (
     <ThemeProvider>
+      <StructuredData />
       <PageCurtain />
       <ReadingProgress />
       <CursorGlow />
       <Particles />
+      <ShareSite />
       <Navbar />
       <main className="relative z-10 flex min-h-screen flex-col">
         <Hero />

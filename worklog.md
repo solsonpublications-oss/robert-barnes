@@ -280,3 +280,41 @@ Stage Summary:
 - All features verified via agent-browser: favorites panel opens, theme cycles correctly, ember spans appear on scroll, OG image + manifest served (200), F key works.
 - Lint clean. Dev log clean (200 responses only, no warnings).
 - **Recommended next phase**: add a "share this site" floating button with Web Share API, add a reading-time estimator for each volume, add a subtle confetti burst on newsletter subscribe, consider adding structured data (JSON-LD) for the books, add a 404 page with poetry, add a sitemap.xml + robots.txt for SEO.
+
+---
+Task ID: 8
+Agent: Cron Review Agent (Round 7)
+Task: Added share-site button, reading-time chips, confetti on subscribe, JSON-LD structured data, 404 page with poetry, sitemap.xml + robots.txt.
+
+Work Log:
+- **QA**: Dev server had gone down (connection refused). Restarted it with `bun run dev`. Server came back up cleanly.
+- **New feature: Share-this-site floating button** (`share-site.tsx`):
+  - Fixed right-edge middle button (desktop only) with Share2 icon. Uses the native Web Share API first; falls back to a dropdown menu with Copy link / Share on X / Share on Facebook / Close.
+  - Copy link writes to clipboard and fires a toast. Verified via VLM: "share menu visible on the right side with 'Copy link', 'Share on X', 'Share on Facebook', and 'Close'".
+- **New feature: Reading-time chips on volume cards** (updated `collection.tsx`):
+  - Added a "~X min read" chip (Clock icon, accent color) to each volume card, estimating reading time as ~1 page/min (poetry pace). For Vol I: ~86 min, Vol II: ~116 min, Vol III: ~107 min, Vol IV: ~78 min.
+  - Verified via VLM: "small reading-time chip/badge showing '~X min read' near the top of each card".
+- **New feature: Confetti burst on newsletter subscribe** (`confetti.tsx` + updated `reviews.tsx`):
+  - `ConfettiBurst` component fires 32 confetti pieces in 5 theme colors (gold, rose, ember-soft, cream, mist) radiating outward with rotation, 1.8s ease-out via `@keyframes confettiFall`.
+  - Wired into the Newsletter section — `confettiTrigger` counter increments on successful subscribe, firing the burst centered on the newsletter card.
+  - Verified via VLM: "confetti burst / colorful particles visible in the background area around the newsletter card".
+- **New feature: JSON-LD structured data** (`structured-data.tsx`):
+  - 3 JSON-LD blocks injected into the page: Person (author), BookSeries (The Art of Poetry with 4 books, each with rating + offers + page count), WebSite (site metadata).
+  - Helps Google show rich results for the author and book series.
+  - Verified: 6 `application/ld+json` scripts in DOM (3 types × SSR+hydration), types: Person, BookSeries, WebSite.
+- **New feature: 404 page with poetry** (`src/app/not-found.tsx`):
+  - Custom 404 page with animated butterfly, gold-gradient "404" title, an original 5-line poem ("some pages are meant / to stay blank — / the way silence holds / the shape of a poem / not yet written."), and two CTAs: "Return to the verse" (home) + "Go back" (history.back).
+  - Verified via VLM: "404 not-found page with a poetic theme... large 404, a poem, navigation buttons".
+- **New feature: sitemap.xml + robots.txt** (`src/app/sitemap.ts` + `src/app/robots.ts`):
+  - Dynamic sitemap with the home URL, lastModified, weekly change frequency, priority 1.
+  - robots.txt allows all user agents + points to the sitemap.
+  - **Bug fix**: Removed the static `public/robots.txt` that conflicted with the new dynamic `src/app/robots.ts` route (was causing a 500 error). After removal, robots.txt serves 200.
+  - Verified: `curl /sitemap.xml` → 200 with valid XML; `curl /robots.txt` → 200 with correct content.
+- **Lint fix**: Fixed `react-hooks/set-state-in-effect` in confetti.tsx by deferring setState via `requestAnimationFrame` instead of calling it synchronously in the effect body.
+
+Stage Summary:
+- **6 new features fully working**: share-site floating button (Web Share API + fallback menu), reading-time chips on all 4 volume cards, confetti burst on newsletter subscribe (32 pieces, 5 colors), JSON-LD structured data (Person + BookSeries + WebSite), custom 404 page with poetry, dynamic sitemap.xml + robots.txt.
+- Bug fix: resolved robots.txt conflict (static public file vs dynamic route) by removing the static file.
+- All features verified via agent-browser + VLM: share menu opens, reading chips visible, confetti fires, JSON-LD in DOM, 404 page renders with poem, sitemap + robots serve 200.
+- Lint clean. Dev log clean (200 responses for /, /sitemap.xml, /robots.txt, /api/poem; 404 for nonexistent pages).
+- **Recommended next phase**: add a "poem of the day" email signup that actually sends (needs SMTP or service), add a visitor counter with privacy-friendly analytics, add a subtle page-load sound option, consider a "dark mode only" toggle for the hero gradient, add a reading-progress milestone toasts, add keyboard shortcut '?' to show all shortcuts, consider ARIA live regions for the rotating quotes/poems for screen readers.

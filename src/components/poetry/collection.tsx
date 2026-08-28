@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Star, ExternalLink, BookOpen, Info } from "lucide-react";
+import { Star, ExternalLink, BookOpen, Info, Clock } from "lucide-react";
 import { volumes, stats } from "@/lib/poetry-data";
 import { BookModal, useBookModal } from "./book-modal";
 import { BookmarkToggle } from "./reading-list";
@@ -26,14 +26,21 @@ function VolumeCard({
       {/* shimmer top border on hover */}
       <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-      {/* vol badge */}
+      {/* vol badge + reading time */}
       <div className="mb-5 flex items-center justify-between">
         <span className="inline-flex items-baseline gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-luxe text-primary">
           VOL. <span className="font-serif text-sm italic">{v.numeral}</span>
         </span>
-        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground" title={`~${v.pages} min read`}>
           <BookOpen className="h-3.5 w-3.5" />
           {v.pages} pages
+        </span>
+      </div>
+      {/* reading-time chip */}
+      <div className="mb-4 flex justify-end">
+        <span className="inline-flex items-center gap-1 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-[0.65rem] font-medium text-accent">
+          <Clock className="h-3 w-3" />
+          ~{v.pages} min read
         </span>
       </div>
 
