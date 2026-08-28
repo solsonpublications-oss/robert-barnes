@@ -33,6 +33,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://robert-barnes.space-z.ai"),
   title: "The Art of Poetry — R. Ray Barnes",
   description:
     "Four volumes, one voice. A life written in verse by R. Ray Barnes — a love letter told in four parts: to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
@@ -45,23 +46,44 @@ export const metadata: Metadata = {
     "Thoughts Dancing From Heart To Mind",
     "Thoughts From The Heart",
     "Love Life The Creator & Me",
+    "jazz poetry",
+    "faith poetry",
+    "contemporary poetry",
   ],
   authors: [{ name: "R. Ray Barnes" }],
+  creator: "R. Ray Barnes",
+  publisher: "R. Ray Barnes Productions",
   icons: {
     icon: "/images/author-portrait.png",
+    apple: "/images/author-portrait.png",
   },
   openGraph: {
     title: "The Art of Poetry — R. Ray Barnes",
     description:
-      "Four volumes, one voice. A life written in verse by R. Ray Barnes.",
+      "Four volumes, one voice. A life written in verse by R. Ray Barnes — a love letter told in four parts: to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
     type: "website",
+    siteName: "The Art of Poetry",
+    locale: "en_US",
+    url: "https://robert-barnes.space-z.ai/",
+    images: [
+      {
+        url: "/images/og-preview.png",
+        width: 1344,
+        height: 768,
+        alt: "The Art of Poetry — R. Ray Barnes",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Art of Poetry — R. Ray Barnes",
     description:
       "Four volumes, one voice. A life written in verse by R. Ray Barnes.",
+    images: ["/images/og-preview.png"],
+    creator: "@rraybarnes",
   },
+  manifest: "/manifest.webmanifest",
+  category: "literature",
 };
 
 export default function RootLayout({

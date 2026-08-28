@@ -19,6 +19,7 @@ import { AmbientPlayer } from "@/components/poetry/ambient-player";
 import { KeyboardShortcuts } from "@/components/poetry/keyboard-shortcuts";
 import { PageCurtain } from "@/components/poetry/page-curtain";
 import { ReadingList } from "@/components/poetry/reading-list";
+import { FavoritesPanel } from "@/components/poetry/favorites-panel";
 import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
 
@@ -97,6 +98,7 @@ export default function Home() {
       </main>
       <BackToTop />
       <ReadingList />
+      <FavoritesPanel />
       <AmbientPlayer />
       <KeyboardShortcuts />
     </ThemeProvider>

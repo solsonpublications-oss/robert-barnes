@@ -239,3 +239,44 @@ Stage Summary:
 - All features verified via agent-browser: archive API returns 200, archive panel opens, favorite toast appears, B key opens reading list, P key scrolls to poem, print button + container present.
 - Lint clean. Dev log clean (200 responses only, including new ?history=1 endpoint).
 - **Recommended next phase**: add a favorites panel (floating, like reading list) to view/manage favorited poems, add a "poem of the day" email signup that sends the daily poem, add a subtle scroll-triggered ember particle effect on section dividers, consider a dark/light theme auto-switch based on system preference, add Open Graph metadata + social preview image for sharing.
+
+---
+Task ID: 7
+Agent: Cron Review Agent (Round 6)
+Task: Added favorites panel, scroll-triggered ember bursts on dividers, system theme auto-detection, Open Graph metadata + OG image, and PWA manifest.
+
+Work Log:
+- **New feature: Favorites panel** (`favorites-panel.tsx`):
+  - Floating star button (bottom-right, next to Reading List) with count badge showing number of favorited poems.
+  - Opens a panel listing all favorited poems with title, first line preview, copy button, and remove (trash) button. Empty state shows guidance text with a filled star icon.
+  - Uses the `useFavorites` hook (localStorage-backed, syncs across tabs). Hover reveals copy/remove actions per item.
+  - Verified: clicked favorites trigger → panel opens showing previously favorited "untitled" poem.
+- **New feature: Scroll-triggered ember particle bursts** (`ember-burst.tsx` + updated `dividers.tsx`):
+  - `EmberBurst` component emits `count` warm ember particles (default 12) that radiate outward with a 1.4s ease-out float animation when the parent scrolls into view (IntersectionObserver, fires once).
+  - Integrated into all 3 section divider variants: butterfly (14 embers, ember-soft color), line (8 embers, primary color), diamond (10 embers, primary color). 9 EmberBurst wrappers mounted total.
+  - Added `@keyframes emberFloat` to globals.css: embers fade in at 15%, drift to dx/dy, scale down to 0, with a glow box-shadow.
+  - Verified: after scrolling to a fresh divider, 8 ember spans were present in the DOM.
+- **New feature: System preference theme auto-detection** (refactored `theme-provider.tsx`):
+  - Added `isAuto` state + `setAuto()` to the theme context. When auto mode is on, the theme follows `prefers-color-scheme` and updates live when the system theme changes.
+  - First visit (no stored preference) defaults to auto mode, following the system. Manual toggle exits auto mode and persists the choice.
+  - Navbar theme button now cycles 3 states: dark (Sun icon) → light (Moon icon) → auto (Monitor icon) → dark. Tooltip shows current mode.
+  - Verified: cycled dark → light → auto → dark; title attribute updates correctly ("Theme: dark", "Theme: light", "Theme: auto").
+- **New feature: Open Graph metadata + social preview image** (layout.tsx + generated image):
+  - Generated a 1344×768 OG preview image via z-ai image generation: dark purple-black bg (#150d1a), golden butterfly emblem, "The Art of Poetry" italic serif title, "By R. Ray Barnes" small caps, floating particles, film grain → `public/images/og-preview.png` (161 KB).
+  - Added comprehensive OG metadata: `metadataBase`, title, full description, siteName, locale (en_US), url, image (1344×768 with alt text), Twitter card (summary_large_image with image), creator, publisher, category, expanded keywords (jazz poetry, faith poetry, contemporary poetry).
+  - Verified: `curl /images/og-preview.png` → 200, 161KB. metadataBase warning resolved.
+- **New feature: PWA web manifest** (`public/manifest.webmanifest`):
+  - Created manifest with name, short_name, description, start_url, standalone display, background_color (#150d1a), theme_color (#150d1a), portrait orientation, and 2 icon entries (192px + 512px, any+maskable purpose).
+  - Referenced in metadata via `manifest` field.
+  - Verified: `curl /manifest.webmanifest` → 200, 618 bytes.
+- **New keyboard shortcut: 'F' for favorites**:
+  - Added 'F' key to open the favorites panel (dispatches click on the floating trigger).
+  - Verified: dispatched 'f' keydown → favorites panel opened.
+- **Lint fix**: Fixed `react-hooks/set-state-in-effect` in theme-provider by deferring the system theme sync via `Promise.resolve().then(...)` microtask instead of calling setTheme synchronously in the effect body.
+
+Stage Summary:
+- **5 new features fully working**: favorites panel (floating + localStorage), scroll-triggered ember bursts on all section dividers, system theme auto-detection (3-state cycle: dark/light/auto), Open Graph metadata + AI-generated social preview image, PWA web manifest.
+- **1 new keyboard shortcut**: 'F' for favorites panel (total shortcuts now: ⌘K, T, M, B, F, P, R, /).
+- All features verified via agent-browser: favorites panel opens, theme cycles correctly, ember spans appear on scroll, OG image + manifest served (200), F key works.
+- Lint clean. Dev log clean (200 responses only, no warnings).
+- **Recommended next phase**: add a "share this site" floating button with Web Share API, add a reading-time estimator for each volume, add a subtle confetti burst on newsletter subscribe, consider adding structured data (JSON-LD) for the books, add a 404 page with poetry, add a sitemap.xml + robots.txt for SEO.

@@ -27,6 +27,13 @@ export function KeyboardShortcuts() {
       ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   }, []);
 
+  // 'F' → open the favorites panel
+  const openFavorites = useCallback(() => {
+    document
+      .querySelector('button[aria-label="Open favorites"]')
+      ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  }, []);
+
   // 'P' → jump to poem of the day
   const jumpToPoem = useCallback(() => {
     document
@@ -51,6 +58,8 @@ export function KeyboardShortcuts() {
     { key: "m", handler: toggleMusic },
     // B → open reading list
     { key: "b", handler: openReadingList },
+    // F → open favorites
+    { key: "f", handler: openFavorites },
     // P → jump to poem of the day
     { key: "p", handler: jumpToPoem },
     // R → jump to resources
