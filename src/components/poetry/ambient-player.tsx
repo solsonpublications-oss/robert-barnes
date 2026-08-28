@@ -118,6 +118,7 @@ export function AmbientPlayer() {
 
   return (
     <button
+      id="ambient-player-btn"
       onClick={toggle}
       aria-label={playing ? "Stop ambient music" : "Play ambient music"}
       aria-pressed={playing}

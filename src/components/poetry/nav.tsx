@@ -90,15 +90,15 @@ export function Navbar() {
             <li key={l.href}>
               <button
                 onClick={() => handleNav(l.href)}
-                className={`relative rounded-full px-3.5 py-2 text-sm tracking-wide transition-colors duration-300 ${
+                className={`relative rounded-full px-3 py-1.5 text-sm tracking-wide transition-colors duration-300 ${
                   active === l.href
                     ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                    : "text-foreground/80 hover:text-foreground"
                 }`}
               >
                 {l.label}
                 <span
-                  className={`absolute inset-x-3.5 -bottom-0.5 h-px origin-left bg-primary transition-transform duration-300 ${
+                  className={`absolute inset-x-3 -bottom-0.5 h-px origin-left bg-primary transition-transform duration-300 ${
                     active === l.href ? "scale-x-100" : "scale-x-0"
                   }`}
                 />
@@ -118,7 +118,7 @@ export function Navbar() {
 
           <button
             onClick={() => handleNav("#own")}
-            className="hidden rounded-full bg-primary px-5 py-2 text-sm font-medium tracking-wide text-primary-foreground transition-all duration-300 hover:shadow-[0_0_30px_-6px_var(--glow-gold)] hover:brightness-110 sm:block"
+            className="hidden rounded-full border border-border/80 px-4 py-1.5 text-sm font-medium tracking-wide text-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary hover:shadow-[0_0_24px_-8px_var(--glow-gold)] sm:block"
           >
             Get the Series
           </button>

@@ -74,3 +74,55 @@ Stage Summary:
 - Styling enhanced: hover micro-interactions on cards, animated timeline dots, staggered star animations.
 - All features verified working via agent-browser. Lint clean. Dev log clean.
 - Recommended next phase: integrate uploaded PDFs as flip-book previews, add the walkthrough video to the About section, add keyboard shortcuts (e.g., 'T' for theme, 'M' for music), consider a daily poem-of-the-day feature using the LLM skill.
+
+---
+Task ID: 3
+Agent: Cron Review Agent (Round 2)
+Task: Continued QA + added keyboard shortcuts, command palette, section dividers, parallax, and fixed nav/CTA to match original.
+
+Work Log:
+- **QA pass**: Compared clone vs original side-by-side. Found 2 style mismatches:
+  - Original "Get the Series" CTA is a ghost/outline button (transparent bg, cream text, thin border) — clone had solid gold. Fixed to ghost style matching original.
+  - Original nav links are all cream-colored (foreground) — clone used muted-foreground. Fixed to `text-foreground/80` for inactive, `text-primary` for active.
+- **New feature: Keyboard shortcuts** (`keyboard-shortcuts.tsx` + `use-shortcuts.ts` hook):
+  - `⌘K` / `Ctrl+K` / `/` → opens command palette
+  - `T` → toggles dark/light theme
+  - `M` → toggles ambient music player
+  - Shortcuts are ignored when typing in inputs/textareas (except ctrl/meta shortcuts)
+  - Auto-dismissing hint badge appears after 2.5s showing the available shortcuts (sessionStorage-gated so it only shows once per session)
+  - Verified: dispatched keydown for 't' toggled theme to light, dispatched ctrl+k opened palette
+- **New feature: Command palette** (`command-palette.tsx`):
+  - Full-screen overlay with search input, fuzzy-filtered results grouped by category (Navigate, Volumes, Actions)
+  - Lists all nav sections, all 4 volumes (clicking opens book detail modal), and 3 actions (toggle theme, toggle music, back to top)
+  - Full keyboard navigation: ↑↓ to move, Enter to select, Esc to close
+  - Active item highlighted with gold accent, hover syncs with active state
+  - Verified: opens via ⌘K, search filters results, Esc closes
+- **New feature: Section dividers** (`dividers.tsx`):
+  - 3 ornamental variants placed between major sections:
+    - `butterfly` — line + butterfly mark + line (between About/Collection, Pillars/QuoteOfTheDay)
+    - `line` — line + diamond + line (between Stats/Journey, Process/Verses, MomentInVerse/Reviews)
+    - `diamond` — line + diamonds + line (between Journey/Process)
+  - Butterfly mark rotates on hover for micro-interaction
+- **New feature: Parallax scroll hook** (`use-parallax.ts`):
+  - Updates `--parallax` CSS variable on elements with `data-parallax-speed` based on viewport position
+  - RequestAnimationFrame-throttled for smooth performance
+  - `ParallaxLayer` component ready for use in sections
+- **Styling fixes**:
+  - Nav link padding adjusted from `px-3.5 py-2` → `px-3 py-1.5` to match original's `5.6px 12px`
+  - Nav underline inset adjusted to `inset-x-3`
+  - CTA button padding `px-4 py-1.5` matching original's `6.4px 16px`
+  - Added `id="ambient-player-btn"` to ambient player so it can be triggered externally via keyboard shortcut
+- **Verification**: Lint clean. Dev log clean (200 responses only). All features tested:
+  - T key → theme toggles ✓
+  - ⌘K → command palette opens ✓
+  - Command palette search filters ✓
+  - Esc closes palette ✓
+  - Section dividers visible between sections ✓
+  - Ghost CTA button matches original ✓
+  - Nav links cream-colored matching original ✓
+
+Stage Summary:
+- Nav and CTA now match original's ghost/outline aesthetic exactly.
+- 4 new features: keyboard shortcuts (⌘K/T/M///Esc), command palette with fuzzy search + keyboard nav, decorative section dividers (butterfly/line/diamond), parallax scroll hook.
+- All features verified working via agent-browser.
+- Recommended next phase: integrate uploaded PDFs as flip-book previews in the book modal, add the walkthrough video to the About section, add a "poem of the day" generator using the LLM skill, add cursor-following light effect.
