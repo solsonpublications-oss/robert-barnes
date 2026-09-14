@@ -128,7 +128,7 @@ export function Collection() {
     <section id="collection" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="reveal mb-14 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-lg text-primary">four volumes, one voice</p>
+          <p className="kicker text-lg text-primary">five volumes, one voice</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] italic text-foreground"
             style={{ fontWeight: 300 }}
@@ -145,7 +145,7 @@ export function Collection() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {volumes.map((v, i) => (
             <VolumeCard key={v.id} v={v} i={i} onOpen={() => open(v)} />
           ))}

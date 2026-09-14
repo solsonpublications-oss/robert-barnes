@@ -10,7 +10,7 @@ export function StructuredData() {
     "@type": "Person",
     name: "R. Ray Barnes",
     description:
-      "American poet writing in the tradition of love, faith, jazz, family, grace, and longing. Author of The Art of Poetry, a four-volume collection.",
+      "American poet writing in the tradition of love, faith, jazz, family, grace, and longing. Author of The Art of Poetry, a five-volume collection.",
     url: "https://robert-barnes.space-z.ai",
     jobTitle: "Poet",
     knowsAbout: ["Poetry", "Love poetry", "Jazz poetry", "Faith", "Spirituality"],
@@ -25,7 +25,7 @@ export function StructuredData() {
       name: "R. Ray Barnes",
     },
     description:
-      "Four volumes, one voice. A life written in verse — to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
+      "Five volumes, one voice. A life written in verse — to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
     hasPart: volumes.map((v) => ({
       "@type": "Book",
       name: v.title,
@@ -51,7 +51,7 @@ export function StructuredData() {
     name: "The Art of Poetry — R. Ray Barnes",
     url: "https://robert-barnes.space-z.ai",
     description:
-      "Four volumes, one voice. A life written in verse by R. Ray Barnes.",
+      "Five volumes, one voice. A life written in verse by R. Ray Barnes.",
     inLanguage: "en",
     author: { "@type": "Person", name: "R. Ray Barnes" },
   };

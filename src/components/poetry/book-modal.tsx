@@ -49,6 +49,18 @@ export const samplePoems: Record<string, { title: string; lines: string[] }> = {
       "you were slipping.",
     ],
   },
+  vol5: {
+    title: "Spectrum",
+    lines: [
+      "I used to think",
+      "love was a single colour —",
+      "until the light broke open",
+      "and I saw every shade",
+      "I had ever felt",
+      "waiting, all along,",
+      "in the same beam.",
+    ],
+  },
 };
 
 export function BookModal({

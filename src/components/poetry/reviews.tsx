@@ -147,7 +147,7 @@ export function CallToAction() {
           Own the Complete Series
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Four volumes. One heart, unfolding. Available now on Amazon in Kindle
+          Five volumes. One heart, unfolding. Available now on Amazon in Kindle
           and Paperback editions.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
@@ -180,6 +180,7 @@ export function Footer() {
     { href: "#about", label: "About the Poet" },
     { href: "#collection", label: "The Collection" },
     { href: "#themes", label: "Poetic Themes" },
+    { href: "#more-books", label: "Other Books" },
     { href: "#reviews", label: "Reader Reviews" },
     { href: "#connect", label: "Stay Connected" },
   ];

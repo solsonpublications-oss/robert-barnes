@@ -2,6 +2,7 @@ export type Volume = {
   id: string;
   numeral: string;
   title: string;
+  year: string;
   cover: string;
   rating: number;
   pages: number;
@@ -14,6 +15,7 @@ export const volumes: Volume[] = [
     id: "vol1",
     numeral: "I",
     title: "Thoughts Dancing From Heart To Mind",
+    year: "2014",
     cover: "/images/vol1.jpg",
     rating: 5.0,
     pages: 86,
@@ -25,7 +27,8 @@ export const volumes: Volume[] = [
     id: "vol2",
     numeral: "II",
     title: "Butterfly Thoughts",
-    cover: "/images/vol2.jpg",
+    year: "2016",
+    cover: "/images/vol2.png",
     rating: 5.0,
     pages: 116,
     description:
@@ -36,6 +39,7 @@ export const volumes: Volume[] = [
     id: "vol3",
     numeral: "III",
     title: "Thoughts From The Heart",
+    year: "2018",
     cover: "/images/vol3.jpg",
     rating: 5.0,
     pages: 107,
@@ -47,11 +51,24 @@ export const volumes: Volume[] = [
     id: "vol4",
     numeral: "IV",
     title: "Love, Life, The Creator & Me",
+    year: "2020",
     cover: "/images/vol4.jpg",
     rating: 5.0,
     pages: 78,
     description:
       "The widest lens — faith, gratitude, and a life measured in grace rather than time. Love becomes the most important occurrence, mirroring the first love the Creator had for humankind.",
+    amazon: "https://www.amazon.com/dp/B0D5FRZQK9",
+  },
+  {
+    id: "vol5",
+    numeral: "V",
+    title: "A Spectrum Of Thoughts",
+    year: "2026",
+    cover: "/images/vol5.png",
+    rating: 5.0,
+    pages: 112,
+    description:
+      "The fifth and final volume opens the lens widest of all — a spectrum of love, faith, jazz, and the full colour of feeling. Every shade of a life lived in verse, gathered into one luminous voice.",
     amazon: "https://www.amazon.com/dp/B0D5FRZQK9",
   },
 ];
@@ -62,11 +79,42 @@ export type Milestone = {
   text: string;
 };
 
+export type OtherBook = {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+};
+
+export const otherBooks: OtherBook[] = [
+  {
+    id: "easy-guide",
+    title: "An Easy Guide To Understanding God, Spirit & Love",
+    category: "Spiritual Companion",
+    description:
+      "A plain-spoken companion for the seeker — a gentle, accessible path through the nature of God, the quiet power of Spirit, and the many shapes of Love. Written for anyone who has ever wanted the sacred made simple.",
+  },
+  {
+    id: "go-sit",
+    title: "Go Sit In A Corner And Think",
+    category: "Reflections",
+    description:
+      "An invitation to pause. A collection of meditations and quiet provocations that ask the reader to sit with themselves — in the corner of a room, of a thought, of a life — and listen for what the silence has been trying to say.",
+  },
+  {
+    id: "queen-pin",
+    title: "Queen Pin: The Story Of Yvonne Barnes And The Motown Records Bowlerettes",
+    category: "Biography",
+    description:
+      "A tribute and a history — the story of Yvonne Barnes and the Motown Records Bowlerettes, told with the warmth of family memory and the care of a chronicler. A celebration of a woman, a team, and an era that moved to its own rhythm.",
+  },
+];
+
 export const journey: Milestone[] = [
   {
     year: "2008",
     title: "The First Poem",
-    text: "A love letter scribbled on the back of a napkin becomes the seed of something much larger — the very first poem that would one day fill four volumes.",
+    text: "A love letter scribbled on the back of a napkin becomes the seed of something much larger — the very first poem that would one day fill five volumes.",
   },
   {
     year: "2009",
@@ -101,7 +149,7 @@ export const journey: Milestone[] = [
   {
     year: "2022",
     title: "The Art of Poetry",
-    text: "Four volumes become one unified work. The complete series is published, a love letter told in four parts.",
+    text: "Four volumes become one unified work. The complete series is gathered into a single, coherent voice — a love letter told in verse.",
   },
   {
     year: "2024",
@@ -111,7 +159,12 @@ export const journey: Milestone[] = [
   {
     year: "2025",
     title: "Still Writing",
-    text: "The pen keeps moving. New work is in progress — because the well of love, faith, and wonder never runs dry.",
+    text: "The pen keeps moving. A fifth volume takes shape — because the well of love, faith, and wonder never runs dry.",
+  },
+  {
+    year: "2026",
+    title: "A Spectrum Of Thoughts",
+    text: "The fifth volume opens the lens widest of all. The series completes itself as five volumes, one voice — a love letter told in five parts.",
   },
   {
     year: "∞",
@@ -281,9 +334,9 @@ export const reviews: Review[] = [
 ];
 
 export const stats = [
-  { value: 4, label: "VOLUMES", suffix: "" },
-  { value: 380, label: "POEMS", suffix: "+" },
-  { value: 16, label: "YEARS WRITING", suffix: "+" },
+  { value: 5, label: "VOLUMES", suffix: "" },
+  { value: 420, label: "POEMS", suffix: "+" },
+  { value: 18, label: "YEARS WRITING", suffix: "+" },
   { value: Infinity, label: "LOVE", suffix: "" },
 ];
 
@@ -308,6 +361,7 @@ export const navLinks = [
   { href: "#collection", label: "Volumes" },
   { href: "#verses", label: "Verses" },
   { href: "#themes", label: "Themes" },
+  { href: "#more-books", label: "More Books" },
   { href: "#reviews", label: "Reviews" },
   { href: "#connect", label: "Connect" },
 ];

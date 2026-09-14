@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const rotatingSubtitles = [
-  "Four volumes of love, faith, jazz, and the quiet miracle of feeling anything at all.",
-  "The kind of poetry that makes you put the book down and stare at the ceiling.",
-  "One voice, four volumes, a lifetime of feeling.",
   "Where every verse is a love letter written in firelight.",
+  "Five volumes of faith, jazz, and the quiet miracle of feeling anything at all.",
+  "One voice, five volumes, and a lifetime of feeling.",
+  "The kind of poetry that makes you put the book down and stare at the ceiling.",
 ];
 
 function Typewriter() {
@@ -145,7 +145,7 @@ export function Hero() {
       {/* hero content column — matches original max-w-2xl + gap-5 */}
       <div className="reveal relative z-10 flex max-w-2xl flex-col items-center gap-5 text-center" data-delay="0">
         <span className="kicker text-base text-primary sm:text-lg">
-          FOUR VOLUMES · ONE VOICE
+          FIVE VOLUMES · ONE VOICE
         </span>
         <p className="font-serif text-lg italic text-muted-foreground md:text-xl">
           a life, written in verse
@@ -230,7 +230,7 @@ export function About() {
             <p>
               Written for his wife Diane and dedicated to the family that shaped
               him, <em className="text-foreground/90">The Art of Poetry</em> is one
-              long love letter told in four parts — to romance, to grief, to jazz,
+              long love letter told in five parts — to romance, to grief, to jazz,
               and to the faith that carries a heart through all of it.
             </p>
             <p className="kicker text-xl text-accent">— with heart, always</p>

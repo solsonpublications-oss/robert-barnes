@@ -10,6 +10,7 @@ import { Hero, About } from "@/components/poetry/hero";
 import { Collection, Stats } from "@/components/poetry/collection";
 import { Journey, Process } from "@/components/poetry/journey";
 import { Verses, Pillars, QuoteOfTheDay, MomentInVerse } from "@/components/poetry/verses";
+import { OtherBooks } from "@/components/poetry/other-books";
 import { Reviews, Newsletter, CallToAction, Footer } from "@/components/poetry/reviews";
 import { StructuredData } from "@/components/poetry/structured-data";
 import { useReveal } from "@/hooks/use-reveal";
@@ -72,6 +73,8 @@ export default function Home() {
         <SectionDivider variant="line" />
         <Verses />
         <Pillars />
+        <SectionDivider variant="line" />
+        <OtherBooks />
         <SectionDivider variant="butterfly" />
         <QuoteOfTheDay />
         <MomentInVerse />
