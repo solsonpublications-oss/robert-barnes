@@ -204,7 +204,7 @@ export function About() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
           </div>
           <p className="kicker mt-4 text-center text-lg text-primary">
-            the poet
+            author · producer · poet
           </p>
         </div>
 
@@ -226,6 +226,15 @@ export function About() {
               has taken the ordinary business of loving — a wife, a family, a God,
               an ordinary Tuesday — and turned it into verse that moves between the
               sacred and the plainspoken, the tender and the unfiltered.
+            </p>
+            <p>
+              A 2019 Michigan Regional Emmy winner, R. Ray Barnes has spent over
+              thirty-five years as a music producer and songwriter — collaborating
+              with Stevie Wonder, Mary Wilson of the Supremes, James Ingram, and
+              Grammy winner Tony Coleman. He is the author of <em>Queen Pin: The
+              Story of Yvonne Barnes and the Motown Records Bowlerettes</em>, a
+              tribute to his mother and the team once called the &ldquo;Rosa Parks
+              of bowling.&rdquo;
             </p>
             <p>
               Written for his wife Diane and dedicated to the family that shaped

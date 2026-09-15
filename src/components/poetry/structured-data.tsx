@@ -10,10 +10,11 @@ export function StructuredData() {
     "@type": "Person",
     name: "R. Ray Barnes",
     description:
-      "American poet writing in the tradition of love, faith, jazz, family, grace, and longing. Author of The Art of Poetry, a five-volume collection.",
+      "Emmy Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
     url: "https://robert-barnes.space-z.ai",
-    jobTitle: "Poet",
-    knowsAbout: ["Poetry", "Love poetry", "Jazz poetry", "Faith", "Spirituality"],
+    jobTitle: "Author · Producer · Poet",
+    award: ["2019 Michigan Regional Emmy Award", "8th Annual Eclipse Award"],
+    knowsAbout: ["Poetry", "Love poetry", "Jazz poetry", "Faith", "Spirituality", "Music production", "Songwriting"],
   };
 
   const seriesLd = {

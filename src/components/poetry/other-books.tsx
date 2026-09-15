@@ -1,49 +1,14 @@
 "use client";
 
-import { BookText, Compass, Sparkles, Feather, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { BookText, Compass, ExternalLink, Sparkles } from "lucide-react";
 import { otherBooks } from "@/lib/poetry-data";
 
 const categoryIcon: Record<string, React.ComponentType<{ className?: string }>> = {
   "Spiritual Companion": Compass,
   Reflections: BookText,
-  Biography: Feather,
+  Biography: BookText,
 };
-
-/** A decorative CSS-drawn book spine — no external cover image needed. */
-function BookSpine({ id }: { id: string }) {
-  // deterministic accent per book
-  const accent =
-    id === "easy-guide"
-      ? "from-primary/30 to-accent/20"
-      : id === "go-sit"
-        ? "from-accent/25 to-primary/15"
-        : "from-primary/25 via-mist/15 to-accent/20";
-  return (
-    <div className="relative mx-auto aspect-[2/3] w-full max-w-[150px]">
-      {/* glow */}
-      <div
-        className={`absolute -inset-2 rounded-lg bg-gradient-to-br ${accent} opacity-40 blur-xl`}
-        aria-hidden
-      />
-      {/* spine */}
-      <div className="relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border border-primary/30 bg-gradient-to-br from-card to-secondary p-4 book-shadow">
-        <div className="flex items-center justify-between">
-          <span className="h-1 w-8 rounded-full bg-primary/60" aria-hidden />
-          <span className="h-1 w-1 rounded-full bg-accent/70" aria-hidden />
-        </div>
-        <div className="flex flex-1 items-center justify-center text-center">
-          <span className="font-serif text-[0.62rem] italic leading-tight text-foreground/80">
-            R. Ray Barnes
-          </span>
-        </div>
-        <div className="flex flex-col items-center gap-1">
-          <span className="h-px w-10 bg-primary/40" aria-hidden />
-          <Sparkles className="h-3.5 w-3.5 text-primary" aria-hidden />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function OtherBooks() {
   return (
@@ -67,6 +32,7 @@ export function OtherBooks() {
         <div className="grid gap-6 md:grid-cols-3">
           {otherBooks.map((b, i) => {
             const Icon = categoryIcon[b.category] ?? BookText;
+            const isAvailable = Boolean(b.amazon);
             return (
               <article
                 key={b.id}
@@ -81,13 +47,35 @@ export function OtherBooks() {
                     <Icon className="h-3 w-3" />
                     {b.category}
                   </span>
-                  <span className="font-serif text-[0.7rem] italic tracking-wide text-muted-foreground">
-                    by R. Ray Barnes
+                  <span
+                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[0.65rem] font-semibold tracking-luxe ${
+                      isAvailable
+                        ? "border border-primary/40 bg-primary/10 text-primary"
+                        : "border border-border/60 bg-background/40 text-muted-foreground"
+                    }`}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full ${
+                        isAvailable ? "bg-primary" : "bg-muted-foreground/60"
+                      }`}
+                      aria-hidden
+                    />
+                    {isAvailable ? "Available now" : "Forthcoming"}
                   </span>
                 </div>
 
+                {/* cover image */}
                 <div className="mb-6">
-                  <BookSpine id={b.id} />
+                  <div className="relative mx-auto aspect-[2/3] w-full max-w-[170px] overflow-hidden rounded-lg book-shadow transition-transform duration-500 group-hover:-rotate-2 group-hover:scale-[1.04]">
+                    <div className="absolute -inset-2 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+                    <Image
+                      src={b.cover}
+                      alt={`Book cover for ${b.title}`}
+                      fill
+                      sizes="(max-width: 768px) 60vw, 170px"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  </div>
                 </div>
 
                 <h3 className="mb-3 text-center font-serif text-xl italic leading-snug text-foreground">
@@ -97,11 +85,22 @@ export function OtherBooks() {
                   {b.description}
                 </p>
 
-                <div className="mt-auto flex items-center justify-center gap-1.5 rounded-full border border-border/50 bg-background/40 px-4 py-2 text-xs tracking-wide text-muted-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary/70" aria-hidden />
-                  Available from the author
-                  <ArrowUpRight className="h-3 w-3 text-primary/70" aria-hidden />
-                </div>
+                {isAvailable ? (
+                  <a
+                    href={b.amazon}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_-6px_var(--glow-gold)]"
+                  >
+                    Get on Amazon
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                ) : (
+                  <div className="mt-auto flex items-center justify-center gap-1.5 rounded-full border border-border/50 bg-background/40 px-4 py-2.5 text-xs tracking-wide text-muted-foreground">
+                    <Sparkles className="h-3 w-3 text-primary/70" aria-hidden />
+                    Forthcoming from the author
+                  </div>
+                )}
               </article>
             );
           })}

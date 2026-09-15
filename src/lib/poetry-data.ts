@@ -28,7 +28,7 @@ export const volumes: Volume[] = [
     numeral: "II",
     title: "Butterfly Thoughts",
     year: "2016",
-    cover: "/images/vol2.png",
+    cover: "/images/vol2.jpg",
     rating: 5.0,
     pages: 116,
     description:
@@ -83,14 +83,19 @@ export type OtherBook = {
   id: string;
   title: string;
   category: string;
+  cover: string;
   description: string;
+  amazon?: string;
+  status?: string;
 };
 
 export const otherBooks: OtherBook[] = [
   {
     id: "easy-guide",
-    title: "An Easy Guide To Understanding God, Spirit & Love",
+    title: "One: An Easy Guide To Understanding God, Spirit & Love",
     category: "Spiritual Companion",
+    cover: "/images/easy-guide-cover.png",
+    status: "Forthcoming",
     description:
       "A plain-spoken companion for the seeker — a gentle, accessible path through the nature of God, the quiet power of Spirit, and the many shapes of Love. Written for anyone who has ever wanted the sacred made simple.",
   },
@@ -98,6 +103,8 @@ export const otherBooks: OtherBook[] = [
     id: "go-sit",
     title: "Go Sit In A Corner And Think",
     category: "Reflections",
+    cover: "/images/go-sit-cover.png",
+    status: "Forthcoming",
     description:
       "An invitation to pause. A collection of meditations and quiet provocations that ask the reader to sit with themselves — in the corner of a room, of a thought, of a life — and listen for what the silence has been trying to say.",
   },
@@ -105,8 +112,10 @@ export const otherBooks: OtherBook[] = [
     id: "queen-pin",
     title: "Queen Pin: The Story Of Yvonne Barnes And The Motown Records Bowlerettes",
     category: "Biography",
+    cover: "/images/queen-pin-cover.jpg",
+    amazon: "https://www.amazon.com/stores/R.-Ray-Barnes/author/B0D5F8H3QK",
     description:
-      "A tribute and a history — the story of Yvonne Barnes and the Motown Records Bowlerettes, told with the warmth of family memory and the care of a chronicler. A celebration of a woman, a team, and an era that moved to its own rhythm.",
+      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the all-female team that won first place in the highest-scoring all-white league in the United States and built the largest youth bowling league in the nation while fighting prevailing racial inequities. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon.",
   },
 ];
 
@@ -197,39 +206,39 @@ export type Poem = {
 
 export const poems: Poem[] = [
   {
-    id: "mist",
-    source: "FROM BUTTERFLY THOUGHTS (VOL. II)",
+    id: "all-that-jazz",
+    source: "FROM ALL THAT JAZZ (VOL. I)",
     lines: [
-      "out of the mist you appeared —",
-      "and though the music was blaring,",
-      "I heard your eyes as they whispered",
-      "sweet melodies into mine.",
+      "Jazz is Hot…",
+      "Like sunlight, its energy is always aglow…",
+      "as its Rhythms move through you",
+      "like a hot lava flow…",
     ],
-    attribution: "— untitled",
+    attribution: "— All That Jazz",
   },
   {
-    id: "delicacy",
-    source: "FROM DELICACY (VOL. III)",
+    id: "god-speak",
+    source: "FROM GOD SPEAK (VOL. III)",
     lines: [
-      "i've been sailing",
-      "around, around, around",
-      "in your sea of love,",
-      "making circles",
-      "around your heart —",
+      "It is in silence",
+      "that God speaks the loudest…",
+      "and",
+      "She even sometimes sings!",
     ],
-    attribution: "— Delicacy",
+    attribution: "— God Speak",
   },
   {
-    id: "great-love",
-    source: "FROM A GREAT LOVE (VOL. IV)",
+    id: "in-living-color",
+    source: "FROM IN LIVING COLOR (VOL. V)",
     lines: [
-      "a Great Love",
-      "is much like the Great Pyramid —",
-      "it seems impossible to build,",
-      "but built on a solid foundation,",
-      "it will last forever.",
+      "LOVE",
+      "is comprised of a broad",
+      "Spectrum of COLORS…",
+      "&",
+      "HATE",
+      "is merely a dull array of GRAYS…",
     ],
-    attribution: "— A Great Love",
+    attribution: "— In Living Color",
   },
 ];
 
@@ -240,24 +249,24 @@ export type Quote = {
 
 export const quotes: Quote[] = [
   {
-    text: "Grace arrives in the unguarded hour — while you're stirring coffee, while you're not looking.",
-    source: "— Volume III — Thoughts From The Heart",
-  },
-  {
-    text: "Love is the only language the heart speaks without translation.",
+    text: "If you Free the Love you have Within, you’ll never be Without Love.",
     source: "— Volume I — Thoughts Dancing From Heart To Mind",
   },
   {
-    text: "A butterfly does not ask permission to be beautiful. It simply is.",
+    text: "Where there is only a little understanding, There can only be a little love.",
     source: "— Volume II — Butterfly Thoughts",
   },
   {
-    text: "Faith is the music the soul hums when the mind has forgotten the words.",
+    text: "It is in silence that God speaks the loudest… and She even sometimes sings!",
+    source: "— Volume III — Thoughts From The Heart",
+  },
+  {
+    text: "True love has no hiding place…",
     source: "— Volume IV — Love, Life, The Creator & Me",
   },
   {
-    text: "We do not write the poem. The poem writes us, and waits for us to catch up.",
-    source: "— R. Ray Barnes, on the craft",
+    text: "LOVE is comprised of a broad Spectrum of COLORS… and HATE is merely a dull array of GRAYS…",
+    source: "— Volume V — A Spectrum Of Thoughts",
   },
 ];
 
@@ -269,39 +278,47 @@ export type VerseMoment = {
 export const verseMoments: VerseMoment[] = [
   {
     lines: [
-      "The body remembers",
-      "what the mind tries to forget—",
-      "a shoulder, a rhythm,",
-      "the weight of Sunday morning.",
+      "So don’t hope to",
+      "fall in-to love,",
+      "hope to be-come love…",
+      "Then Love will",
+      "fall out-of you,",
+      "in abundance—",
     ],
-    source: "— from Volume IV: Love, Life, The Creator & Me",
+    source: "— from Volume I: Love Is Always & Forever",
   },
   {
     lines: [
-      "I keep your name",
-      "behind my teeth like a seed—",
-      "some nights it almost",
-      "blooms into a song.",
+      "as i am indeed",
+      "Falling, Falling...",
+      "Free Falling",
+      "in Love with you",
     ],
-    source: "— from Volume II: Butterfly Thoughts",
+    source: "— from Volume II: Free Falling",
   },
   {
     lines: [
-      "All my prayers",
-      "sound like your footsteps",
-      "coming home through",
-      "the long corridor of evening.",
+      "The faster you move towards",
+      "the Light",
+      "The faster",
+      "the Light",
+      "moves towards you",
     ],
-    source: "— from Volume III: Thoughts From The Heart",
+    source: "— from Volume III: Lightspeed…",
   },
   {
     lines: [
-      "Jazz taught me",
-      "that silence is just",
-      "a rest held long enough",
-      "to become a note.",
+      "It seems",
+      "my thoughts",
+      "take flight",
+      "right where",
+      "yours landed",
+      "as we",
+      "kiss and fly",
+      "off together",
+      "in heavenly bliss.",
     ],
-    source: "— from Volume I: Thoughts Dancing From Heart To Mind",
+    source: "— from Volume V: Equinox",
   },
 ];
 
