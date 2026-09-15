@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { BookText, Compass, ExternalLink, Sparkles } from "lucide-react";
+import { BookText, Compass, ExternalLink, Heart, Sparkles } from "lucide-react";
 import { otherBooks } from "@/lib/poetry-data";
 
 const categoryIcon: Record<string, React.ComponentType<{ className?: string }>> = {
   "Spiritual Companion": Compass,
   Reflections: BookText,
+  Relationships: Heart,
   Biography: BookText,
 };
 
@@ -24,12 +25,13 @@ export function OtherBooks() {
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
             The pen does not stop at poetry. These companion works reach into
-            faith, reflection, and family history — the same voice, turned toward
-            other kinds of truth.
+            faith, reflection, relationships, and family history — the same
+            voice, turned toward other kinds of truth. Every title is available
+            now on Amazon.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {otherBooks.map((b, i) => {
             const Icon = categoryIcon[b.category] ?? BookText;
             const isAvailable = Boolean(b.amazon);
@@ -78,9 +80,14 @@ export function OtherBooks() {
                   </div>
                 </div>
 
-                <h3 className="mb-3 text-center font-serif text-xl italic leading-snug text-foreground">
+                <h3 className="mb-3 text-center font-serif text-lg italic leading-snug text-foreground">
                   {b.title}
                 </h3>
+                {b.formats && (
+                  <p className="mb-3 text-center text-[0.68rem] tracking-wide text-muted-foreground/80">
+                    {b.formats}
+                  </p>
+                )}
                 <p className="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {b.description}
                 </p>

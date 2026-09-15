@@ -7,7 +7,10 @@ export type Volume = {
   rating: number;
   pages: number;
   description: string;
-  amazon: string;
+  /** Real Amazon detail-page ASIN link — omitted when the volume is forthcoming. */
+  amazon?: string;
+  /** Formats available on Amazon, e.g. "Kindle · Hardcover · Paperback". */
+  formats?: string;
 };
 
 export const volumes: Volume[] = [
@@ -16,48 +19,52 @@ export const volumes: Volume[] = [
     numeral: "I",
     title: "Thoughts Dancing From Heart To Mind",
     year: "2014",
-    cover: "/images/vol1.jpg",
+    cover: "/images/amazon/vol1.jpg",
     rating: 5.0,
     pages: 86,
     description:
       "A soulful collection that explores the depth of human emotions, love, spirituality, and self-reflection. Every poem flows like a conversation between the heart and mind.",
-    amazon: "https://www.amazon.com/dp/B0D5FKQ7ZL",
+    amazon: "https://www.amazon.com/dp/B0HC4RTW3V",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol2",
     numeral: "II",
     title: "Butterfly Thoughts",
     year: "2016",
-    cover: "/images/vol2.jpg",
+    cover: "/images/amazon/vol2.jpg",
     rating: 5.0,
     pages: 116,
     description:
       "Ideas float off the page like butterflies. A spirit of love, peace, and joy accompanied by powerful poetic images of pain, courage, passion, and triumph.",
-    amazon: "https://www.amazon.com/dp/B0D5FMY3P5",
+    amazon: "https://www.amazon.com/dp/B0HC4L7T6Q",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol3",
     numeral: "III",
     title: "Thoughts From The Heart",
     year: "2018",
-    cover: "/images/vol3.jpg",
+    cover: "/images/amazon/vol3.jpg",
     rating: 5.0,
     pages: 107,
     description:
       "When you inner-connect spiritually with that special someone, the energy created gives birth to a oneness that transforms you — a manifestation of love greater than either could be alone.",
-    amazon: "https://www.amazon.com/dp/B0D5FPB5GH",
+    amazon: "https://www.amazon.com/dp/B0HC4SJTYF",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol4",
     numeral: "IV",
     title: "Love, Life, The Creator & Me",
     year: "2020",
-    cover: "/images/vol4.jpg",
+    cover: "/images/amazon/vol4.jpg",
     rating: 5.0,
     pages: 78,
     description:
       "The widest lens — faith, gratitude, and a life measured in grace rather than time. Love becomes the most important occurrence, mirroring the first love the Creator had for humankind.",
-    amazon: "https://www.amazon.com/dp/B0D5FRZQK9",
+    amazon: "https://www.amazon.com/dp/B0HC4PL286",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol5",
@@ -69,9 +76,11 @@ export const volumes: Volume[] = [
     pages: 112,
     description:
       "The fifth and final volume opens the lens widest of all — a spectrum of love, faith, jazz, and the full colour of feeling. Every shade of a life lived in verse, gathered into one luminous voice.",
-    amazon: "https://www.amazon.com/dp/B0D5FRZQK9",
   },
 ];
+
+/** Canonical Amazon author page — every book by R. Ray Barnes lives here. */
+export const AMAZON_AUTHOR_URL = "https://www.amazon.com/stores/author/B00QJ4O3CW";
 
 export type Milestone = {
   year: string;
@@ -85,17 +94,22 @@ export type OtherBook = {
   category: string;
   cover: string;
   description: string;
+  /** Real Amazon detail-page ASIN link — omitted when the book is forthcoming. */
   amazon?: string;
   status?: string;
+  /** Formats available on Amazon. */
+  formats?: string;
 };
 
 export const otherBooks: OtherBook[] = [
   {
     id: "easy-guide",
-    title: "One: An Easy Guide To Understanding God, Spirit & Love",
+    title: "One: An Easy Guide To Understanding: God, Spirit & Love",
     category: "Spiritual Companion",
-    cover: "/images/easy-guide-cover.png",
-    status: "Forthcoming",
+    cover: "/images/amazon/easy-guide.jpg",
+    amazon: "https://www.amazon.com/dp/B0BSCL83DL",
+    formats: "Kindle · Paperback",
+    status: "Available now",
     description:
       "A plain-spoken companion for the seeker — a gentle, accessible path through the nature of God, the quiet power of Spirit, and the many shapes of Love. Written for anyone who has ever wanted the sacred made simple.",
   },
@@ -103,19 +117,34 @@ export const otherBooks: OtherBook[] = [
     id: "go-sit",
     title: "Go Sit In A Corner And Think",
     category: "Reflections",
-    cover: "/images/go-sit-cover.png",
-    status: "Forthcoming",
+    cover: "/images/amazon/go-sit.jpg",
+    amazon: "https://www.amazon.com/dp/B0BQZ4X3NS",
+    formats: "Kindle · Paperback",
+    status: "Available now",
     description:
-      "An invitation to pause. A collection of meditations and quiet provocations that ask the reader to sit with themselves — in the corner of a room, of a thought, of a life — and listen for what the silence has been trying to say.",
+      "An invitation to pause. A collection of meditations and quiet provocations that ask the reader to sit with themselves — in the corner of a room, of a thought, of a life — and listen for what the silence has been trying to say. Also available through Kindle Unlimited.",
+  },
+  {
+    id: "69-ways",
+    title: "69 Ways To Better Relationships, Sex and Love",
+    category: "Relationships",
+    cover: "/images/amazon/69-ways.jpg",
+    amazon: "https://www.amazon.com/dp/B00G641NOQ",
+    formats: "Kindle · Paperback",
+    status: "Available now",
+    description:
+      "Sixty-nine candid, warm-hearted ways to deepen connection — with 43 poems, photographs, and a few laughs along the way. Written with Roberto Casanova & Julie Lovelace, featuring photography by LaSalle Barnes. The same voice that writes of love in verse, turned toward the everyday art of loving well.",
   },
   {
     id: "queen-pin",
-    title: "Queen Pin: The Story Of Yvonne Barnes And The Motown Records Bowlerettes",
+    title: "Queen Pin: The Story of Yvonne Barnes & The Motown Records Bowlerettes",
     category: "Biography",
-    cover: "/images/queen-pin-cover.jpg",
-    amazon: "https://www.amazon.com/stores/R.-Ray-Barnes/author/B0D5F8H3QK",
+    cover: "/images/amazon/queen-pin.jpg",
+    amazon: "https://www.amazon.com/dp/B0BJQMCLZV",
+    formats: "Kindle · Audiobook · Paperback",
+    status: "Available now",
     description:
-      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the all-female team that won first place in the highest-scoring all-white league in the United States and built the largest youth bowling league in the nation while fighting prevailing racial inequities. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon.",
+      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the all-female team that won first place in the highest-scoring all-white league in the United States and built the largest youth bowling league in the nation while fighting prevailing racial inequities. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon in Kindle, Audiobook, and Paperback.",
   },
 ];
 

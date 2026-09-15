@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Star, Copy, Check, Mail, ArrowRight, Instagram, Facebook, Twitter, ShoppingBag, BookOpen } from "lucide-react";
-import { reviews } from "@/lib/poetry-data";
+import { reviews, AMAZON_AUTHOR_URL } from "@/lib/poetry-data";
 import { ButterflyMark } from "./particles";
 import { useToast } from "@/hooks/use-toast";
 
@@ -147,12 +147,12 @@ export function CallToAction() {
           Own the Complete Series
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Five volumes. One heart, unfolding. Available now on Amazon in Kindle
-          and Paperback editions.
+          Five volumes. One heart, unfolding — plus Queen Pin and more, all
+          available now on Amazon in Kindle and print editions.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://www.amazon.com/stores/R.-Ray-Barnes/author/B0D5F8H3QK"
+            href={AMAZON_AUTHOR_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:shadow-[0_0_36px_-6px_var(--glow-gold)] hover:brightness-110"
@@ -161,7 +161,7 @@ export function CallToAction() {
             Shop on Amazon
           </a>
           <a
-            href="https://www.amazon.com/stores/R.-Ray-Barnes/author/B0D5F8H3QK"
+            href={AMAZON_AUTHOR_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-7 py-3.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary/10"
@@ -188,7 +188,7 @@ export function Footer() {
     { href: "https://instagram.com", label: "Instagram", icon: Instagram },
     { href: "https://facebook.com", label: "Facebook", icon: Facebook },
     { href: "https://twitter.com", label: "X (Twitter)", icon: Twitter },
-    { href: "https://www.amazon.com/stores/R.-Ray-Barnes/author/B0D5F8H3QK", label: "Amazon Author Page", icon: ShoppingBag },
+    { href: AMAZON_AUTHOR_URL, label: "Amazon Author Page", icon: ShoppingBag },
   ];
   return (
     <footer className="relative mt-auto border-t border-border/50 bg-card/20 px-5 py-16">

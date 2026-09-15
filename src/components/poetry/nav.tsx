@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Menu, X, Sun, Moon, ArrowUp } from "lucide-react";
 import { navLinks } from "@/lib/poetry-data";
 import { ButterflyMark } from "./particles";
@@ -26,13 +26,29 @@ export function BackToTop() {
   );
 }
 
+/**
+ * True only after the client has hydrated. Uses useSyncExternalStore so the
+ * server render (false) always matches the first client render — no warnings.
+ */
+function useHydrated() {
+  return useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false,
+  );
+}
+const subscribeNoop = () => () => {};
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
+  // Theme is read from localStorage after mount — render a neutral icon until
+  // then so the server HTML matches the client and hydration never mismatches.
+  const mounted = useHydrated();
   const { theme, toggle } = useTheme();
 
-  const themeIcon = theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />;
+  const themeIcon = !mounted ? null : theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />;
   const themeLabel = theme === "dark" ? "light" : "dark";
 
   useEffect(() => {
@@ -113,8 +129,8 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <button
             onClick={toggle}
-            aria-label={`Switch to ${themeLabel} mode`}
-            title={`Theme: ${theme}`}
+            aria-label={mounted ? `Switch to ${themeLabel} mode` : "Toggle color theme"}
+            title={mounted ? `Theme: ${theme}` : "Theme"}
             className="grid h-9 w-9 place-items-center rounded-full border border-border/70 text-muted-foreground transition-colors duration-300 hover:border-primary/50 hover:text-primary"
           >
             {themeIcon}

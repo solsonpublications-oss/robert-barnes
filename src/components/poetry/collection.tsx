@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Star, ExternalLink, BookOpen, Info } from "lucide-react";
+import { Star, ExternalLink, BookOpen, Info, Sparkles } from "lucide-react";
 import { volumes, stats } from "@/lib/poetry-data";
 import { BookModal, useBookModal } from "./book-modal";
 
@@ -78,21 +78,35 @@ function VolumeCard({
       </div>
 
       {/* description */}
-      <p className="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">
+      <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
         {v.description}
       </p>
 
+      {/* formats available on Amazon */}
+      {v.formats && (
+        <p className="mb-4 text-center text-[0.68rem] tracking-wide text-muted-foreground/80">
+          {v.formats}
+        </p>
+      )}
+
       {/* cta */}
-      <a
-        href={v.amazon}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
-        className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_-6px_var(--glow-gold)]"
-      >
-        Get on Amazon
-        <ExternalLink className="h-3.5 w-3.5" />
-      </a>
+      {v.amazon ? (
+        <a
+          href={v.amazon}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_-6px_var(--glow-gold)]"
+        >
+          Get on Amazon
+          <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      ) : (
+        <div className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-border/50 bg-background/40 px-4 py-2.5 text-xs tracking-wide text-muted-foreground">
+          <Sparkles className="h-3 w-3 text-primary/70" aria-hidden />
+          Forthcoming {v.year} — Kindle &amp; Print
+        </div>
+      )}
     </article>
   );
 }

@@ -49,6 +49,7 @@ export const metadata: Metadata = {
     "A Spectrum Of Thoughts",
     "One: An Easy Guide To Understanding God Spirit & Love",
     "Go Sit In A Corner And Think",
+    "69 Ways To Better Relationships Sex and Love",
     "Queen Pin",
     "Yvonne Barnes",
     "Motown Records Bowlerettes",

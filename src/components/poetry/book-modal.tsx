@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { X, Star, ExternalLink, BookOpen, Volume2, Loader2 } from "lucide-react";
+import { X, Star, ExternalLink, BookOpen, Volume2, Loader2, Sparkles } from "lucide-react";
 import { volumes, type Volume } from "@/lib/poetry-data";
 import { useToast } from "@/hooks/use-toast";
 
@@ -194,6 +194,12 @@ export function BookModal({
                 {volume.pages} pages
               </span>
             </div>
+            {/* formats available on Amazon */}
+            {volume.formats && (
+              <p className="mt-2 text-xs tracking-wide text-muted-foreground/80">
+                Available in: {volume.formats}
+              </p>
+            )}
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               {volume.description}
             </p>
@@ -230,15 +236,22 @@ export function BookModal({
             )}
 
             {/* cta */}
-            <a
-              href={volume.amazon}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:shadow-[0_0_30px_-6px_var(--glow-gold)] hover:brightness-110"
-            >
-              Get on Amazon
-              <ExternalLink className="h-4 w-4" />
-            </a>
+            {volume.amazon ? (
+              <a
+                href={volume.amazon}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:shadow-[0_0_30px_-6px_var(--glow-gold)] hover:brightness-110"
+              >
+                Get on Amazon
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            ) : (
+              <div className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-border/50 bg-background/40 px-5 py-2.5 text-xs tracking-wide text-muted-foreground">
+                <Sparkles className="h-3.5 w-3.5 text-primary/70" aria-hidden />
+                Forthcoming {volume.year} — join the mailing list below
+              </div>
+            )}
           </div>
         </div>
       </div>
