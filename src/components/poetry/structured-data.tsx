@@ -1,4 +1,4 @@
-import { volumes, otherBooks, AMAZON_AUTHOR_URL } from "@/lib/poetry-data";
+import { volumes, otherBooks, AMAZON_AUTHOR_URL, STUDIO_URL } from "@/lib/poetry-data";
 
 /**
  * JSON-LD structured data for the author + books, injected into the page
@@ -13,14 +13,18 @@ const personLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "R. Ray Barnes",
+  alternateName: ["Robert Ray Barnes", "Robert Barnes"],
   description:
-    "Emmy Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
+    "Emmy® Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
   url: SITE,
   image: `${SITE}/images/author-portrait.png`,
   jobTitle: "Author · Producer · Poet",
-  award: ["2019 Michigan Regional Emmy Award", "8th Annual Eclipse Award"],
+  award: [
+    "2019 Michigan Regional Emmy® Award (Interview / Discussion: Left Behind In Vietnam)",
+    "2019 Eclipse Award (Best Television or Online Program: WWII Veteran Carroll Braxton – Original Montford Point Marine)",
+  ],
   knowsAbout: ["Poetry", "Love poetry", "Jazz poetry", "Faith", "Spirituality", "Music production", "Songwriting"],
-  sameAs: [AMAZON_AUTHOR],
+  sameAs: [AMAZON_AUTHOR, STUDIO_URL],
 };
 
 const bookJsonLd = (book: { title: string; description: string; cover: string; amazon?: string; status?: string }) => ({

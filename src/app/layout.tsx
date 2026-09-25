@@ -52,6 +52,8 @@ export const metadata: Metadata = {
     "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse: a love letter told in five parts, plus Queen Pin and companion works on faith, reflection, and family history.",
   keywords: [
     "R. Ray Barnes",
+    "Robert Ray Barnes",
+    "Robert Barnes",
     "The Art of Poetry",
     "poetry",
     "love poems",
@@ -66,7 +68,14 @@ export const metadata: Metadata = {
     "Yvonne Barnes",
     "Motown Records Bowlerettes",
     "Emmy winning author",
+    "2019 Michigan Regional Emmy Award",
+    "Left Behind In Vietnam",
+    "Eclipse Award winner",
+    "Carroll Braxton",
+    "Montford Point Marine",
     "music producer",
+    "R. Ray Barnes Productions",
+    "Berry Gordy Motown",
     "jazz poetry",
     "faith poetry",
     "contemporary poetry",
@@ -138,6 +147,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://m.media-amazon.com" />
+      </head>
       <body
         className={`${fraunces.variable} ${literata.variable} ${caveat.variable} ${geistMono.variable} antialiased bg-background text-foreground grain ambient-bg`}
       >

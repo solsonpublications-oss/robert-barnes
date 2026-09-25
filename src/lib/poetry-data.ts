@@ -87,25 +87,38 @@ export type Award = {
   id: string;
   name: string;
   title: string;
+  category?: string;
+  work?: string;
+  credits?: string;
   description: string;
-  /** Drop-in slot for the client's award photo — when absent, the engraved line-art medallion is shown. */
   image?: string;
+  imageWebp?: string;
 };
 
 export const awards: Award[] = [
   {
     id: "emmy",
-    name: "Emmy Award",
-    title: "2019 Michigan Regional Emmy",
+    name: "Emmy® Award",
+    title: "2019 Michigan Regional Emmy®",
+    category: "Interview / Discussion",
+    work: "Left Behind In Vietnam",
+    credits: "R. Ray Barnes · Warriors Productions / Peaceful Warrior Foundation",
     description:
-      "One of television's most noted honors, presented by the National Academy of Television Arts & Sciences for excellence in the television arts — recognition of a creative life that moves from the studio to the page.",
+      "Presented by the National Academy of Television Arts & Sciences for Interview/Discussion on 'Left Behind In Vietnam' — honoring exceptional documentary storytelling and emotional truth.",
+    image: "/images/award-emmy.jpg",
+    imageWebp: "/images/award-emmy.webp",
   },
   {
     id: "eclipse",
     name: "Eclipse Award",
-    title: "8th Annual Eclipse Award",
+    title: "2019 Eclipse Award",
+    category: "Best Television or Online Program",
+    work: "WWII Veteran Carroll Braxton – Original Montford Point Marine",
+    credits: "Rodney Brown & R. Ray Barnes",
     description:
-      "A noted industry honor marking a career of achievement across music, film, and the written word — further validation of the work by the creative community it belongs to.",
+      "Honored with the Eclipse Award for Best Television or Online Program for the documentary tribute to Montford Point Marine Carroll Braxton — celebrating courage, American history, and creative achievement.",
+    image: "/images/award-eclipse.jpg",
+    imageWebp: "/images/award-eclipse.webp",
   },
 ];
 

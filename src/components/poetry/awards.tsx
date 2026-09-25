@@ -142,29 +142,30 @@ function AwardCard({ award, index }: { award: Award; index: number }) {
 
   return (
     <article
-      className="reveal group relative overflow-hidden rounded-[1.5rem] border border-border/60 bg-card/40 p-7 transition-colors duration-500 hover:border-primary/40 hover:glow-soft sm:p-9"
+      className="reveal group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-border/60 bg-card/40 p-7 transition-colors duration-500 hover:border-primary/40 hover:glow-soft sm:p-9"
       data-delay={index * 120}
     >
       {/* shimmer top border on hover */}
       <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-      {/* plaque frame */}
-      <div className="relative mx-auto aspect-[4/5] w-full max-w-[250px] overflow-hidden rounded-xl border border-primary/25">
+      {/* plaque / trophy photo frame */}
+      <div className="relative mx-auto aspect-[3/4] w-full max-w-[270px] overflow-hidden rounded-2xl border border-primary/30 bg-neutral-950/80 shadow-2xl transition-all duration-500 group-hover:border-primary/60 group-hover:shadow-[0_0_30px_-6px_var(--glow-gold)]">
         <div
-          className="absolute inset-0"
+          className="pointer-events-none absolute inset-0 z-10"
           aria-hidden
           style={{
             background:
-              "radial-gradient(circle at 50% 36%, color-mix(in oklab, var(--primary) 15%, transparent), transparent 72%), linear-gradient(to bottom, color-mix(in oklab, var(--primary) 7%, transparent), transparent 30%, color-mix(in oklab, var(--accent) 7%, transparent))",
+              "radial-gradient(circle at 50% 30%, color-mix(in oklab, var(--primary) 15%, transparent), transparent 70%), linear-gradient(to bottom, transparent 65%, color-mix(in oklab, var(--background) 80%, transparent) 100%)",
           }}
         />
         {award.image ? (
           <Image
             src={award.image}
-            alt={`${award.name} — ${award.title}`}
+            alt={`${award.name} — ${award.title}${award.work ? ` (${award.work})` : ""}`}
             fill
-            sizes="(max-width: 768px) 80vw, 250px"
-            className="object-cover"
+            sizes="(max-width: 768px) 85vw, 270px"
+            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -174,17 +175,38 @@ function AwardCard({ award, index }: { award: Award; index: number }) {
       </div>
 
       {/* engraved text */}
-      <div className="mt-7 flex flex-col items-center gap-3 text-center">
+      <div className="mt-7 flex flex-1 flex-col items-center gap-2.5 text-center">
         <h3 className="font-serif text-[clamp(1.5rem,3vw,1.9rem)] italic leading-snug text-foreground">
           {award.name}
         </h3>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3.5 py-1 text-[0.7rem] font-semibold tracking-luxe text-primary">
-          <AwardIcon className="h-3 w-3" aria-hidden />
-          {award.title}
-        </span>
+
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3.5 py-1 text-[0.7rem] font-semibold tracking-luxe text-primary">
+            <AwardIcon className="h-3 w-3" aria-hidden />
+            {award.title}
+          </span>
+          {award.category && (
+            <span className="rounded-full border border-border/80 bg-muted/40 px-3 py-1 text-[0.7rem] font-medium tracking-wide text-muted-foreground">
+              {award.category}
+            </span>
+          )}
+        </div>
+
+        {award.work && (
+          <p className="mt-1 font-serif text-sm italic text-accent/90 sm:text-base">
+            &ldquo;{award.work}&rdquo;
+          </p>
+        )}
+
         <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
           {award.description}
         </p>
+
+        {award.credits && (
+          <p className="mt-auto w-full border-t border-border/40 pt-3 text-[0.75rem] font-mono tracking-tight text-muted-foreground/80">
+            {award.credits}
+          </p>
+        )}
       </div>
     </article>
   );
