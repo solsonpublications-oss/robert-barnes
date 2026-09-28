@@ -131,12 +131,6 @@
   --ember-soft: #eac98e;
   --mist: #a99bb5;
   --ink: #150d1a;
-
-  /* Theme-aware shadows (dark defaults) */
-  --book-shadow-color: rgba(0, 0, 0, 0.55);
-  --shadow-soft: 0 20px 70px -28px color-mix(in oklab, var(--primary) 60%, transparent),
-    0 4px 20px -8px color-mix(in oklab, var(--accent) 40%, transparent);
-  --nav-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
 
@@ -176,17 +170,11 @@
 
   --glow-gold: rgba(168, 115, 36, 0.3);
   --glow-rose: rgba(176, 74, 102, 0.28);
-  --grain-opacity: 0.03;
+  --grain-opacity: 0.05;
   --ember: #a87324;
   --ember-soft: #c89a4a;
   --mist: #7a6650;
   --ink: #2a1a12;
-
-  /* Theme-aware shadows (soft, warm for light) */
-  --book-shadow-color: rgba(42, 26, 18, 0.24);
-  --shadow-soft: 0 18px 60px -32px color-mix(in oklab, var(--primary) 36%, transparent),
-    0 3px 14px -8px color-mix(in oklab, var(--accent) 22%, transparent);
-  --nav-shadow: 0 8px 30px -14px rgba(42, 26, 18, 0.18);
   color-scheme: light;
 }
 
@@ -288,11 +276,6 @@
     opacity: 0.6;
   }
 
-  /* Softer ambient wash in light theme */
-  [data-theme="light"] .ambient-bg::after {
-    opacity: 0.32;
-  }
-
   .glass {
     background: color-mix(in oklab, var(--card) 60%, transparent);
     backdrop-filter: blur(14px) saturate(120%);
@@ -305,7 +288,8 @@
   }
 
   .glow-soft {
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 20px 70px -28px color-mix(in oklab, var(--primary) 60%, transparent),
+      0 4px 20px -8px color-mix(in oklab, var(--accent) 40%, transparent);
   }
 
   .text-balance {
@@ -351,21 +335,6 @@
       0 0 120px rgba(200, 92, 124, 0.08);
   }
 
-  /* Light theme: readable warm-ink gradient, no murky glow */
-  [data-theme="light"] .hero-title {
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklab, var(--foreground) 88%, var(--primary)) 0%,
-      var(--primary) 52%,
-      var(--accent) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    text-shadow: none;
-  }
-
   /* Butterfly flutter animation */
   .butterfly-wing-left {
     transform-origin: 60px 45px;
@@ -399,31 +368,8 @@
 
   /* Book shadow */
   .book-shadow {
-    filter: drop-shadow(0 22px 28px var(--book-shadow-color))
-      drop-shadow(0 8px 12px color-mix(in oklab, var(--primary) 14%, transparent));
-  }
-
-  /* Portrait halo — warm glow behind the author photo (theme-aware) */
-  .portrait-halo {
-    position: absolute;
-    inset: -0.75rem;
-    border-radius: 2rem;
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklab, var(--primary) 25%, transparent),
-      color-mix(in oklab, var(--accent) 15%, transparent),
-      transparent
-    );
-    filter: blur(40px);
-  }
-  [data-theme="light"] .portrait-halo {
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklab, var(--primary) 13%, transparent),
-      color-mix(in oklab, var(--accent) 8%, transparent),
-      transparent
-    );
-    opacity: 0.8;
+    filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 8px 12px color-mix(in oklab, var(--primary) 18%, transparent));
   }
 
   .hover-lift {

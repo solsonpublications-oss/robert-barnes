@@ -7,12 +7,12 @@ import { Navbar, BackToTop } from "@/components/poetry/nav";
 import { ReadingProgress } from "@/components/poetry/reading-progress";
 import { SectionDivider } from "@/components/poetry/dividers";
 import { Hero, About } from "@/components/poetry/hero";
-import { AwardsSpotlight } from "@/components/poetry/awards";
 import { Collection, Stats } from "@/components/poetry/collection";
 import { Journey, Process } from "@/components/poetry/journey";
 import { Verses, Pillars, QuoteOfTheDay, MomentInVerse } from "@/components/poetry/verses";
 import { OtherBooks } from "@/components/poetry/other-books";
 import { Reviews, Newsletter, CallToAction, Footer } from "@/components/poetry/reviews";
+import { StructuredData } from "@/components/poetry/structured-data";
 import { useReveal } from "@/hooks/use-reveal";
 import { useParallax } from "@/hooks/use-parallax";
 
@@ -55,12 +55,12 @@ export default function Home() {
 
   return (
     <ThemeProvider>
+      <StructuredData />
       <ReadingProgress />
       <Particles />
       <Navbar />
       <main className="relative z-10 flex min-h-screen flex-col">
         <Hero />
-        <AwardsSpotlight />
         <About />
         <SectionDivider variant="butterfly" />
         <Collection />

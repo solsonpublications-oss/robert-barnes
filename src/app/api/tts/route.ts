@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     const cacheKey = `${clampedVoice}:${clampedSpeed}:${cleanText}`;
     const cached = cache.get(cacheKey);
     if (cached) {
-      return new NextResponse(new Uint8Array(cached), {
+      return new NextResponse(cached, {
         status: 200,
         headers: {
           "Content-Type": "audio/wav",
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
       cache.set(cacheKey, buffer);
     }
 
-    return new NextResponse(new Uint8Array(buffer), {
+    return new NextResponse(buffer, {
       status: 200,
       headers: {
         "Content-Type": "audio/wav",

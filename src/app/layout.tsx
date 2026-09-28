@@ -1,8 +1,7 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Fraunces, Literata, Caveat, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import { StructuredData } from "@/components/poetry/structured-data";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -33,27 +32,13 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#150d1a" },
-    { media: "(prefers-color-scheme: light)", color: "#f5ece0" },
-  ],
-};
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://robert-barnes.space-z.ai"),
-  title: {
-    default: "The Art of Poetry — R. Ray Barnes",
-    template: "%s — The Art of Poetry",
-  },
+  title: "The Art of Poetry — R. Ray Barnes",
   description:
     "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse: a love letter told in five parts, plus Queen Pin and companion works on faith, reflection, and family history.",
   keywords: [
     "R. Ray Barnes",
-    "Robert Ray Barnes",
-    "Robert Barnes",
     "The Art of Poetry",
     "poetry",
     "love poems",
@@ -64,18 +49,12 @@ export const metadata: Metadata = {
     "A Spectrum Of Thoughts",
     "One: An Easy Guide To Understanding God Spirit & Love",
     "Go Sit In A Corner And Think",
+    "69 Ways To Better Relationships Sex and Love",
     "Queen Pin",
     "Yvonne Barnes",
     "Motown Records Bowlerettes",
     "Emmy winning author",
-    "2019 Michigan Regional Emmy Award",
-    "Left Behind In Vietnam",
-    "Eclipse Award winner",
-    "Carroll Braxton",
-    "Montford Point Marine",
     "music producer",
-    "R. Ray Barnes Productions",
-    "Berry Gordy Motown",
     "jazz poetry",
     "faith poetry",
     "contemporary poetry",
@@ -87,30 +66,6 @@ export const metadata: Metadata = {
     icon: "/images/author-portrait.png",
     apple: "/images/author-portrait.png",
   },
-  alternates: {
-    canonical: "/",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-  formatDetection: {
-    telephone: false,
-    email: false,
-    address: false,
-  },
-  appleWebApp: {
-    capable: true,
-    title: "The Art of Poetry",
-    statusBarStyle: "black-translucent",
-  },
   openGraph: {
     title: "The Art of Poetry — R. Ray Barnes",
     description:
@@ -121,10 +76,10 @@ export const metadata: Metadata = {
     url: "https://robert-barnes.space-z.ai/",
     images: [
       {
-        url: "/api/og",
-        width: 1200,
-        height: 630,
-        alt: "The Art of Poetry — Emmy-winning author and poet R. Ray Barnes, with his five poetry volumes",
+        url: "/images/og-preview.png",
+        width: 1344,
+        height: 768,
+        alt: "The Art of Poetry — R. Ray Barnes",
       },
     ],
   },
@@ -133,7 +88,7 @@ export const metadata: Metadata = {
     title: "The Art of Poetry — R. Ray Barnes",
     description:
       "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse.",
-    images: ["/api/og"],
+    images: ["/images/og-preview.png"],
     creator: "@rraybarnes",
   },
   manifest: "/manifest.webmanifest",
@@ -147,15 +102,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://m.media-amazon.com" />
-      </head>
       <body
         className={`${fraunces.variable} ${literata.variable} ${caveat.variable} ${geistMono.variable} antialiased bg-background text-foreground grain ambient-bg`}
       >
-        <StructuredData />
         {children}
         <Toaster />
       </body>

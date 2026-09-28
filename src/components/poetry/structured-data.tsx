@@ -1,104 +1,107 @@
-import { volumes, otherBooks, AMAZON_AUTHOR_URL, STUDIO_URL } from "@/lib/poetry-data";
+import { volumes, otherBooks, AMAZON_AUTHOR_URL } from "@/lib/poetry-data";
 
 /**
- * JSON-LD structured data for the author + books, injected into the page
- * head for richer search results (Google Books / rich snippets / knowledge
- * panel signals).
+ * JSON-LD structured data for the author + book series, injected into
+ * the page head for richer search results (Google Books / rich snippets).
  */
-
-const SITE = "https://robert-barnes.space-z.ai";
-const AMAZON_AUTHOR = AMAZON_AUTHOR_URL;
-
-const personLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "R. Ray Barnes",
-  alternateName: ["Robert Ray Barnes", "Robert Barnes"],
-  description:
-    "Emmy® Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
-  url: SITE,
-  image: `${SITE}/images/author-portrait.png`,
-  jobTitle: "Author · Producer · Poet",
-  award: [
-    "2019 Michigan Regional Emmy® Award (Interview / Discussion: Left Behind In Vietnam)",
-    "2019 Eclipse Award (Best Television or Online Program: WWII Veteran Carroll Braxton – Original Montford Point Marine)",
-  ],
-  knowsAbout: ["Poetry", "Love poetry", "Jazz poetry", "Faith", "Spirituality", "Music production", "Songwriting"],
-  sameAs: [AMAZON_AUTHOR, STUDIO_URL],
-};
-
-const bookJsonLd = (book: { title: string; description: string; cover: string; amazon?: string; status?: string }) => ({
-  "@type": "Book",
-  name: book.title,
-  author: { "@type": "Person", name: "R. Ray Barnes" },
-  description: book.description,
-  image: `${SITE}${book.cover}`,
-  url: book.amazon ?? AMAZON_AUTHOR,
-  ...(book.status
-    ? { offers: { "@type": "Offer", url: book.amazon ?? AMAZON_AUTHOR, availability: "https://schema.org/PreOrder" } }
-    : {
-        offers: {
-          "@type": "Offer",
-          url: book.amazon ?? AMAZON_AUTHOR,
-          availability: "https://schema.org/InStock",
-        },
-      }),
-});
-
-const seriesLd = {
-  "@context": "https://schema.org",
-  "@type": "BookSeries",
-  name: "The Art of Poetry",
-  author: {
+export function StructuredData() {
+  const authorLd = {
+    "@context": "https://schema.org",
     "@type": "Person",
     name: "R. Ray Barnes",
-  },
-  description:
-    "Five volumes, one voice. A life written in verse — to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
-  hasPart: volumes.map((v) => ({
-    ...bookJsonLd(v),
-    bookEdition: `Volume ${v.numeral}`,
-    numberOfPages: v.pages,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: v.rating,
-      reviewCount: 1,
+    description:
+      "Emmy Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
+    url: "https://robert-barnes.space-z.ai",
+    sameAs: [AMAZON_AUTHOR_URL],
+    jobTitle: "Author · Producer · Poet",
+    award: ["2019 Michigan Regional Emmy Award", "8th Annual Eclipse Award"],
+    knowsAbout: ["Poetry", "Love poetry", "Jazz poetry", "Faith", "Spirituality", "Music production", "Songwriting"],
+  };
+
+  const seriesLd = {
+    "@context": "https://schema.org",
+    "@type": "BookSeries",
+    name: "The Art of Poetry",
+    author: {
+      "@type": "Person",
+      name: "R. Ray Barnes",
     },
-  })),
-};
+    description:
+      "Five volumes, one voice. A life written in verse — to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
+    hasPart: volumes.map((v) => ({
+      "@type": "Book",
+      name: v.title,
+      bookEdition: `Volume ${v.numeral}`,
+      numberOfPages: v.pages,
+      author: { "@type": "Person", name: "R. Ray Barnes" },
+      // No self-serving aggregateRating markup — ratings live on Amazon and
+      // Vol V is not yet published. Honest markup only.
+      ...(v.amazon
+        ? {
+            offers: {
+              "@type": "Offer",
+              url: v.amazon,
+              availability: "https://schema.org/InStock",
+            },
+          }
+        : {}),
+    })),
+  };
 
-const otherWorksLd = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "Companion works by R. Ray Barnes",
-  itemListElement: otherBooks.map((b, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    item: bookJsonLd(b),
-  })),
-};
+  // Every published book with its real Amazon detail page.
+  const allBooksLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "All Books by R. Ray Barnes",
+    itemListElement: [
+      ...volumes
+        .filter((v) => v.amazon)
+        .map((v, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: v.amazon,
+          name: `The Art of Poetry Volume ${v.numeral}: ${v.title}`,
+        })),
+      ...otherBooks
+        .filter((b) => b.amazon)
+        .map((b, i) => ({
+          "@type": "ListItem",
+          position: volumes.filter((v) => v.amazon).length + i + 1,
+          url: b.amazon,
+          name: b.title,
+        })),
+    ],
+  };
 
-const websiteLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "The Art of Poetry — R. Ray Barnes",
-  url: SITE,
-  description: "Five volumes, one voice. A life written in verse by R. Ray Barnes.",
-  inLanguage: "en",
-  author: { "@type": "Person", name: "R. Ray Barnes" },
-  image: `${SITE}/api/og`,
-  publisher: { "@type": "Person", name: "R. Ray Barnes" },
-};
+  const websiteLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "The Art of Poetry — R. Ray Barnes",
+    url: "https://robert-barnes.space-z.ai",
+    description:
+      "Five volumes, one voice. A life written in verse by R. Ray Barnes.",
+    inLanguage: "en",
+    author: { "@type": "Person", name: "R. Ray Barnes" },
+  };
 
-const ld = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
-
-export function StructuredData() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld(personLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld(seriesLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld(otherWorksLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld(websiteLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(authorLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(seriesLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(allBooksLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
+      />
     </>
   );
 }

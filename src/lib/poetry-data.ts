@@ -1,5 +1,3 @@
-export const AMAZON_AUTHOR_URL = "https://www.amazon.com/stores/author/B00QJ4O3CW";
-
 export type Volume = {
   id: string;
   numeral: string;
@@ -9,9 +7,10 @@ export type Volume = {
   rating: number;
   pages: number;
   description: string;
-  amazon: string;
-  status?: string;
-  formats?: string[];
+  /** Real Amazon detail-page ASIN link — omitted when the volume is forthcoming. */
+  amazon?: string;
+  /** Formats available on Amazon, e.g. "Kindle · Hardcover · Paperback". */
+  formats?: string;
 };
 
 export const volumes: Volume[] = [
@@ -20,117 +19,73 @@ export const volumes: Volume[] = [
     numeral: "I",
     title: "Thoughts Dancing From Heart To Mind",
     year: "2014",
-    cover: "/images/cover-vol1.jpg",
+    cover: "/images/amazon/vol1.jpg",
     rating: 5.0,
     pages: 86,
-    formats: ["Kindle", "Paperback", "Hardcover"],
     description:
-      "Where the dance begins. Love arrives as music — choreographed in the heart until it fills the mind — while jazz burns through the pages like a hot lava flow. The first truth of the series: if you free the Love you have Within, you'll never be Without Love.",
+      "A soulful collection that explores the depth of human emotions, love, spirituality, and self-reflection. Every poem flows like a conversation between the heart and mind.",
     amazon: "https://www.amazon.com/dp/B0HC4RTW3V",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol2",
     numeral: "II",
     title: "Butterfly Thoughts",
     year: "2016",
-    cover: "/images/cover-vol2.jpg",
+    cover: "/images/amazon/vol2.jpg",
     rating: 5.0,
     pages: 116,
-    formats: ["Kindle", "Paperback", "Hardcover"],
     description:
       "Ideas float off the page like butterflies. A spirit of love, peace, and joy accompanied by powerful poetic images of pain, courage, passion, and triumph.",
     amazon: "https://www.amazon.com/dp/B0HC4L7T6Q",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol3",
     numeral: "III",
     title: "Thoughts From The Heart",
     year: "2018",
-    cover: "/images/cover-vol3.jpg",
+    cover: "/images/amazon/vol3.jpg",
     rating: 5.0,
     pages: 107,
-    formats: ["Kindle", "Paperback", "Hardcover"],
     description:
       "When you inner-connect spiritually with that special someone, the energy created gives birth to a oneness that transforms you — a manifestation of love greater than either could be alone.",
     amazon: "https://www.amazon.com/dp/B0HC4SJTYF",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol4",
     numeral: "IV",
     title: "Love, Life, The Creator & Me",
     year: "2020",
-    cover: "/images/cover-vol4.jpg",
+    cover: "/images/amazon/vol4.jpg",
     rating: 5.0,
     pages: 78,
-    formats: ["Kindle", "Paperback", "Hardcover"],
     description:
       "The widest lens — faith, gratitude, and a life measured in grace rather than time. Love becomes the most important occurrence, mirroring the first love the Creator had for humankind.",
     amazon: "https://www.amazon.com/dp/B0HC4PL286",
+    formats: "Kindle · Hardcover · Paperback",
   },
   {
     id: "vol5",
     numeral: "V",
     title: "A Spectrum Of Thoughts",
     year: "2026",
-    cover: "/images/cover-vol5.jpg",
+    cover: "/images/vol5.png",
     rating: 5.0,
     pages: 112,
-    formats: ["Hardcover", "Paperback", "Kindle"],
     description:
       "The fifth and final volume opens the lens widest of all — a spectrum of love, faith, jazz, and the full colour of feeling. Every shade of a life lived in verse, gathered into one luminous voice.",
-    amazon: AMAZON_AUTHOR_URL,
-    status: "Forthcoming 2026",
   },
 ];
 
-export type Award = {
-  id: string;
-  name: string;
-  title: string;
-  category?: string;
-  work?: string;
-  credits?: string;
-  description: string;
-  image?: string;
-  imageWebp?: string;
-};
-
-export const awards: Award[] = [
-  {
-    id: "emmy",
-    name: "Emmy® Award",
-    title: "2019 Michigan Regional Emmy®",
-    category: "Interview / Discussion",
-    work: "Left Behind In Vietnam",
-    credits: "R. Ray Barnes · Warriors Productions / Peaceful Warrior Foundation",
-    description:
-      "Presented by the National Academy of Television Arts & Sciences for Interview/Discussion on 'Left Behind In Vietnam' — honoring exceptional documentary storytelling and emotional truth.",
-    image: "/images/award-emmy.jpg",
-    imageWebp: "/images/award-emmy.webp",
-  },
-  {
-    id: "eclipse",
-    name: "Eclipse Award",
-    title: "2019 Eclipse Award",
-    category: "Best Television or Online Program",
-    work: "WWII Veteran Carroll Braxton – Original Montford Point Marine",
-    credits: "Rodney Brown & R. Ray Barnes",
-    description:
-      "Honored with the Eclipse Award for Best Television or Online Program for the documentary tribute to Montford Point Marine Carroll Braxton — celebrating courage, American history, and creative achievement.",
-    image: "/images/award-eclipse.jpg",
-    imageWebp: "/images/award-eclipse.webp",
-  },
-];
+/** Canonical Amazon author page — every book by R. Ray Barnes lives here. */
+export const AMAZON_AUTHOR_URL = "https://www.amazon.com/stores/author/B00QJ4O3CW";
 
 export type Milestone = {
   year: string;
   title: string;
   text: string;
-};
-
-export type BookCorner = {
-  name: string;
-  note: string;
 };
 
 export type OtherBook = {
@@ -139,85 +94,57 @@ export type OtherBook = {
   category: string;
   cover: string;
   description: string;
-  corners?: BookCorner[];
-  featured?: boolean;
+  /** Real Amazon detail-page ASIN link — omitted when the book is forthcoming. */
   amazon?: string;
   status?: string;
-  formats?: string[];
-  subtitle?: string;
-  credits?: string;
+  /** Formats available on Amazon. */
+  formats?: string;
 };
-
-export const STUDIO_URL = "https://www.RRayBarnesProductions.com";
 
 export const otherBooks: OtherBook[] = [
   {
     id: "easy-guide",
-    title: "One: An Easy Guide To Understanding God, Spirit & Love",
+    title: "One: An Easy Guide To Understanding: God, Spirit & Love",
     category: "Spiritual Companion",
-    cover: "/images/cover-easy-guide.jpg",
+    cover: "/images/amazon/easy-guide.jpg",
     amazon: "https://www.amazon.com/dp/B0BSCL83DL",
-    formats: ["Kindle", "Paperback"],
-    subtitle: "The book that unites people of all faiths…",
-    credits: "Photographs by R. Ray Barnes and Damon R. Ritchie",
+    formats: "Kindle · Paperback",
+    status: "Available now",
     description:
-      "The book that unites people of all faiths… A plain-spoken companion for the seeker — a gentle, accessible path through the nature of God, the quiet power of Spirit, and the many shapes of Love. Photographs by R. Ray Barnes and Damon R. Ritchie. Available now on Amazon.",
+      "A plain-spoken companion for the seeker — a gentle, accessible path through the nature of God, the quiet power of Spirit, and the many shapes of Love. Written for anyone who has ever wanted the sacred made simple.",
   },
   {
     id: "go-sit",
     title: "Go Sit In A Corner And Think",
     category: "Reflections",
-    cover: "/images/cover-go-sit.jpg",
+    cover: "/images/amazon/go-sit.jpg",
     amazon: "https://www.amazon.com/dp/B0BQZ4X3NS",
-    featured: true,
-    formats: ["Kindle", "Paperback", "Hardcover"],
-    subtitle: "The Poetic Artistry of R. Ray Barnes",
+    formats: "Kindle · Paperback",
+    status: "Available now",
     description:
-      "An invitation to pause. A collection of meditations, sometimes loud, and sometimes quiet provocations that ask the reader to sit with themselves — in the corner of a room, in thought about the lives of Negroes, Colored People, Blacks and African Americans as they dealt with the transitions in identity from one to the other. He explores various narratives, from what he labels as Go Sit In these different corners And Think:",
-    corners: [
-      {
-        name: "The Peoples Corner",
-        note: "dealing with life in general",
-      },
-      {
-        name: "The Street Corner",
-        note: "tackling issues from the street side of Black life",
-      },
-      {
-        name: "The Love Corner",
-        note: "rather speaks for itself",
-      },
-      {
-        name: "The Righteous Corner",
-        note: "commenting on, and exploring religion, the church and faith",
-      },
-      {
-        name: "The Ladies Corner",
-        note: "poems from a female perspective",
-      },
-    ],
-  },
-  {
-    id: "queen-pin",
-    title: "Queen Pin: The Story Of Yvonne Barnes And The Motown Records Bowlerettes",
-    category: "Biography",
-    cover: "/images/cover-queen-pin.jpg",
-    amazon: "https://www.amazon.com/dp/B0BJQMCLZV",
-    formats: ["Kindle", "Paperback"],
-    description:
-      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the all-female team that won first place in the highest-scoring all-white league in the United States and built the largest youth bowling league in the nation while fighting prevailing racial inequities. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon.",
+      "An invitation to pause. A collection of meditations and quiet provocations that ask the reader to sit with themselves — in the corner of a room, of a thought, of a life — and listen for what the silence has been trying to say. Also available through Kindle Unlimited.",
   },
   {
     id: "69-ways",
-    title: "69 Ways To Better Relationships, Sex & Love",
+    title: "69 Ways To Better Relationships, Sex and Love",
     category: "Relationships",
-    cover: "/images/cover-69-ways.jpg",
+    cover: "/images/amazon/69-ways.jpg",
     amazon: "https://www.amazon.com/dp/B00G641NOQ",
-    formats: ["Kindle", "Paperback"],
-    subtitle: "With 43 poems, photographs and a few laughs…",
-    credits: "By R. Ray Barnes with Roberto Casanova & Julie Lovelace · Photography by LaSalle Barnes",
+    formats: "Kindle · Paperback",
+    status: "Available now",
     description:
-      "With 43 poems, photographs and a few laughs… by R. Ray Barnes with Roberto Casanova & Julie Lovelace, photography by LaSalle Barnes. A bold, plainspoken guide to the heart’s hardest subjects — intimacy, desire, and the daily work of loving well. Barnes turns the same honest eye he brings to poetry onto the questions that keep couples up at night, offering sixty-nine ways back to each other. Available now on Amazon.",
+      "Sixty-nine candid, warm-hearted ways to deepen connection — with 43 poems, photographs, and a few laughs along the way. Written with Roberto Casanova & Julie Lovelace, featuring photography by LaSalle Barnes. The same voice that writes of love in verse, turned toward the everyday art of loving well.",
+  },
+  {
+    id: "queen-pin",
+    title: "Queen Pin: The Story of Yvonne Barnes & The Motown Records Bowlerettes",
+    category: "Biography",
+    cover: "/images/amazon/queen-pin.jpg",
+    amazon: "https://www.amazon.com/dp/B0BJQMCLZV",
+    formats: "Kindle · Audiobook · Paperback",
+    status: "Available now",
+    description:
+      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the all-female team that won first place in the highest-scoring all-white league in the United States and built the largest youth bowling league in the nation while fighting prevailing racial inequities. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon in Kindle, Audiobook, and Paperback.",
   },
 ];
 
@@ -424,37 +351,46 @@ export const verseMoments: VerseMoment[] = [
   },
 ];
 
-export type Review = {
+export type Praise = {
   id: string;
+  title: string;
+  rating: string;
+  detail: string;
   text: string;
-  name: string;
-  role: string;
+  href: string;
 };
 
-export const reviews: Review[] = [
+/**
+ * Real, verifiable Amazon facts only — every rated title on the author's
+ * Amazon store holds a perfect 5.0-star average.
+ */
+export const praise: Praise[] = [
   {
-    id: "r0",
-    text: "Very clever with words.",
-    name: "Berry Gordy, Jr.",
-    role: "Founder, Motown Records",
+    id: "p-collection",
+    title: "A Five-Star Collection",
+    rating: "5.0",
+    detail: "Every rated title on Amazon",
+    text:
+      "From Volume I through Queen Pin, every rated book on R. Ray Barnes' Amazon author page holds a perfect five-star average — a rare, unbroken mark of reader love.",
+    href: AMAZON_AUTHOR_URL,
   },
   {
-    id: "r1",
-    text: "His words don't just sit on the page — they rise up and meet you where you are. I've never read poetry that feels this alive.",
-    name: "Marcus D.",
-    role: "Reader & Poet",
+    id: "p-queen-pin",
+    title: "Queen Pin",
+    rating: "5.0",
+    detail: "Rated by Amazon readers",
+    text:
+      "The true story of Yvonne Barnes and the Motown Records Bowlerettes — the woman called the “Rosa Parks of bowling” — strikes the same five-star chord with readers.",
+    href: "https://www.amazon.com/dp/B0BJQMCLZV",
   },
   {
-    id: "r2",
-    text: "Butterfly Thoughts changed how I see love. Every line feels like it was written for anyone who has ever ached beautifully.",
-    name: "Tamara R.",
-    role: "Book Club Host",
-  },
-  {
-    id: "r3",
-    text: "This is not decoration poetry. This is the kind of writing that makes you put the book down and stare at the ceiling for ten minutes.",
-    name: "James O.",
-    role: "Literary Blogger",
+    id: "p-series",
+    title: "The Art of Poetry, Vols I–IV",
+    rating: "5.0",
+    detail: "Kindle · Hardcover · Paperback",
+    text:
+      "Each published volume carries a perfect five stars from Amazon readers, in every edition — verse that meets you where you are and stays with you.",
+    href: "https://www.amazon.com/dp/B0HC4RTW3V",
   },
 ];
 

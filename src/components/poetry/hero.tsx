@@ -191,7 +191,7 @@ export function About() {
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
         {/* portrait */}
         <div className="reveal relative mx-auto w-full max-w-sm" data-delay="0">
-          <div className="portrait-halo" aria-hidden />
+          <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/25 via-accent/15 to-transparent blur-2xl" />
           <div className="relative overflow-hidden rounded-[1.75rem] border border-primary/25 glow-soft">
             <Image
               src="/images/author-portrait.png"
@@ -237,9 +237,8 @@ export function About() {
               of bowling.&rdquo;
             </p>
             <p>
-              Written for the love and beauty within us all and dedicated to his
-              wife and family that shaped him,{" "}
-              <em className="text-foreground/90">The Art of Poetry</em> is one
+              Written for his wife Diane and dedicated to the family that shaped
+              him, <em className="text-foreground/90">The Art of Poetry</em> is one
               long love letter told in five parts — to romance, to grief, to jazz,
               and to the faith that carries a heart through all of it.
             </p>

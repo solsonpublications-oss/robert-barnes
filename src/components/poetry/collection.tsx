@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Star, ExternalLink, BookOpen, Info } from "lucide-react";
+import { Star, ExternalLink, BookOpen, Info, Sparkles } from "lucide-react";
 import { volumes, stats } from "@/lib/poetry-data";
 import { BookModal, useBookModal } from "./book-modal";
 
@@ -23,21 +23,14 @@ function VolumeCard({
       <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       {/* vol badge + page count */}
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-y-2">
+      <div className="mb-5 flex items-center justify-between">
         <span className="inline-flex items-baseline gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-luxe text-primary">
           VOL. <span className="font-serif text-sm italic">{v.numeral}</span>
         </span>
-        {v.status ? (
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 text-[0.6rem] font-semibold tracking-widest text-accent">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
-            {v.status}
-          </span>
-        ) : (
-          <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-            <BookOpen className="h-3.5 w-3.5" />
-            {v.pages} pages
-          </span>
-        )}
+        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+          <BookOpen className="h-3.5 w-3.5" />
+          {v.pages} pages
+        </span>
       </div>
 
       {/* cover — clickable */}
@@ -70,45 +63,54 @@ function VolumeCard({
         {v.title}
       </h3>
 
-      {/* rating */}
-      <div className="mb-2 flex items-center justify-center gap-2">
-        <span className="inline-flex">
-          {Array.from({ length: 5 }).map((_, s) => (
-            <Star
-              key={s}
-              className="h-3.5 w-3.5 fill-primary text-primary transition-transform duration-300 group-hover:scale-110"
-              style={{ transitionDelay: `${s * 40}ms` }}
-            />
-          ))}
-        </span>
-        <span className="text-xs text-muted-foreground">{v.rating.toFixed(1)}</span>
-      </div>
-
-      {/* formats */}
-      {v.formats && (
-        <div className="mb-3 text-center">
-          <span className="inline-block rounded-full border border-border/50 bg-background/50 px-2.5 py-0.5 text-[0.68rem] font-medium tracking-wide text-muted-foreground">
-            {v.formats.join(" · ")}
+      {/* rating — shown only for titles published & rated on Amazon */}
+      {v.amazon ? (
+        <div className="mb-3 flex items-center justify-center gap-2">
+          <span className="inline-flex">
+            {Array.from({ length: 5 }).map((_, s) => (
+              <Star
+                key={s}
+                className="h-3.5 w-3.5 fill-primary text-primary transition-transform duration-300 group-hover:scale-110"
+                style={{ transitionDelay: `${s * 40}ms` }}
+              />
+            ))}
           </span>
+          <span className="text-xs text-muted-foreground">Reader-rated</span>
         </div>
+      ) : (
+        <div className="mb-3 h-[14px]" aria-hidden />
       )}
 
       {/* description */}
-      <p className="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">
+      <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
         {v.description}
       </p>
 
+      {/* formats available on Amazon */}
+      {v.formats && (
+        <p className="mb-4 text-center text-[0.68rem] tracking-wide text-muted-foreground/80">
+          {v.formats}
+        </p>
+      )}
+
       {/* cta */}
-      <a
-        href={v.amazon}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
-        className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_-6px_var(--glow-gold)]"
-      >
-        {v.status ? "Author Page" : "Get on Amazon"}
-        <ExternalLink className="h-3.5 w-3.5" />
-      </a>
+      {v.amazon ? (
+        <a
+          href={v.amazon}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_-6px_var(--glow-gold)]"
+        >
+          Get on Amazon
+          <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      ) : (
+        <div className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-border/50 bg-background/40 px-4 py-2.5 text-xs tracking-wide text-muted-foreground">
+          <Sparkles className="h-3 w-3 text-primary/70" aria-hidden />
+          Forthcoming {v.year} — Kindle &amp; Print
+        </div>
+      )}
     </article>
   );
 }
@@ -165,27 +167,6 @@ export function Collection() {
           {volumes.map((v, i) => (
             <VolumeCard key={v.id} v={v} i={i} onOpen={() => open(v)} />
           ))}
-        </div>
-
-        {/* Series bundle / Amazon store banner */}
-        <div className="reveal mt-12 flex flex-col items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-gradient-to-r from-card/60 via-primary/5 to-card/60 p-6 text-center backdrop-blur sm:flex-row sm:text-left">
-          <div>
-            <h4 className="font-serif text-lg italic text-foreground">
-              Experience the Complete Journey
-            </h4>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Explore all published volumes on Amazon — available in Kindle, Paperback &amp; Hardcover editions.
-            </p>
-          </div>
-          <a
-            href="https://www.amazon.com/stores/author/B00QJ4O3CW"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-semibold tracking-wide text-primary-foreground transition-all duration-300 hover:shadow-[0_0_24px_-6px_var(--glow-gold)] hover:brightness-110"
-          >
-            Explore Series on Amazon
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
         </div>
       </div>
 
