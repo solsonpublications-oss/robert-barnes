@@ -1,7 +1,8 @@
 {
   "name": "The Art of Poetry — R. Ray Barnes",
   "short_name": "Art of Poetry",
-  "description": "Four volumes, one voice. A life written in verse by R. Ray Barnes.",
+  "description": "Five volumes, one voice. A life written in verse by Emmy-winning author R. Ray Barnes.",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#150d1a",
@@ -12,13 +13,19 @@
       "src": "/images/author-portrait.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/images/author-portrait.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/images/author-portrait.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
