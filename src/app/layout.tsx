@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://robert-barnes.space-z.ai"),
   title: "The Art of Poetry — R. Ray Barnes",
   description:
-    "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse: a love letter told in five parts, plus Queen Pin and companion works on faith, reflection, and family history.",
+    "Emmy-winning author and producer R. Ray Barnes — four volumes, one voice. A life written in verse: a love letter told in four parts, plus Queen Pin and companion works on faith, reflection, and family history.",
   keywords: [
     "R. Ray Barnes",
     "The Art of Poetry",
@@ -46,7 +46,6 @@ export const metadata: Metadata = {
     "Thoughts Dancing From Heart To Mind",
     "Thoughts From The Heart",
     "Love Life The Creator & Me",
-    "A Spectrum Of Thoughts",
     "One: An Easy Guide To Understanding God Spirit & Love",
     "Go Sit In A Corner And Think",
     "69 Ways To Better Relationships Sex and Love",
@@ -69,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Art of Poetry — R. Ray Barnes",
     description:
-      "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse: a love letter told in five parts, plus Queen Pin and companion works on faith, reflection, and family history.",
+      "Emmy-winning author and producer R. Ray Barnes — four volumes, one voice. A life written in verse: a love letter told in four parts, plus Queen Pin and companion works on faith, reflection, and family history.",
     type: "website",
     siteName: "The Art of Poetry",
     locale: "en_US",
@@ -87,7 +86,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Art of Poetry — R. Ray Barnes",
     description:
-      "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse.",
+      "Emmy-winning author and producer R. Ray Barnes — four volumes, one voice. A life written in verse.",
     images: ["/images/og-preview.png"],
     creator: "@rraybarnes",
   },

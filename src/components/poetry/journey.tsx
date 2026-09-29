@@ -30,7 +30,7 @@ export function Journey() {
     <section id="journey" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl">
         <div className="reveal mb-16 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-lg text-primary">the journey</p>
+          <p className="kicker text-primary">the journey</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] font-300 italic text-foreground"
             style={{ fontWeight: 300 }}
@@ -38,7 +38,7 @@ export function Journey() {
             A Life in Verse
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            From a napkin poem to five published volumes — every chapter of R.
+            From a napkin poem to four published volumes — every chapter of R.
             Ray Barnes&apos;s poetic life.
           </p>
         </div>
@@ -115,7 +115,7 @@ export function Process() {
     <section className="relative px-5 py-24 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="reveal mb-14 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-lg text-primary">the process</p>
+          <p className="kicker text-primary">the process</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] font-300 italic text-foreground"
             style={{ fontWeight: 300 }}

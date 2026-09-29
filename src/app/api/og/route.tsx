@@ -58,12 +58,7 @@ function truncate(s: string, n: number): string {
   return s.length > n ? `${s.slice(0, n - 1).trimEnd()}…` : s;
 }
 
-/**
- * resvg cannot decode the designed vol5.png — swap in a JPEG derivative for
- * OG rendering only (the site itself keeps using vol5.png via next/image).
- */
 function ogCover(publicPath: string): string {
-  if (publicPath === "/images/vol5.png") return "/images/cover-vol5.jpg";
   return publicPath;
 }
 
@@ -189,7 +184,7 @@ function AuthorCard() {
               marginTop: 6,
             }}
           >
-            Five volumes, one voice — a life written in verse.
+            Four volumes, one voice — a life written in verse.
           </div>
           <div
             style={{

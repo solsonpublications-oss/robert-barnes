@@ -167,24 +167,18 @@ function AwardPhoto({
 
   return (
     <figure
-      className="relative animate-in fade-in duration-700"
+      className="relative flex flex-col items-center justify-center animate-in fade-in duration-700"
       data-award-photo="found"
     >
-      <div
-        aria-hidden
-        className="absolute -inset-3 rounded-[1.6rem] bg-gradient-to-br from-primary/30 via-accent/15 to-transparent blur-xl"
+      <img
+        src={photo}
+        alt={alt}
+        loading="lazy"
+        onError={() => setFailedSrc(photo)}
+        className="h-auto max-h-[380px] sm:max-h-[440px] w-auto max-w-full rounded-xl object-contain drop-shadow-2xl"
       />
-      <div className="relative overflow-hidden rounded-[1.2rem] border border-primary/45 bg-background p-1 shadow-[0_20px_50px_-20px_rgba(217,164,77,0.6)]">
-        <img
-          src={photo}
-          alt={alt}
-          loading="lazy"
-          onError={() => setFailedSrc(photo)}
-          className="aspect-[4/3] w-60 rounded-[0.85rem] object-cover sm:w-72"
-        />
-      </div>
-      <figcaption className="absolute -bottom-3.5 left-1/2 -translate-x-1/2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/50 bg-background px-4 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-primary shadow-[0_6px_18px_-8px_rgba(217,164,77,0.7)]">
+      <figcaption className="mt-3">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/50 bg-background/90 px-4 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-primary shadow-sm">
           <AwardIcon className="h-3 w-3" aria-hidden />
           Winner
         </span>
@@ -209,7 +203,7 @@ export function Awards() {
     <section id="awards" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="reveal mb-14 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-lg text-primary">honors &amp; recognition</p>
+          <p className="kicker text-primary">a picture&apos;s worth a thousand words</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] italic text-foreground"
             style={{ fontWeight: 300 }}
@@ -248,7 +242,7 @@ export function Awards() {
               </div>
 
               <h3 className="font-serif text-2xl italic text-foreground">{a.title}</h3>
-              <p className="kicker mt-2 text-sm text-accent">{a.subtitle}</p>
+              <p className="mt-2 font-serif text-sm italic text-accent">{a.subtitle}</p>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">{a.text}</p>
             </article>
           ))}

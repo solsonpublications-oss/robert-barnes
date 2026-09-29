@@ -48,7 +48,7 @@ export function Reviews() {
     <section id="reviews" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="reveal mb-14 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-lg text-primary">kind words</p>
+          <p className="kicker text-primary">kind words</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] font-300 italic text-foreground"
             style={{ fontWeight: 300 }}
@@ -113,7 +113,7 @@ export function Newsletter() {
   return (
     <section id="connect" className="relative px-5 py-24 sm:py-28">
       <div className="reveal relative mx-auto max-w-3xl rounded-[2rem] border border-accent/25 bg-gradient-to-br from-card/60 to-secondary/30 p-10 text-center backdrop-blur sm:p-14">
-        <p className="kicker text-lg text-accent">stay connected</p>
+        <p className="kicker text-accent">stay connected</p>
         <h2
           className="mt-3 font-serif text-[clamp(2rem,5vw,3.25rem)] font-300 italic text-foreground"
           style={{ fontWeight: 300 }}
@@ -158,7 +158,7 @@ export function CallToAction() {
   return (
     <section id="own" className="relative px-5 py-24 sm:py-32">
       <div className="reveal mx-auto max-w-4xl text-center">
-        <p className="kicker text-lg text-primary">bring the verse home</p>
+        <p className="kicker text-primary">bring the verse home</p>
         <h2
           className="mt-3 font-serif text-[clamp(2.2rem,6vw,4rem)] font-300 italic text-gold-gradient"
           style={{ fontWeight: 300 }}
@@ -166,7 +166,7 @@ export function CallToAction() {
           Own the Complete Series
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Five volumes. One heart, unfolding — plus Queen Pin and more, all
+          Four volumes. One heart, unfolding — plus Queen Pin and more, all
           available now on Amazon in Kindle and print editions.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
@@ -208,12 +208,12 @@ export function Footer() {
   return (
     <footer className="relative mt-auto border-t border-border/50 bg-card/20 px-5 py-16">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center">
-        <div className="flex flex-col items-center gap-3">
-          <BrandLogo className="h-14 w-14" rounded="rounded-xl" />
+        <div className="flex flex-col items-center gap-2">
+          <BrandLogo className="h-20 w-auto" rounded="rounded-xl" />
           <p className="font-serif text-2xl italic text-foreground">
-            The Art of Poetry
+            R. Ray Barnes
           </p>
-          <p className="text-sm text-muted-foreground">By R. Ray Barnes</p>
+          <p className="text-sm text-muted-foreground">Author · Poet · Music Producer · Songwriter</p>
         </div>
 
         <nav aria-label="Footer navigation" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
@@ -228,25 +228,27 @@ export function Footer() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          {socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={s.label}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border/60 text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
-            >
-              <s.icon className="h-4 w-4" />
-            </a>
-          ))}
+        <div className="flex flex-col items-center gap-3">
+          <p className="kicker text-accent">Made with love, R. Ray Barnes</p>
+          <div className="flex items-center gap-3">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="grid h-10 w-10 place-items-center rounded-full border border-border/60 text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+              >
+                <s.icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col items-center gap-1">
-          <p className="kicker text-lg text-accent">with love, R. Ray Barnes</p>
           <p className="text-xs tracking-wide text-muted-foreground">
-            © 2026 R. Ray Barnes Productions · The Art of Poetry
+            © 2026 R. Ray Barnes Productions · All Rights Reserved
           </p>
         </div>
       </div>

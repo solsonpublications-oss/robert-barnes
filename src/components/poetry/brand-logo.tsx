@@ -51,9 +51,9 @@ export function BrandLogo({ className = "", rounded = "rounded-md" }: { classNam
   return (
     <img
       src={src}
-      alt="R. Ray Barnes logo"
+      alt="Barnes Productions logo"
       onError={() => setFailed(true)}
-      className={`${className} ${rounded} border border-primary/25 object-cover shadow-[0_0_18px_-6px_var(--glow-gold)]`}
+      className={`${className} ${rounded} border border-primary/25 bg-background/90 p-1 object-contain shadow-[0_0_18px_-6px_var(--glow-gold)]`}
     />
   );
 }

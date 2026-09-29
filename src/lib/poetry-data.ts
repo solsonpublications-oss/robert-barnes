@@ -19,9 +19,9 @@ export const volumes: Volume[] = [
     numeral: "I",
     title: "Thoughts Dancing From Heart To Mind",
     year: "2014",
-    cover: "/images/amazon/vol1.jpg",
+    cover: "/images/covers/vol1.jpg",
     rating: 5.0,
-    pages: 86,
+    pages: 134,
     description:
       "A soulful collection that explores the depth of human emotions, love, spirituality, and self-reflection. Every poem flows like a conversation between the heart and mind.",
     amazon: "https://www.amazon.com/dp/B0HC4RTW3V",
@@ -32,9 +32,9 @@ export const volumes: Volume[] = [
     numeral: "II",
     title: "Butterfly Thoughts",
     year: "2016",
-    cover: "/images/amazon/vol2.jpg",
+    cover: "/images/covers/vol2.jpg",
     rating: 5.0,
-    pages: 116,
+    pages: 121,
     description:
       "Ideas float off the page like butterflies. A spirit of love, peace, and joy accompanied by powerful poetic images of pain, courage, passion, and triumph.",
     amazon: "https://www.amazon.com/dp/B0HC4L7T6Q",
@@ -45,9 +45,9 @@ export const volumes: Volume[] = [
     numeral: "III",
     title: "Thoughts From The Heart",
     year: "2018",
-    cover: "/images/amazon/vol3.jpg",
+    cover: "/images/covers/vol3.jpg",
     rating: 5.0,
-    pages: 107,
+    pages: 110,
     description:
       "When you inner-connect spiritually with that special someone, the energy created gives birth to a oneness that transforms you — a manifestation of love greater than either could be alone.",
     amazon: "https://www.amazon.com/dp/B0HC4SJTYF",
@@ -58,24 +58,13 @@ export const volumes: Volume[] = [
     numeral: "IV",
     title: "Love, Life, The Creator & Me",
     year: "2020",
-    cover: "/images/amazon/vol4.jpg",
+    cover: "/images/covers/vol4.jpg",
     rating: 5.0,
-    pages: 78,
+    pages: 137,
     description:
       "The widest lens — faith, gratitude, and a life measured in grace rather than time. Love becomes the most important occurrence, mirroring the first love the Creator had for humankind.",
     amazon: "https://www.amazon.com/dp/B0HC4PL286",
     formats: "Kindle · Hardcover · Paperback",
-  },
-  {
-    id: "vol5",
-    numeral: "V",
-    title: "A Spectrum Of Thoughts",
-    year: "2026",
-    cover: "/images/vol5.png",
-    rating: 5.0,
-    pages: 112,
-    description:
-      "The fifth and final volume opens the lens widest of all — a spectrum of love, faith, jazz, and the full colour of feeling. Every shade of a life lived in verse, gathered into one luminous voice.",
   },
 ];
 
@@ -112,10 +101,9 @@ export const awards: Award[] = [
     title: "Michigan Regional Emmy Award",
     subtitle: "Winner · 2019",
     text:
-      "Presented by the National Academy of Television Arts & Sciences, Michigan Chapter, honoring outstanding achievement in television — one more chapter in a career spent telling true stories on screen, in song, and on the page.",
+      "Presented by the National Academy of Television Arts & Sciences, Michigan Chapter, for Interview/Discussion — Left Behind in Vietnam. Produced by R. Ray Barnes with iMichigan Productions and Peaceful Warriors Foundation.",
     photoCandidates: [
       "/images/awards/award-emmy.jpg",
-      "/images/awards/emmy.jpg",
       "/images/award-emmy.jpg",
     ],
   },
@@ -123,13 +111,12 @@ export const awards: Award[] = [
     id: "eclipse",
     medal: "eclipse",
     short: "ECLIPSE",
-    title: "8th Annual Eclipse Award",
+    title: "36th Annual Eclipse Award",
     subtitle: "Winner",
     text:
-      "Honoring distinguished creative work — a second milestone in a career that moves fluidly between the recording studio, the television screen, and the written word.",
+      "Presented to R. Ray Barnes for Outstanding Television or Cable Program, honoring distinguished creative work across screen, song, and the written word.",
     photoCandidates: [
       "/images/awards/award-eclipse.jpg",
-      "/images/awards/eclipse.jpg",
       "/images/award-eclipse.jpg",
     ],
   },
@@ -171,7 +158,7 @@ export const otherBooks: OtherBook[] = [
     id: "easy-guide",
     title: "One: An Easy Guide To Understanding: God, Spirit & Love",
     category: "Spiritual Companion",
-    cover: "/images/amazon/easy-guide.jpg",
+    cover: "/images/covers/easy-guide.jpg",
     amazon: "https://www.amazon.com/dp/B0BSCL83DL",
     formats: "Kindle · Paperback",
     status: "Available now",
@@ -182,18 +169,18 @@ export const otherBooks: OtherBook[] = [
     id: "go-sit",
     title: "Go Sit In A Corner And Think",
     category: "Reflections",
-    cover: "/images/amazon/go-sit.jpg",
+    cover: "/images/covers/go-sit.jpg",
     amazon: "https://www.amazon.com/dp/B0BQZ4X3NS",
     formats: "Kindle · Paperback",
     status: "Available now",
     description:
-      "An invitation to pause. A collection of meditations and quiet provocations that ask the reader to sit with themselves — in the corner of a room, of a thought, of a life — and listen for what the silence has been trying to say. Also available through Kindle Unlimited.",
+      "An invitation to pause. A collection of meditations, sometimes loud, and sometimes quiet provocations that ask the reader to sit with themselves — in the corner of a room, in thought about the lives of Negros, Colored People, Blacks and African Americans as they delt with the transitions in identity from one to the other— He explores various narratives, from what he labels as Go Sit In these different corners And Think. There is “The Peoples Corner,” dealing with life in general; “The Street Corner,” tackling issues from the street side of Black life; “The Love Corner,” rather speaks for itself; “The Righteous Corner,” commenting on, and exploring religion, the church and faith; and finally, “The Ladies Corner,” poems from a female perspective.",
   },
   {
     id: "69-ways",
     title: "69 Ways To Better Relationships, Sex and Love",
     category: "Relationships",
-    cover: "/images/amazon/69-ways.jpg",
+    cover: "/images/covers/69-ways.jpg",
     amazon: "https://www.amazon.com/dp/B00G641NOQ",
     formats: "Kindle · Paperback",
     status: "Available now",
@@ -204,7 +191,7 @@ export const otherBooks: OtherBook[] = [
     id: "queen-pin",
     title: "Queen Pin: The Story of Yvonne Barnes & The Motown Records Bowlerettes",
     category: "Biography",
-    cover: "/images/amazon/queen-pin.jpg",
+    cover: "/images/covers/queen-pin.jpg",
     amazon: "https://www.amazon.com/dp/B0BJQMCLZV",
     formats: "Kindle · Audiobook · Paperback",
     status: "Available now",
@@ -217,7 +204,7 @@ export const journey: Milestone[] = [
   {
     year: "2008",
     title: "The First Poem",
-    text: "A love letter scribbled on the back of a napkin becomes the seed of something much larger — the very first poem that would one day fill five volumes.",
+    text: "A love letter scribbled on the back of a napkin becomes the seed of something much larger — the very first poem that would one day fill four volumes.",
   },
   {
     year: "2009",
@@ -247,27 +234,17 @@ export const journey: Milestone[] = [
   {
     year: "2020",
     title: "Love, Life, The Creator & Me",
-    text: "The final volume widens the lens from romance to everything: faith, family, gratitude, and grace measured not in years but in grace.",
+    text: "The fourth and final volume widens the lens from romance to everything: faith, family, gratitude, and grace measured not in years but in grace.",
   },
   {
     year: "2022",
     title: "The Art of Poetry",
-    text: "Four volumes become one unified work. The complete series is gathered into a single, coherent voice — a love letter told in verse.",
+    text: "Four volumes become one unified work. The complete series is gathered into a single, coherent voice — a love letter told in four parts.",
   },
   {
     year: "2024",
     title: "Reaching Further",
     text: "New poems are written. Readings, interviews, and a growing community of readers who find their own stories in the verse.",
-  },
-  {
-    year: "2025",
-    title: "Still Writing",
-    text: "The pen keeps moving. A fifth volume takes shape — because the well of love, faith, and wonder never runs dry.",
-  },
-  {
-    year: "2026",
-    title: "A Spectrum Of Thoughts",
-    text: "The fifth volume opens the lens widest of all. The series completes itself as five volumes, one voice — a love letter told in five parts.",
   },
   {
     year: "∞",
@@ -322,17 +299,17 @@ export const poems: Poem[] = [
     attribution: "— God Speak",
   },
   {
-    id: "in-living-color",
-    source: "FROM IN LIVING COLOR (VOL. V)",
+    id: "on-the-inside",
+    source: "FROM ON THE INSIDE (VOL. IV)",
     lines: [
-      "LOVE",
-      "is comprised of a broad",
-      "Spectrum of COLORS…",
-      "&",
-      "HATE",
-      "is merely a dull array of GRAYS…",
+      "when you tire",
+      "of living with-out,",
+      "go with-in",
+      "and live life in abundance",
+      "without limitation…",
+      "on the Inside.",
     ],
-    attribution: "— In Living Color",
+    attribution: "— On The Inside",
   },
 ];
 
@@ -357,10 +334,6 @@ export const quotes: Quote[] = [
   {
     text: "True love has no hiding place…",
     source: "— Volume IV — Love, Life, The Creator & Me",
-  },
-  {
-    text: "LOVE is comprised of a broad Spectrum of COLORS… and HATE is merely a dull array of GRAYS…",
-    source: "— Volume V — A Spectrum Of Thoughts",
   },
 ];
 
@@ -402,17 +375,17 @@ export const verseMoments: VerseMoment[] = [
   },
   {
     lines: [
-      "It seems",
-      "my thoughts",
-      "take flight",
-      "right where",
-      "yours landed",
-      "as we",
-      "kiss and fly",
-      "off together",
-      "in heavenly bliss.",
+      "when you tire",
+      "of",
+      "living with-out,",
+      "go with-in",
+      "and",
+      "live life in abundance",
+      "without limitation…",
+      "on the",
+      "Inside.",
     ],
-    source: "— from Volume V: Equinox",
+    source: "— from Volume IV: On The Inside",
   },
 ];
 
@@ -460,8 +433,8 @@ export const praise: Praise[] = [
 ];
 
 export const stats = [
-  { value: 5, label: "VOLUMES", suffix: "" },
-  { value: 420, label: "POEMS", suffix: "+" },
+  { value: 4, label: "VOLUMES", suffix: "" },
+  { value: 350, label: "POEMS", suffix: "+" },
   { value: 18, label: "YEARS WRITING", suffix: "+" },
   { value: Infinity, label: "LOVE", suffix: "" },
 ];

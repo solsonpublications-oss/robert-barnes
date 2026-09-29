@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 
 const rotatingSubtitles = [
   "Where every verse is a love letter written in firelight.",
-  "Five volumes of faith, jazz, and the quiet miracle of feeling anything at all.",
-  "One voice, five volumes, and a lifetime of feeling.",
+  "Four volumes of faith, jazz, and the quiet miracle of feeling anything at all.",
+  "One voice, four volumes, and a lifetime of feeling.",
   "The kind of poetry that makes you put the book down and stare at the ceiling.",
 ];
 
@@ -145,7 +145,7 @@ export function Hero() {
       {/* hero content column — matches original max-w-2xl + gap-5 */}
       <div className="reveal relative z-10 flex max-w-2xl flex-col items-center gap-5 text-center" data-delay="0">
         <span className="kicker text-base text-primary sm:text-lg">
-          FIVE VOLUMES · ONE VOICE
+          FOUR VOLUMES · ONE VOICE
         </span>
         <p className="font-serif text-lg italic text-muted-foreground md:text-xl">
           a life, written in verse
@@ -191,26 +191,24 @@ export function About() {
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
         {/* portrait */}
         <div className="reveal relative mx-auto w-full max-w-sm" data-delay="0">
-          <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/25 via-accent/15 to-transparent blur-2xl" />
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-primary/25 glow-soft">
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-primary/30 shadow-xl">
             <Image
               src="/images/author-portrait.webp"
-              alt="R. Ray Barnes — the poet"
+              alt="R. Ray Barnes — author, poet, music producer, songwriter, actor"
               width={640}
               height={800}
               className="aspect-[4/5] w-full object-cover object-top"
               priority
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
           </div>
-          <p className="kicker mt-4 text-center text-lg text-primary">
-            author · producer · poet
+          <p className="kicker mt-4 text-center text-primary">
+            author, poet, music producer, songwriter, actor
           </p>
         </div>
 
         {/* copy */}
         <div className="flex flex-col items-start gap-6">
-          <p className="reveal kicker text-lg text-primary" data-delay="80">
+          <p className="reveal kicker text-primary" data-delay="80">
             about the poet
           </p>
           <h2
@@ -223,23 +221,29 @@ export function About() {
           <div className="reveal flex flex-col gap-5 text-lg leading-relaxed text-muted-foreground" data-delay="220">
             <p>
               Soft. Unpredictable. Always toward the light. For over a decade he
-              has taken the ordinary business of loving — a wife, a family, a God,
+              has taken the ordinary business of loving — a wife, a family, a spiritual devotion,
               an ordinary Tuesday — and turned it into verse that moves between the
               sacred and the plainspoken, the tender and the unfiltered.
             </p>
             <p>
               A 2019 Michigan Regional Emmy winner, R. Ray Barnes has spent over
-              thirty-five years as a music producer and songwriter — collaborating
-              with Stevie Wonder, Mary Wilson of the Supremes, James Ingram, and
-              Grammy winner Tony Coleman. He is the author of <em>Queen Pin: The
-              Story of Yvonne Barnes and the Motown Records Bowlerettes</em>, a
-              tribute to his mother and the team once called the &ldquo;Rosa Parks
-              of bowling.&rdquo;
+              thirty-five years as a music producer and songwriter ⎯ collaborating
+              with his 3-time Grammy Award winning partner, Tony Coleman, they have
+              worked with major recording artists the likes of Stevie Wonder,
+              Quincy Jones, James Ingram, Aretha Franklin, The Pointer Sisters,
+              Lee Greenwood, Rita Coolidge and many others. He is the author of{" "}
+              <em>Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes</em>,
+              a tribute to his mother who was known as &ldquo;the Rosa Parks of
+              bowling,&rdquo; and to the other extraordinary women who comprised
+              their championship team. Beyond writing and music, he created the
+              biblical board game <em>Resurrection: The Life Of Christ</em>, and
+              authored screenplays, stage plays and the animated proposed feature,{" "}
+              <em>The Adventures of Rapman &amp; Homeboy and the Hip-Hop Posse</em>.
             </p>
             <p>
-              Written for his wife Diane and dedicated to the family that shaped
-              him, <em className="text-foreground/90">The Art of Poetry</em> is one
-              long love letter told in five parts — to romance, to grief, to jazz,
+              Written for the love and beauty within us all and dedicated to his
+              wife and family that shaped him, <em className="text-foreground/90">The Art of Poetry</em> is one
+              long love letter told in four parts — to romance, to grief, to jazz,
               and to the faith that carries a heart through all of it.
             </p>
             <p className="kicker text-xl text-accent">— with heart, always</p>

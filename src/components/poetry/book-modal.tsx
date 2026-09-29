@@ -54,17 +54,6 @@ export const samplePoems: Record<string, { title: string; lines: string[] }> = {
       "Inside.",
     ],
   },
-  vol5: {
-    title: "In Living Color",
-    lines: [
-      "LOVE",
-      "is comprised of a broad",
-      "Spectrum of COLORS…",
-      "&",
-      "HATE",
-      "is merely a dull array of GRAYS…",
-    ],
-  },
 };
 
 export function BookModal({

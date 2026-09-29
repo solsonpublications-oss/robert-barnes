@@ -124,7 +124,7 @@ export function Verses() {
     <section id="verses" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl">
         <div className="reveal mb-14 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-lg text-primary">a taste of the verse</p>
+          <p className="kicker text-primary">a taste of the verse</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] font-300 italic text-foreground"
             style={{ fontWeight: 300 }}
@@ -174,7 +174,7 @@ export function Pillars() {
     <section id="themes" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="reveal mb-14 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-lg text-primary">what moves the pen</p>
+          <p className="kicker text-primary">what moves the pen</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] font-300 italic text-foreground"
             style={{ fontWeight: 300 }}
@@ -183,7 +183,7 @@ export function Pillars() {
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
             Every poem rests on something deeper than words — a feeling, a belief,
-            a person. These are the pillars that hold up five volumes of verse.
+            a person. These are the pillars that hold up four volumes of verse.
           </p>
         </div>
 
@@ -221,7 +221,7 @@ export function QuoteOfTheDay() {
   return (
     <section className="relative px-5 py-24 sm:py-28">
       <div className="reveal mx-auto max-w-3xl rounded-[2rem] border border-primary/25 bg-gradient-to-br from-card/60 to-secondary/40 p-10 text-center backdrop-blur glow-soft sm:p-14">
-        <p className="kicker text-base text-accent">quote of the day</p>
+        <p className="kicker text-accent">quote of the day</p>
         <blockquote
           key={idx}
           aria-live="polite"
@@ -319,7 +319,7 @@ export function MomentInVerse() {
       <div className="reveal mx-auto max-w-2xl">
         <div className="relative overflow-hidden rounded-[2rem] border border-border/50 bg-card/40 p-10 text-center backdrop-blur sm:p-14">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-accent/5" />
-          <p className="kicker relative text-base text-primary">a moment in verse</p>
+          <p className="kicker relative text-primary">a moment in verse</p>
           <blockquote
             key={idx}
             aria-live="polite"
@@ -437,7 +437,7 @@ export function MomentInVerse() {
             className="max-w-2xl text-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <p className="kicker text-base text-primary">a moment in verse</p>
+            <p className="kicker text-primary">a moment in verse</p>
             <blockquote className="mt-8 space-y-3 font-serif text-[clamp(1.75rem,5vw,3rem)] font-300 italic leading-snug text-gold-gradient" style={{ fontWeight: 300 }}>
               {m.lines.map((l, li) => (
                 <p key={li}>{l}</p>

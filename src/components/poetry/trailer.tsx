@@ -64,7 +64,7 @@ export function QueenPinTrailer() {
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
         {/* copy */}
         <div className="flex flex-col items-start gap-5">
-          <p className="reveal kicker inline-flex items-center gap-2 text-lg text-primary" data-delay="0">
+          <p className="reveal kicker inline-flex items-center gap-2 text-primary" data-delay="0">
             <Clapperboard className="h-4 w-4" aria-hidden />
             official trailer
           </p>

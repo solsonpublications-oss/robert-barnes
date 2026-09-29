@@ -298,7 +298,9 @@
 
   .kicker {
     font-family: var(--font-caveat), cursive;
-    font-weight: 500;
+    font-size: clamp(1.75rem, 2.5vw, 2.35rem) !important;
+    font-weight: 700;
+    line-height: 1.35;
     letter-spacing: 0.02em;
   }
 
@@ -318,18 +320,9 @@
     animation-delay: var(--delay, 0s);
   }
 
-  /* Hero title gradient + glow (matches original .hero-gradient-text) */
+  /* Hero title — solid crisp foreground on both light and dark themes */
   .hero-title {
-    background: linear-gradient(
-      135deg,
-      #f5ece0 0%,
-      #eac98e 50%,
-      #da8da5 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: var(--foreground);
     text-shadow:
       0 0 60px rgba(217, 164, 77, 0.15),
       0 0 120px rgba(200, 92, 124, 0.08);
