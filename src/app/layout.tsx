@@ -36,12 +36,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://robert-barnes.space-z.ai"),
   title: "The Art of Poetry — R. Ray Barnes",
   description:
-    "Emmy-winning author and producer R. Ray Barnes — four volumes, one voice. A life written in verse: a love letter told in four parts, plus Queen Pin and companion works on faith, reflection, and family history.",
+    "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse: a love letter told in five parts, plus Queen Pin and companion works on faith, reflection, and family history.",
   keywords: [
     "R. Ray Barnes",
     "The Art of Poetry",
     "poetry",
     "love poems",
+    "A Spectrum Of Thoughts",
     "Butterfly Thoughts",
     "Thoughts Dancing From Heart To Mind",
     "Thoughts From The Heart",
@@ -68,7 +69,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Art of Poetry — R. Ray Barnes",
     description:
-      "Emmy-winning author and producer R. Ray Barnes — four volumes, one voice. A life written in verse: a love letter told in four parts, plus Queen Pin and companion works on faith, reflection, and family history.",
+      "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse: a love letter told in five parts, plus Queen Pin and companion works on faith, reflection, and family history.",
     type: "website",
     siteName: "The Art of Poetry",
     locale: "en_US",
@@ -86,7 +87,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Art of Poetry — R. Ray Barnes",
     description:
-      "Emmy-winning author and producer R. Ray Barnes — four volumes, one voice. A life written in verse.",
+      "Emmy-winning author and producer R. Ray Barnes — five volumes, one voice. A life written in verse.",
     images: ["/images/og-preview.png"],
     creator: "@rraybarnes",
   },

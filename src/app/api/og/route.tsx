@@ -184,7 +184,7 @@ function AuthorCard() {
               marginTop: 6,
             }}
           >
-            Four volumes, one voice — a life written in verse.
+            Five volumes, one voice — a life written in verse.
           </div>
           <div
             style={{
@@ -210,13 +210,13 @@ function AuthorCard() {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: 22, alignItems: "flex-end", position: "relative" }}>
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-end", position: "relative" }}>
         {covers.map((c, i) => (
           <img
             key={i}
             src={img64(c)}
-            width={130}
-            height={195}
+            width={110}
+            height={165}
             alt={`The Art of Poetry volume ${i + 1} cover`}
             style={{
               borderRadius: 8,

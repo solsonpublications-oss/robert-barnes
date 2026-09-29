@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Star, ExternalLink, BookOpen, Info, Sparkles } from "lucide-react";
-import { volumes, stats } from "@/lib/poetry-data";
+import { Star, ExternalLink, BookOpen, Info } from "lucide-react";
+import { volumes, stats, AMAZON_AUTHOR_URL } from "@/lib/poetry-data";
 import { BookModal, useBookModal } from "./book-modal";
 
 function VolumeCard({
@@ -16,7 +16,7 @@ function VolumeCard({
 }) {
   return (
     <article
-      className="reveal group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-border/60 bg-card/40 p-6 hover-lift hover:border-primary/40 hover:glow-soft"
+      className="reveal group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/60 p-6 sm:p-7 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_24px_60px_-20px_rgba(217,164,77,0.35)]"
       data-delay={i * 90}
     >
       {/* shimmer top border on hover */}
@@ -63,23 +63,19 @@ function VolumeCard({
         {v.title}
       </h3>
 
-      {/* rating — shown only for titles published & rated on Amazon */}
-      {v.amazon ? (
-        <div className="mb-3 flex items-center justify-center gap-2">
-          <span className="inline-flex">
-            {Array.from({ length: 5 }).map((_, s) => (
-              <Star
-                key={s}
-                className="h-3.5 w-3.5 fill-primary text-primary transition-transform duration-300 group-hover:scale-110"
-                style={{ transitionDelay: `${s * 40}ms` }}
-              />
-            ))}
-          </span>
-          <span className="text-xs text-muted-foreground">Reader-rated</span>
-        </div>
-      ) : (
-        <div className="mb-3 h-[14px]" aria-hidden />
-      )}
+      {/* rating */}
+      <div className="mb-3 flex items-center justify-center gap-2">
+        <span className="inline-flex">
+          {Array.from({ length: 5 }).map((_, s) => (
+            <Star
+              key={s}
+              className="h-3.5 w-3.5 fill-primary text-primary transition-transform duration-300 group-hover:scale-110"
+              style={{ transitionDelay: `${s * 40}ms` }}
+            />
+          ))}
+        </span>
+        <span className="text-xs text-muted-foreground">Reader-rated</span>
+      </div>
 
       {/* description */}
       <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
@@ -94,23 +90,16 @@ function VolumeCard({
       )}
 
       {/* cta */}
-      {v.amazon ? (
-        <a
-          href={v.amazon}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_-6px_var(--glow-gold)]"
-        >
-          Get on Amazon
-          <ExternalLink className="h-3.5 w-3.5" />
-        </a>
-      ) : (
-        <div className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-border/50 bg-background/40 px-4 py-2.5 text-xs tracking-wide text-muted-foreground">
-          <Sparkles className="h-3 w-3 text-primary/70" aria-hidden />
-          Forthcoming {v.year} — Kindle &amp; Print
-        </div>
-      )}
+      <a
+        href={v.amazon ?? AMAZON_AUTHOR_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+        className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-4 py-2.5 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_-6px_var(--glow-gold)]"
+      >
+        Get on Amazon
+        <ExternalLink className="h-3.5 w-3.5" />
+      </a>
     </article>
   );
 }
@@ -144,9 +133,9 @@ export function Collection() {
   const { active, open, close } = useBookModal();
   return (
     <section id="collection" className="relative px-5 py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="reveal mb-14 flex flex-col items-center gap-3 text-center">
-          <p className="kicker text-primary">four volumes, one voice</p>
+          <p className="kicker text-primary">five volumes, one voice</p>
           <h2
             className="font-serif text-[clamp(2.2rem,5.5vw,3.75rem)] italic text-foreground"
             style={{ fontWeight: 300 }}
@@ -163,7 +152,7 @@ export function Collection() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {volumes.map((v, i) => (
             <VolumeCard key={v.id} v={v} i={i} onOpen={() => open(v)} />
           ))}

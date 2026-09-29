@@ -166,7 +166,7 @@ export function CallToAction() {
           Own the Complete Series
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Four volumes. One heart, unfolding — plus Queen Pin and more, all
+          Five volumes. One heart, unfolding — plus Queen Pin and more, all
           available now on Amazon in Kindle and print editions.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">

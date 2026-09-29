@@ -66,6 +66,18 @@ export const volumes: Volume[] = [
     amazon: "https://www.amazon.com/dp/B0HC4PL286",
     formats: "Kindle · Hardcover · Paperback",
   },
+  {
+    id: "vol5",
+    numeral: "V",
+    title: "A Spectrum Of Thoughts",
+    year: "2026",
+    cover: "/images/covers/vol5.jpg",
+    rating: 5.0,
+    pages: 111,
+    description:
+      "Your life is refined and unlimited by its contour on the inside. The fifth volume opens the lens widest of all — exploring love, faith, jazz, and the broad spectrum of colors that define the human heart.",
+    formats: "Kindle · Hardcover · Paperback",
+  },
 ];
 
 /** Canonical Amazon author page — every book by R. Ray Barnes lives here. */
@@ -204,7 +216,7 @@ export const journey: Milestone[] = [
   {
     year: "2008",
     title: "The First Poem",
-    text: "A love letter scribbled on the back of a napkin becomes the seed of something much larger — the very first poem that would one day fill four volumes.",
+    text: "A love letter scribbled on the back of a napkin becomes the seed of something much larger — the very first poem that would one day fill five volumes.",
   },
   {
     year: "2009",
@@ -234,17 +246,22 @@ export const journey: Milestone[] = [
   {
     year: "2020",
     title: "Love, Life, The Creator & Me",
-    text: "The fourth and final volume widens the lens from romance to everything: faith, family, gratitude, and grace measured not in years but in grace.",
+    text: "The fourth volume widens the lens from romance to everything: faith, family, gratitude, and grace measured not in years but in grace.",
   },
   {
     year: "2022",
     title: "The Art of Poetry",
-    text: "Four volumes become one unified work. The complete series is gathered into a single, coherent voice — a love letter told in four parts.",
+    text: "The collection expands into a unified body of work. The series is gathered into a single, coherent voice — a love letter told in verse.",
   },
   {
     year: "2024",
     title: "Reaching Further",
     text: "New poems are written. Readings, interviews, and a growing community of readers who find their own stories in the verse.",
+  },
+  {
+    year: "2026",
+    title: "A Spectrum Of Thoughts",
+    text: "The fifth volume opens the lens widest of all. The series completes itself as five volumes, one voice — a love letter told in five parts.",
   },
   {
     year: "∞",
@@ -299,17 +316,17 @@ export const poems: Poem[] = [
     attribution: "— God Speak",
   },
   {
-    id: "on-the-inside",
-    source: "FROM ON THE INSIDE (VOL. IV)",
+    id: "in-living-color",
+    source: "FROM IN LIVING COLOR (VOL. V)",
     lines: [
-      "when you tire",
-      "of living with-out,",
-      "go with-in",
-      "and live life in abundance",
-      "without limitation…",
-      "on the Inside.",
+      "LOVE",
+      "is comprised of a broad",
+      "Spectrum of COLORS…",
+      "&",
+      "HATE",
+      "is merely a dull array of GRAYS…",
     ],
-    attribution: "— On The Inside",
+    attribution: "— In Living Color",
   },
 ];
 
@@ -334,6 +351,10 @@ export const quotes: Quote[] = [
   {
     text: "True love has no hiding place…",
     source: "— Volume IV — Love, Life, The Creator & Me",
+  },
+  {
+    text: "LOVE is comprised of a broad Spectrum of COLORS… and HATE is merely a dull array of GRAYS…",
+    source: "— Volume V — A Spectrum Of Thoughts",
   },
 ];
 
@@ -375,17 +396,17 @@ export const verseMoments: VerseMoment[] = [
   },
   {
     lines: [
-      "when you tire",
-      "of",
-      "living with-out,",
-      "go with-in",
-      "and",
-      "live life in abundance",
-      "without limitation…",
-      "on the",
-      "Inside.",
+      "It seems",
+      "my thoughts",
+      "take flight",
+      "right where",
+      "yours landed",
+      "as we",
+      "kiss and fly",
+      "off together",
+      "in heavenly bliss.",
     ],
-    source: "— from Volume IV: On The Inside",
+    source: "— from Volume V: Equinox",
   },
 ];
 
@@ -423,7 +444,7 @@ export const praise: Praise[] = [
   },
   {
     id: "p-series",
-    title: "The Art of Poetry, Vols I–IV",
+    title: "The Art of Poetry, Vols I–V",
     rating: "5.0",
     detail: "Kindle · Hardcover · Paperback",
     text:
@@ -433,7 +454,7 @@ export const praise: Praise[] = [
 ];
 
 export const stats = [
-  { value: 4, label: "VOLUMES", suffix: "" },
+  { value: 5, label: "VOLUMES", suffix: "" },
   { value: 350, label: "POEMS", suffix: "+" },
   { value: 18, label: "YEARS WRITING", suffix: "+" },
   { value: Infinity, label: "LOVE", suffix: "" },

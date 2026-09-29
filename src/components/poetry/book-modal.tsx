@@ -54,6 +54,17 @@ export const samplePoems: Record<string, { title: string; lines: string[] }> = {
       "Inside.",
     ],
   },
+  vol5: {
+    title: "Your Life Inside Your Mind",
+    lines: [
+      "Your Life is not",
+      "defined and limited",
+      "by its contour on the outside,",
+      "Your Life is",
+      "refined and unlimited",
+      "by its contour on the inside…",
+    ],
+  },
 };
 
 export function BookModal({

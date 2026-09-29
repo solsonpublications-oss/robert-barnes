@@ -10,7 +10,7 @@ export function StructuredData() {
     "@type": "Person",
     name: "R. Ray Barnes",
     description:
-      "Emmy Award–winning American author, producer, and poet. Author of The Art of Poetry, a four-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
+      "Emmy Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
     url: "https://robert-barnes.space-z.ai",
     sameAs: [AMAZON_AUTHOR_URL],
     jobTitle: "Author · Producer · Poet",
@@ -27,7 +27,7 @@ export function StructuredData() {
       name: "R. Ray Barnes",
     },
     description:
-      "Four volumes, one voice. A life written in verse — to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
+      "Five volumes, one voice. A life written in verse — to romance, to grief, to jazz, and to the faith that carries a heart through all of it.",
     hasPart: volumes.map((v) => ({
       "@type": "Book",
       name: v.title,
@@ -77,7 +77,7 @@ export function StructuredData() {
     name: "The Art of Poetry — R. Ray Barnes",
     url: "https://robert-barnes.space-z.ai",
     description:
-      "Four volumes, one voice. A life written in verse by R. Ray Barnes.",
+      "Five volumes, one voice. A life written in verse by R. Ray Barnes.",
     inLanguage: "en",
     author: { "@type": "Person", name: "R. Ray Barnes" },
   };

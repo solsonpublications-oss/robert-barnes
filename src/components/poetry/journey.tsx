@@ -38,7 +38,7 @@ export function Journey() {
             A Life in Verse
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            From a napkin poem to four published volumes — every chapter of R.
+            From a napkin poem to five published volumes — every chapter of R.
             Ray Barnes&apos;s poetic life.
           </p>
         </div>

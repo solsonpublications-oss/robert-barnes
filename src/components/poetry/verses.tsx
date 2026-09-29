@@ -183,7 +183,7 @@ export function Pillars() {
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
             Every poem rests on something deeper than words — a feeling, a belief,
-            a person. These are the pillars that hold up four volumes of verse.
+            a person. These are the pillars that hold up five volumes of verse.
           </p>
         </div>
 
