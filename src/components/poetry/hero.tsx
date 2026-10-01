@@ -227,7 +227,7 @@ export function About() {
             </p>
             <p>
               A 2019 Michigan Regional Emmy winner, R. Ray Barnes has spent over
-              thirty-five years as a music producer and songwriter ⎯ collaborating
+              forty-five years as a music producer and songwriter ⎯ collaborating
               with his 3-time Grammy Award winning partner, Tony Coleman, they have
               worked with major recording artists the likes of Stevie Wonder,
               Quincy Jones, James Ingram, Aretha Franklin, The Pointer Sisters,

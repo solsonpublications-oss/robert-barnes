@@ -50,6 +50,10 @@ export function QueenPinTrailer() {
   const play = () => {
     const v = videoRef.current;
     if (!v || !ready || !src) return;
+    if (v.ended || (v.duration && v.currentTime >= v.duration)) {
+      v.currentTime = 0;
+    }
+    setStarted(true);
     v.play().catch(() => setErrorMissing(true));
   };
 
@@ -139,6 +143,12 @@ export function QueenPinTrailer() {
                 poster="/images/amazon/queen-pin.jpg"
                 src={ready && src ? src : undefined}
                 onPlaying={() => setStarted(true)}
+                onEnded={() => {
+                  setStarted(false);
+                  if (videoRef.current) {
+                    videoRef.current.currentTime = 0;
+                  }
+                }}
                 onError={() => setErrorMissing(true)}
               />
 

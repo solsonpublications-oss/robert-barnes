@@ -134,12 +134,12 @@ export const awards: Award[] = [
   },
 ];
 
-/** Real collaborations from the author's 35+ years as a music producer & songwriter. */
+/** Real collaborations from the author's 45+ years as a music producer & songwriter. */
 export const collaborators: string[] = [
   "Stevie Wonder",
   "Mary Wilson of the Supremes",
   "James Ingram",
-  "Tony Coleman",
+  "Lee Greenwood",
   "The Pointer Sisters",
 ];
 

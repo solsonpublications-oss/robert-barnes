@@ -254,7 +254,7 @@ export function Awards() {
         >
           <p className="kicker inline-flex items-center gap-2 text-sm text-accent">
             <Music2 className="h-4 w-4" aria-hidden />
-            thirty-five years in the studio
+            forty-five years in the studio
           </p>
           <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
             As a music producer and songwriter, he has shared stages and sessions

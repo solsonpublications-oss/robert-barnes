@@ -209,7 +209,7 @@ export function Footer() {
     <footer className="relative mt-auto border-t border-border/50 bg-card/20 px-5 py-16">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center">
         <div className="flex flex-col items-center gap-2">
-          <BrandLogo className="h-20 w-auto" rounded="rounded-xl" />
+          <BrandLogo className="h-28 w-auto sm:h-32" rounded="rounded-2xl" />
           <p className="font-serif text-2xl italic text-foreground">
             R. Ray Barnes
           </p>

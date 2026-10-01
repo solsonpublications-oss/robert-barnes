@@ -10,7 +10,7 @@ export function StructuredData() {
     "@type": "Person",
     name: "R. Ray Barnes",
     description:
-      "Emmy Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over thirty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Tony Coleman.",
+      "Emmy Award–winning American author, producer, and poet. Author of The Art of Poetry, a five-volume collection, and Queen Pin: The Story of Yvonne Barnes and the Motown Records Bowlerettes. Over forty-five years as a music producer and songwriter collaborating with Stevie Wonder, Mary Wilson, James Ingram, and Lee Greenwood.",
     url: "https://robert-barnes.space-z.ai",
     sameAs: [AMAZON_AUTHOR_URL],
     jobTitle: "Author · Producer · Poet",

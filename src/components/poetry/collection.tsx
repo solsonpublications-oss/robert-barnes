@@ -147,7 +147,7 @@ export function Collection() {
             grief, to jazz, and to the faith that carries a heart through all of
             it.
           </p>
-          <p className="mt-1 text-xs tracking-wide text-muted-foreground/70">
+          <p className="mt-1 font-script text-[clamp(1.4rem,2vw,1.9rem)] font-bold tracking-wide text-primary">
             Click a cover to read a sample poem
           </p>
         </div>
