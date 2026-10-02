@@ -76,6 +76,7 @@ export const volumes: Volume[] = [
     pages: 111,
     description:
       "Your life is refined and unlimited by its contour on the inside. The fifth volume opens the lens widest of all — exploring love, faith, jazz, and the broad spectrum of colors that define the human heart.",
+    amazon: "https://www.amazon.com/Art-Poetry-Spectrum-Thoughts-ebook/dp/B0HLH2M4MX",
     formats: "Kindle · Hardcover · Paperback",
   },
 ];
