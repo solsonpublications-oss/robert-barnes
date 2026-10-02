@@ -201,8 +201,10 @@ export function About() {
               priority
             />
           </div>
-          <p className="kicker mt-4 text-center text-primary">
-            author, poet, music producer, songwriter, actor
+          <p className="kicker mt-4 text-center text-primary leading-snug">
+            author, poet, actor,
+            <br />
+            music producer, songwriter
           </p>
         </div>
 

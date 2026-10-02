@@ -208,7 +208,7 @@ export const otherBooks: OtherBook[] = [
     formats: "Kindle · Audiobook · Paperback",
     status: "Available now",
     description:
-      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the all-female team that won first place in the highest-scoring all-white league in the United States and built the largest youth bowling league in the nation while fighting prevailing racial inequities. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon in Kindle, Audiobook, and Paperback.",
+      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the first all-Black female pro team that won first place in the highest-scoring all-white league in the United States. As well, Yvonne built the largest youth bowling league in the nation while simultaneously fighting the prevailing racial inequities in both youth and ladies pro bowling. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon in Kindle, Audiobook, and Paperback.",
   },
 ];
 

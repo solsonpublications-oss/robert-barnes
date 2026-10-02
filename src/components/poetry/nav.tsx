@@ -92,14 +92,15 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="group flex items-center gap-2.5"
+          className="group flex items-center gap-3 text-left"
           aria-label="Back to top"
         >
           <span className="transition-transform duration-700 group-hover:rotate-6">
-            <BrandLogo className="h-9 w-9" />
+            <BrandLogo className="h-11 w-auto sm:h-12" rounded="rounded-lg" />
           </span>
-          <span className="hidden font-serif text-lg italic tracking-wide text-foreground sm:block">
-            R. Ray Barnes
+          <span className="flex flex-col font-serif text-[1.05rem] italic leading-[1.15] tracking-wide text-foreground">
+            <span>R. Ray</span>
+            <span>Barnes</span>
           </span>
         </button>
 

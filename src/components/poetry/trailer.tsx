@@ -85,8 +85,8 @@ export function QueenPinTrailer() {
               to <em className="text-foreground/90">Queen Pin: The Story of
               Yvonne Barnes &amp; The Motown Records Bowlerettes</em> — the true
               story of his mother, the woman called the &ldquo;Rosa Parks of
-              bowling,&rdquo; and the all-female team that triumphed inside a
-              divided America.
+              bowling,&rdquo; and the all-Black female team that triumphed inside
+              a divided America.
             </p>
             <p>
               Watch it here, then read the story the way only her son can tell it.
@@ -166,8 +166,8 @@ export function QueenPinTrailer() {
               )}
             </div>
           </div>
-          <p className="mt-4 text-center text-xs tracking-wide text-muted-foreground/70">
-            A Queen Pin video promotion produced by R. Ray Barnes Productions.
+          <p className="mt-4 text-center text-xs tracking-wide text-primary">
+            A Queen Pin video promotion by R. Ray Barnes Productions.
           </p>
         </div>
       </div>

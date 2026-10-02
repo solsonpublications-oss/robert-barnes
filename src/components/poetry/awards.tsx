@@ -257,8 +257,9 @@ export function Awards() {
             forty-five years in the studio
           </p>
           <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            As a music producer and songwriter, he has shared stages and sessions
-            with a generation of legends —
+            As music producers and songwriters, he and Tony Coleman have shared
+            stages and sessions with the generation of legends named here and many
+            more ⎯
           </p>
           <ul className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
             {collaborators.map((name) => (

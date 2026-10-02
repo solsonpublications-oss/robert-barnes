@@ -248,6 +248,9 @@ export function Footer() {
 
         <div className="flex flex-col items-center gap-1">
           <p className="text-xs tracking-wide text-muted-foreground">
+            Photo by LaSalle Barnes, Sr.
+          </p>
+          <p className="text-xs tracking-wide text-muted-foreground">
             © 2026 R. Ray Barnes Productions · All Rights Reserved
           </p>
         </div>
