@@ -172,7 +172,7 @@ export const otherBooks: OtherBook[] = [
     title: "One: An Easy Guide To Understanding: God, Spirit & Love",
     category: "Spiritual Companion",
     cover: "/images/covers/easy-guide.jpg",
-    amazon: "https://www.amazon.com/dp/B0BSCL83DL",
+    amazon: "https://www.amazon.com/One-Easy-Guide-Understanding-Spirit/dp/B0HLV1N9QX",
     formats: "Kindle · Paperback",
     status: "Available now",
     description:
