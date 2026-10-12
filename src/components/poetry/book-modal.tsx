@@ -235,6 +235,13 @@ export function BookModal({
               </div>
             )}
 
+            {/* category breadcrumbs */}
+            {volume.categories && (
+              <p className="mt-4 text-xs font-medium tracking-wide text-primary/85">
+                <span className="text-muted-foreground">Categories: </span>{volume.categories}
+              </p>
+            )}
+
             {/* cta */}
             {volume.amazon ? (
               <a

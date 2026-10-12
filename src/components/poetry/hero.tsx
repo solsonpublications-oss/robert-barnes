@@ -244,7 +244,7 @@ export function About() {
             </p>
             <p>
               Written for the love and beauty within us all and dedicated to his
-              wife and family that shaped him, <em className="text-foreground/90">The Art of Poetry</em> is one
+              mother, father, family and mentors that shaped him, <em className="text-foreground/90">The Art of Poetry</em> is one
               long love letter told in five parts — to romance, to grief, to jazz,
               and to the faith that carries a heart through all of it.
             </p>

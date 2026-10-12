@@ -6,7 +6,9 @@ import { otherBooks } from "@/lib/poetry-data";
 
 const categoryIcon: Record<string, React.ComponentType<{ className?: string }>> = {
   "Spiritual Companion": Compass,
+  "God, Love & Spirituality": Compass,
   Reflections: BookText,
+  "Black & African American Poetry": BookText,
   Relationships: Heart,
   Biography: BookText,
 };
@@ -88,8 +90,27 @@ export function OtherBooks() {
                 </div>
 
                 <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {b.description}
+                  {b.description.includes("See Promo Trailer Below.") ? (
+                    <>
+                      {b.description.replace("See Promo Trailer Below.", "")}
+                      <a
+                        href="#trailer"
+                        className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-accent"
+                      >
+                        See Promo Trailer Below.
+                      </a>
+                    </>
+                  ) : (
+                    b.description
+                  )}
                 </p>
+
+                {/* category breadcrumbs */}
+                {b.categories && (
+                  <p className="mb-2 text-center text-[0.72rem] font-medium tracking-wide text-primary/85">
+                    {b.categories}
+                  </p>
+                )}
 
                 {b.formats && (
                   <p className="mb-4 text-center text-[0.68rem] tracking-wide text-muted-foreground/80">

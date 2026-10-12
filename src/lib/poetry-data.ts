@@ -6,6 +6,7 @@ export type Volume = {
   cover: string;
   rating: number;
   pages: number;
+  categories: string;
   description: string;
   /** Real Amazon detail-page ASIN link — omitted when the volume is forthcoming. */
   amazon?: string;
@@ -22,6 +23,7 @@ export const volumes: Volume[] = [
     cover: "/images/covers/vol1.jpg",
     rating: 5.0,
     pages: 134,
+    categories: "Poetry, Prose, Romance, Love, Inspirational",
     description:
       "A soulful collection that explores the depth of human emotions, love, spirituality, and self-reflection. Every poem flows like a conversation between the heart and mind.",
     amazon: "https://www.amazon.com/dp/B0HC4RTW3V",
@@ -35,6 +37,7 @@ export const volumes: Volume[] = [
     cover: "/images/covers/vol2.jpg",
     rating: 5.0,
     pages: 121,
+    categories: "Poetry, Prose, Romance, Love, Inspirational",
     description:
       "Ideas float off the page like butterflies. A spirit of love, peace, and joy accompanied by powerful poetic images of pain, courage, passion, and triumph.",
     amazon: "https://www.amazon.com/dp/B0HC4L7T6Q",
@@ -48,6 +51,7 @@ export const volumes: Volume[] = [
     cover: "/images/covers/vol3.jpg",
     rating: 5.0,
     pages: 110,
+    categories: "Poetry, Prose, Romance, Love, Inspirational",
     description:
       "When you inner-connect spiritually with that special someone, the energy created gives birth to a oneness that transforms you — a manifestation of love greater than either could be alone.",
     amazon: "https://www.amazon.com/dp/B0HC4SJTYF",
@@ -61,6 +65,7 @@ export const volumes: Volume[] = [
     cover: "/images/covers/vol4.jpg",
     rating: 5.0,
     pages: 137,
+    categories: "Poetry, Prose, Romance, Love, Inspirational",
     description:
       "The widest lens — faith, gratitude, and a life measured in grace rather than time. Love becomes the most important occurrence, mirroring the first love the Creator had for humankind.",
     amazon: "https://www.amazon.com/dp/B0HC4PL286",
@@ -74,6 +79,7 @@ export const volumes: Volume[] = [
     cover: "/images/covers/vol5.jpg",
     rating: 5.0,
     pages: 111,
+    categories: "Poetry, Prose, Romance, Love, Inspirational",
     description:
       "Your life is refined and unlimited by its contour on the inside. The fifth volume opens the lens widest of all — exploring love, faith, jazz, and the broad spectrum of colors that define the human heart.",
     amazon: "https://www.amazon.com/Art-Poetry-Spectrum-Thoughts-ebook/dp/B0HLH2M4MX",
@@ -157,6 +163,7 @@ export type OtherBook = {
   id: string;
   title: string;
   category: string;
+  categories?: string;
   cover: string;
   description: string;
   /** Real Amazon detail-page ASIN link — omitted when the book is forthcoming. */
@@ -170,7 +177,8 @@ export const otherBooks: OtherBook[] = [
   {
     id: "easy-guide",
     title: "One: An Easy Guide To Understanding: God, Spirit & Love",
-    category: "Spiritual Companion",
+    category: "God, Love & Spirituality",
+    categories: "God, Love & Spirituality",
     cover: "/images/covers/easy-guide.jpg",
     amazon: "https://www.amazon.com/One-Easy-Guide-Understanding-Spirit/dp/B0HLV1N9QX",
     formats: "Kindle · Paperback",
@@ -181,7 +189,8 @@ export const otherBooks: OtherBook[] = [
   {
     id: "go-sit",
     title: "Go Sit In A Corner And Think",
-    category: "Reflections",
+    category: "Black & African American Poetry",
+    categories: "Poetry ~ Literature & Fiction ~ Regional & Cultural ~ Black & African American",
     cover: "/images/covers/go-sit.jpg",
     amazon: "https://www.amazon.com/dp/B0BQZ4X3NS",
     formats: "Kindle · Paperback",
@@ -193,6 +202,7 @@ export const otherBooks: OtherBook[] = [
     id: "69-ways",
     title: "69 Ways To Better Relationships, Sex and Love",
     category: "Relationships",
+    categories: "Relationships ~ Love & Romance",
     cover: "/images/covers/69-ways.jpg",
     amazon: "https://www.amazon.com/dp/B00G641NOQ",
     formats: "Kindle · Paperback",
@@ -204,12 +214,13 @@ export const otherBooks: OtherBook[] = [
     id: "queen-pin",
     title: "Queen Pin: The Story of Yvonne Barnes & The Motown Records Bowlerettes",
     category: "Biography",
+    categories: "Biography ~ Sports & History",
     cover: "/images/covers/queen-pin.jpg",
     amazon: "https://www.amazon.com/dp/B0BJQMCLZV",
     formats: "Kindle · Audiobook · Paperback",
     status: "Available now",
     description:
-      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the first all-Black female pro team that won first place in the highest-scoring all-white league in the United States. As well, Yvonne built the largest youth bowling league in the nation while simultaneously fighting the prevailing racial inequities in both youth and ladies pro bowling. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available now on Amazon in Kindle, Audiobook, and Paperback.",
+      "The true story of Yvonne Barnes — the author’s mother — and the Motown Records Bowlerettes, the first all-Black female pro team that won first place in the highest-scoring all-white league in the United States. As well, Yvonne built the largest youth bowling league in the nation while simultaneously fighting the prevailing racial inequities in both youth and ladies pro bowling. A tribute to a woman once called the \u201cRosa Parks of bowling,\u201d and to an era that moved to its own rhythm. Available on Amazon in Kindle, Audiobook, and Paperback. See Promo Trailer Below.",
   },
 ];
 

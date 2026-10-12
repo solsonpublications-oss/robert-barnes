@@ -82,6 +82,13 @@ function VolumeCard({
         {v.description}
       </p>
 
+      {/* category breadcrumbs */}
+      {v.categories && (
+        <p className="mb-2 text-center text-[0.72rem] font-medium tracking-wide text-primary/85">
+          {v.categories}
+        </p>
+      )}
+
       {/* formats available on Amazon */}
       {v.formats && (
         <p className="mb-4 text-center text-[0.68rem] tracking-wide text-muted-foreground/80">

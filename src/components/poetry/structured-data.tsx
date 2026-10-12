@@ -33,6 +33,7 @@ export function StructuredData() {
       name: v.title,
       bookEdition: `Volume ${v.numeral}`,
       numberOfPages: v.pages,
+      genre: v.categories,
       author: { "@type": "Person", name: "R. Ray Barnes" },
       ...(v.amazon
         ? {
