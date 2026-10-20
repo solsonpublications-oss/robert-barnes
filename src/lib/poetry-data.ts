@@ -177,7 +177,7 @@ export const otherBooks: OtherBook[] = [
   {
     id: "easy-guide",
     title: "One: An Easy Guide To Understanding: God, Spirit & Love",
-    category: "God, Love & Spirituality",
+    category: "Spirituality",
     categories: "God, Love & Spirituality",
     cover: "/images/covers/easy-guide.jpg",
     amazon: "https://www.amazon.com/One-Easy-Guide-Understanding-Spirit/dp/B0HLV1N9QX",
@@ -189,7 +189,7 @@ export const otherBooks: OtherBook[] = [
   {
     id: "go-sit",
     title: "Go Sit In A Corner And Think",
-    category: "Black & African American Poetry",
+    category: "Reflections",
     categories: "Poetry - Literature - Regional & Cultural - Black & African American",
     cover: "/images/covers/go-sit.jpg",
     amazon: "https://www.amazon.com/dp/B0BQZ4X3NS",

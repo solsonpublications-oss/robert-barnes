@@ -5,9 +5,11 @@ import { BookText, Compass, ExternalLink, Heart, Sparkles, Star } from "lucide-r
 import { otherBooks } from "@/lib/poetry-data";
 
 const categoryIcon: Record<string, React.ComponentType<{ className?: string }>> = {
+  Spirituality: Compass,
   "Spiritual Companion": Compass,
   "God, Love & Spirituality": Compass,
   Reflections: BookText,
+  Poetry: BookText,
   "Black & African American Poetry": BookText,
   Relationships: Heart,
   Biography: BookText,
@@ -46,13 +48,13 @@ export function OtherBooks() {
                 {/* shimmer top border on hover */}
                 <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                <div className="mb-5 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-luxe text-primary">
-                    <Icon className="h-3.5 w-3.5" />
+                <div className="mb-5 flex items-center justify-between gap-2">
+                  <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-luxe text-primary">
+                    <Icon className="h-3.5 w-3.5 shrink-0" />
                     {b.category}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
+                  <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-xs text-muted-foreground">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
                     Available now
                   </span>
                 </div>
