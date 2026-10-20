@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { BookText, Compass, ExternalLink, Heart, Sparkles, Star } from "lucide-react";
+import { BookText, CheckCircle2, Compass, ExternalLink, Heart, Sparkles, Star } from "lucide-react";
 import { otherBooks } from "@/lib/poetry-data";
 
 const categoryIcon: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -42,19 +42,19 @@ export function OtherBooks() {
             return (
               <article
                 key={b.id}
-                className="reveal group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/60 p-7 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_24px_60px_-20px_rgba(217,164,77,0.35)]"
+                className="reveal group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/60 p-6 sm:p-7 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_24px_60px_-20px_rgba(217,164,77,0.35)]"
                 data-delay={i * 90}
               >
                 {/* shimmer top border on hover */}
                 <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                <div className="mb-5 flex items-center justify-between gap-2">
+                <div className="mb-5 flex flex-col items-start gap-2">
                   <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-luxe text-primary">
                     <Icon className="h-3.5 w-3.5 shrink-0" />
                     {b.category}
                   </span>
-                  <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-xs text-muted-foreground">
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                  <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[0.72rem] font-medium text-emerald-400">
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
                     Available now
                   </span>
                 </div>
